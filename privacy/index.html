@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /><title>Privacy · Pvot</title>
+  <meta name="description" content="Pvot collects nothing. This page explains exactly what that means for the apps, the OS, and this website." />
+  <link rel="canonical" href="https://pvot-oss.github.io/privacy/" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#08080b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Privacy · Pvot" />
+  <meta property="og:description" content="Pvot collects nothing. This page explains exactly what that means for the apps, the OS, and this website." />
+  <meta property="og:url" content="https://pvot-oss.github.io/privacy/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=apps,arrow_forward,arrow_outward,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,edit_note,explore,favorite,folder,keyboard,lock,memory,menu,mic,palette,photo_camera,photo_library,schedule,settings,shield,sms,storefront,straighten,verified,visibility_off,wb_sunny&display=block" rel="stylesheet" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+  <body>
+    <header id="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Pvot home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span class="brand-name">Pvot</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="/apps/">Apps</a>
+      <a href="/#system">System</a>
+      <a href="/about/">About</a>
+      <a href="/contribute/">Contribute</a>
+      <a class="nav-gh-inline" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">
+        <span class="ms">code</span> GitHub
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="ms">menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+    <main id="top">
+      <section class="doc-hero">
+  <div class="mesh"></div>
+  <div class="wrap doc-hero-inner">
+    <span class="eyebrow reveal">Privacy</span>
+    <h1 class="reveal" data-delay="60"><span class="grad">We collect nothing.</span></h1>
+    <p class="reveal" data-delay="120">The short version: Pvot has no servers taking your data, no analytics, and no trackers. Here is the detail.</p>
+  </div>
+</section>
+
+<section class="doc">
+  <div class="wrap doc-body reveal">
+    <h2>The apps</h2>
+    <p>
+      Pvot apps are offline-first. They store your data on your device and request only the permissions
+      they genuinely need to do their job. There are no ad IDs, no analytics SDKs, and no background
+      phone-home. Where an app talks to the network at all (for example, a weather forecast), it is for a
+      feature you asked for, and it is documented in that app’s source.
+    </p>
+
+    <h2>The system</h2>
+    <p>
+      Pvot OS forks AOSP and LineageOS and removes Google’s proprietary services. Because the platform is
+      open source, you can audit exactly what it does and build it yourself.
+    </p>
+
+    <h2>This website</h2>
+    <p>This site is a static page hosted on GitHub Pages. We do not run analytics or set any cookies. In normal operation:</p>
+    <ul>
+      <li><strong>No cookies, no local storage tracking, no analytics scripts.</strong></li>
+      <li><strong>GitHub Pages</strong> may log basic request data (such as IP addresses) as part of serving the site. That is GitHub’s infrastructure, covered by their privacy policy.</li>
+      <li><strong>Google Fonts</strong> are used for typography and icons, which involves a request to Google’s font servers. No account or identifier is attached.</li>
+      <li>Links out to GitHub, Telegram, and app stores are governed by those services’ own policies.</li>
+    </ul>
+
+    <h2>Questions</h2>
+    <p>
+      If anything here is unclear, open an issue on our
+      <a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">issue tracker</a> or reach us on
+      <a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a>.
+    </p>
+
+    <p class="doc-note">Last updated: October 2026.</p>
+  </div>
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span class="brand-name">Pvot</span>
+        </a>
+        <p>Open-source Android that answers to you. No ads, no tracking, built in the open.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pvot</h4>
+        <ul>
+          <li><a href="/apps/">Apps</a></li>
+          <li><a href="/#system">The system</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Build</h4>
+        <ul>
+          <li><a href="/contribute/">Contribute</a></li>
+          <li><a href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">PvotLib</a></li>
+          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">Organization</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© 2026 Pvot · Apache-2.0</span>
+      <span>Built with PvotLib, the same design system that ships in the OS.</span>
+    </div>
+  </div>
+</footer>
+
+    <script src="/assets/js/main.js" defer></script>
+  </body>
+</html>
