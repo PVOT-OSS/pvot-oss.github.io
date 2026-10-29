@@ -1,0 +1,48 @@
+title: Pvot
+tagline: Open-source Android, built for you
+description: >-
+  Pvot is an open-source, AOSP-based Android ecosystem: a full suite of
+  first-party apps built on one shared design system. No ads, no tracking,
+  just software that answers to you.
+url: "https://pvot-oss.github.io"
+baseurl: ""
+lang: en
+
+# Apps are a collection, so each one gets its own page at /apps/<slug>/.
+collections:
+  apps:
+    output: true
+    permalink: /apps/:name/
+
+defaults:
+  - scope: { path: "", type: "apps" }
+    values: { layout: "app" }
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+sass:
+  style: compressed
+
+# Social links, read across the site as site.social.*
+social:
+  github: "https://github.com/PVOT-OSS"
+  telegram: "https://t.me/Pvot_OS"
+  issues: "https://github.com/PVOT-OSS/public-issues"
+  pvotlib: "https://github.com/PVOT-OSS/PvotLib"
+
+# Primary nav
+nav:
+  - { label: "Apps", href: "/apps/" }
+  - { label: "System", href: "/#system" }
+  - { label: "About", href: "/about/" }
+  - { label: "Contribute", href: "/contribute/" }
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - public
+  - .claude

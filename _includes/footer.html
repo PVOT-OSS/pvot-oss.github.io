@@ -1,0 +1,46 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span class="brand-name">{{ site.title }}</span>
+        </a>
+        <p>Open-source Android that answers to you. No ads, no tracking, built in the open.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Pvot</h4>
+        <ul>
+          <li><a href="{{ '/apps/' | relative_url }}">Apps</a></li>
+          <li><a href="{{ '/#system' | relative_url }}">The system</a></li>
+          <li><a href="{{ '/about/' | relative_url }}">About</a></li>
+          <li><a href="{{ '/privacy/' | relative_url }}">Privacy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Build</h4>
+        <ul>
+          <li><a href="{{ '/contribute/' | relative_url }}">Contribute</a></li>
+          <li><a href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">PvotLib</a></li>
+          <li><a href="{{ site.social.issues }}" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="{{ site.social.github }}" target="_blank" rel="noopener">Organization</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="{{ site.social.telegram }}" target="_blank" rel="noopener">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© {{ site.time | date: "%Y" }} Pvot · Apache-2.0</span>
+      <span>Built with PvotLib, the same design system that ships in the OS.</span>
+    </div>
+  </div>
+</footer>

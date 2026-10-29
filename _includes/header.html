@@ -1,0 +1,24 @@
+<header id="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span class="brand-name">{{ site.title }}</span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      {%- for item in site.nav %}
+      <a href="{{ item.href | relative_url }}">{{ item.label }}</a>
+      {%- endfor %}
+      <a class="nav-gh-inline" href="{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost nav-gh" href="{{ site.social.github }}" target="_blank" rel="noopener">
+        <span class="ms">code</span> GitHub
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span class="ms">menu</span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,56 @@
+---
+layout: base
+permalink: /about/
+title: About
+description: "Pvot is an open-source, AOSP-based Android ecosystem built on one shared design system, with privacy as the architecture."
+---
+<section class="doc-hero">
+  <div class="mesh"></div>
+  <div class="wrap doc-hero-inner">
+    <span class="eyebrow reveal">About</span>
+    <h1 class="reveal" data-delay="60"><span class="grad">Android that answers to you.</span></h1>
+    <p class="reveal" data-delay="120">
+      Pvot is an open-source Android ecosystem: a full suite of first-party apps and the OS underneath
+      them, built by a small team that thinks your phone should work for you alone.
+    </p>
+  </div>
+</section>
+
+<section class="doc">
+  <div class="wrap doc-body reveal">
+    <h2>What Pvot is</h2>
+    <p>
+      Pvot is a de-Googled Android platform built from the framework up. We fork
+      <a href="https://source.android.com/" target="_blank" rel="noopener">AOSP</a> and
+      <a href="https://lineageos.org/" target="_blank" rel="noopener">LineageOS</a> and rebuild the pieces
+      that matter, then ship a complete set of apps to replace the defaults. Every app is open source,
+      offline-first, and free of trackers.
+    </p>
+
+    <h2>One design system</h2>
+    <p>
+      Every Pvot app is built on <a href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">PvotLib</a>, our
+      shared Jetpack Compose design system. That is why the whole ecosystem moves and feels like a single
+      product rather than a pile of unrelated apps. The same components that ship in the OS are the ones
+      the apps are made from.
+    </p>
+
+    <h2>Privacy is the architecture</h2>
+    <p>Privacy is not a settings screen you have to find. It is how the system is built:</p>
+    <ul>
+      <li><strong>No trackers, no ad IDs, no phone-home.</strong> Apps hold no network permission they do not need.</li>
+      <li><strong>Offline-first.</strong> Your data lives on your device by default, not on someone else’s server.</li>
+      <li><strong>Open end to end.</strong> From the framework forks to the apps, every line is public and buildable.</li>
+    </ul>
+
+    <h2>Who builds it</h2>
+    <p>
+      Pvot is built in the open by volunteers who care about low-level Android. It shares its roots and
+      some of its people with the custom-kernel world, and like that work, it runs on curiosity rather than
+      a business model. If you want to help, the <a href="{{ '/contribute/' | relative_url }}">contribute page</a>
+      is the place to start.
+    </p>
+
+    <p class="doc-note">Pvot is licensed under Apache-2.0 and individual apps under their own open-source licenses.</p>
+  </div>
+</section>

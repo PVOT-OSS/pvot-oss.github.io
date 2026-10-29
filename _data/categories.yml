@@ -1,0 +1,14 @@
+# App categories, in display order. Each app's front matter `category` points
+# at one of these ids.
+- id: media
+  title: Media
+  blurb: See it, hear it, capture it.
+- id: communication
+  title: Communication
+  blurb: Reach anyone. Leak nothing.
+- id: everyday
+  title: Everyday
+  blurb: The rhythm of your day.
+- id: utility
+  title: Utility
+  blurb: Small tools. Sharp edges.

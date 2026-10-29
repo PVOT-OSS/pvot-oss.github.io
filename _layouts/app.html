@@ -1,0 +1,72 @@
+---
+layout: base
+---
+{%- assign app = page -%}
+{%- assign category = site.data.categories | where: "id", app.category | first -%}
+{%- if app.repo -%}{%- assign repo = "https://github.com/PVOT-OSS/" | append: app.repo -%}{%- else -%}{%- assign repo = site.social.github -%}{%- endif -%}
+{%- assign released = true -%}{%- if app.status == 'soon' -%}{%- assign released = false -%}{%- endif -%}
+{%- case app.status -%}
+{%- when 'stable' -%}{%- assign status_label = 'Available' -%}
+{%- when 'beta' -%}{%- assign status_label = 'Beta' -%}
+{%- else -%}{%- assign status_label = 'In development' -%}
+{%- endcase -%}
+
+<section class="app-detail" style="--accent:{{ app.accent }}">
+  <div class="detail-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="crumb" href="{{ '/apps/' | relative_url }}"><span class="ms">chevron_right</span> All apps</a>
+
+    <div class="detail-head reveal">
+      <span class="detail-icon" aria-hidden="true"><span class="ms">{{ app.icon }}</span></span>
+      <div class="detail-id">
+        <div class="detail-cat">{{ category.title }}</div>
+        <h1>{{ app.title }}</h1>
+        <p class="detail-tagline">{{ app.tagline }}</p>
+        <span class="app-status app-status-{{ app.status }}">{{ status_label }}</span>
+      </div>
+    </div>
+
+    <p class="detail-summary reveal" data-delay="60">{{ app.summary }}</p>
+
+    <div class="detail-actions reveal" data-delay="120">
+      {%- if released %}
+      <a class="btn btn-primary" href="{{ repo }}" target="_blank" rel="noopener"><span class="ms">code</span> View source</a>
+      <a class="btn btn-ghost" href="{{ repo }}/releases" target="_blank" rel="noopener"><span class="ms">download</span> Releases</a>
+      {%- if app.fdroid %}<a class="btn btn-ghost" href="{{ app.fdroid }}" target="_blank" rel="noopener"><span class="ms">storefront</span> F-Droid</a>{%- endif %}
+      {%- if app.play %}<a class="btn btn-ghost" href="{{ app.play }}" target="_blank" rel="noopener"><span class="ms">storefront</span> Play Store</a>{%- endif %}
+      {%- else %}
+      <span class="soon-note"><span class="ms">bolt</span> In active development. Star the repo to follow along.</span>
+      <a class="btn btn-ghost" href="{{ repo }}" target="_blank" rel="noopener"><span class="ms">code</span> {% if app.repo %}View repo{% else %}View org{% endif %}</a>
+      {%- endif %}
+    </div>
+
+    <div class="detail-features reveal" data-delay="160">
+      <h2>What it does</h2>
+      <ul>
+        {%- for f in app.features %}
+        <li><span class="ms">verified</span> {{ f }}</li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    {%- assign siblings = site.apps | where: "category", app.category | sort: "order" -%}
+    {%- assign related = "" | split: "" -%}
+    {%- for s in siblings -%}
+      {%- unless s.url == page.url -%}{%- assign related = related | push: s -%}{%- endunless -%}
+    {%- endfor -%}
+    {%- if related.size > 0 %}
+    <div class="detail-related">
+      <h2>More in {{ category.title }}</h2>
+      <div class="related-grid">
+        {%- for r in related limit: 3 %}
+        <a class="related-tile" href="{{ r.url | relative_url }}" style="--accent:{{ r.accent }}">
+          <span class="related-icon" aria-hidden="true"><span class="ms">{{ r.icon }}</span></span>
+          <span class="related-name">{{ r.title }}</span>
+          <span class="related-tag">{{ r.tagline }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endif %}
+  </div>
+</section>

@@ -1,0 +1,36 @@
+---
+layout: base
+permalink: /apps/
+title: Apps
+description: "Every Pvot app: a full suite of open-source, privacy-first Android apps built on one design system."
+---
+{%- assign released = site.apps | where_exp: "a", "a.status != 'soon'" -%}
+
+<section class="page-hero">
+  <div class="mesh"></div>
+  <div class="wrap page-hero-inner">
+    <span class="eyebrow reveal">The apps</span>
+    <h1 class="reveal" data-delay="60"><span class="grad">The whole suite.</span></h1>
+    <p class="reveal" data-delay="120">
+      Sixteen first-party apps, each one open source, offline-first, and free of trackers.
+      {{ released.size }} available today, the rest on the way.
+    </p>
+  </div>
+</section>
+
+<section class="apps-page">
+  <div class="wrap">
+    {%- for cat in site.data.categories %}
+    {%- assign catapps = site.apps | where: "category", cat.id | sort: "order" %}
+    <div class="cat-block">
+      <div class="cat-head reveal">
+        <h2>{{ cat.title }}</h2>
+        <span>{{ cat.blurb }}</span>
+      </div>
+      <div class="app-grid">
+        {%- for app in catapps %}{% assign d = forloop.index0 | times: 50 %}{% include app-tile.html app=app delay=d %}{% endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>

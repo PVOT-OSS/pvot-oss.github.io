@@ -1,0 +1,26 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {%- capture title -%}
+    {% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}
+  {%- endcapture -%}
+  {%- assign desc = page.description | default: site.description -%}
+  <title>{{ title | strip }}</title>
+  <meta name="description" content="{{ desc | strip_newlines | strip }}" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#08080b" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ title | strip }}" />
+  <meta property="og:description" content="{{ desc | strip_newlines | strip }}" />
+  <meta property="og:url" content="{{ page.url | absolute_url }}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=apps,arrow_forward,arrow_outward,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,edit_note,explore,favorite,folder,keyboard,lock,memory,menu,mic,palette,photo_camera,photo_library,schedule,settings,shield,sms,storefront,straighten,verified,visibility_off,wb_sunny&display=block" rel="stylesheet" />
+
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+</head>

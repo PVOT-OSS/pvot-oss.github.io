@@ -1,0 +1,125 @@
+---
+layout: base
+---
+{%- assign allapps = site.apps | sort: "order" -%}
+
+<!-- ---------- Hero ---------- -->
+<section class="hero">
+  <div class="mesh"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Open source · Privacy first</span>
+    <h1 class="hero-title reveal" data-delay="60">Your phone.<br /><span class="grad">Your rules.</span></h1>
+    <p class="hero-lead reveal" data-delay="120">
+      Pvot is an open-source, AOSP-based Android ecosystem: a full suite of first-party apps built on
+      one shared design system. No ads. No tracking. Just software that answers to you.
+    </p>
+    <div class="hero-cta reveal" data-delay="180">
+      <a class="btn btn-primary" href="{{ '/apps/' | relative_url }}"><span class="ms">apps</span> Explore the apps</a>
+      <a class="btn btn-ghost" href="{{ site.social.github }}" target="_blank" rel="noopener"><span class="ms">code</span> View on GitHub</a>
+    </div>
+  </div>
+  <div class="marquee reveal" data-delay="240" aria-hidden="true">
+    <div class="marquee-track">
+      {%- for app in allapps %}<span class="marquee-icon" style="--accent:{{ app.accent }}"><span class="ms">{{ app.icon }}</span></span>{%- endfor %}
+      {%- for app in allapps %}<span class="marquee-icon" style="--accent:{{ app.accent }}"><span class="ms">{{ app.icon }}</span></span>{%- endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Value props ---------- -->
+<section class="props">
+  <div class="wrap props-grid">
+    <div class="prop reveal" data-delay="0">
+      <span class="prop-icon ms">visibility_off</span>
+      <h3>No tracking</h3>
+      <p>No ad IDs, no analytics, no phone-home. Apps hold no network permission they do not need.</p>
+    </div>
+    <div class="prop reveal" data-delay="80">
+      <span class="prop-icon ms">shield</span>
+      <h3>Private by design</h3>
+      <p>Everything works offline first. Your data lives on your device, not on someone else’s server.</p>
+    </div>
+    <div class="prop reveal" data-delay="160">
+      <span class="prop-icon ms">code</span>
+      <h3>Fully open</h3>
+      <p>Every line is open source and buildable. Read it, trust it, or fork it yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Apps ---------- -->
+<section id="apps" class="apps section-pad">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow reveal">The apps</span>
+      <h2 class="reveal" data-delay="60">Sixteen apps.<br /><span class="grad">Zero compromises.</span></h2>
+      <p class="reveal" data-delay="120">Every default replaced. Each one does its job offline, then gets out of your way.</p>
+    </div>
+
+    {%- for cat in site.data.categories %}
+    {%- assign catapps = site.apps | where: "category", cat.id | sort: "order" %}
+    <div class="cat-block">
+      <div class="cat-head reveal">
+        <h3>{{ cat.title }}</h3>
+        <span>{{ cat.blurb }}</span>
+      </div>
+      <div class="app-grid">
+        {%- for app in catapps %}{% assign d = forloop.index0 | times: 50 %}{% include app-tile.html app=app delay=d %}{% endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+
+<!-- ---------- System ---------- -->
+<section id="system" class="system section-pad">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow reveal" style="color:var(--rose);background:rgba(var(--rose-rgb),0.12);border-color:rgba(var(--rose-rgb),0.3)">The system</span>
+      <h2 class="reveal" data-delay="60">Built like an OS.<br /><span class="grad">Not a data business.</span></h2>
+      <p class="reveal" data-delay="120">
+        Pvot forks AOSP and LineageOS at the framework level, so the whole stack is yours to read,
+        build, and trust. Privacy is not a setting here. It is the architecture.
+      </p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal" data-delay="0" style="--accent:#6b66ff">
+        <span class="feature-icon"><span class="ms">lock</span></span>
+        <h3>Privacy by architecture</h3>
+        <p>No trackers, no ad IDs, no phone-home. Apps request only the permissions they truly need.</p>
+      </div>
+      <div class="feature-card reveal" data-delay="80" style="--accent:#ff6b9d">
+        <span class="feature-icon"><span class="ms">bolt</span></span>
+        <h3>AOSP at the core</h3>
+        <p>Forks of platform_frameworks_base and system_core: a real, buildable, modern Android base.</p>
+      </div>
+      <div class="feature-card reveal" data-delay="160" style="--accent:#a78bfa">
+        <span class="feature-icon"><span class="ms">palette</span></span>
+        <h3>One design system</h3>
+        <p>Every app is built on PvotLib, so the whole ecosystem moves and feels like a single product.</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal" data-delay="0"><span class="stat-n" style="color:var(--indigo-light)">16</span><span class="stat-l">first-party apps</span></div>
+      <div class="stat reveal" data-delay="80"><span class="stat-n" style="color:var(--rose-pop)">0</span><span class="stat-l">trackers, ever</span></div>
+      <div class="stat reveal" data-delay="160"><span class="stat-n" style="color:var(--rose)">100%</span><span class="stat-l">open source</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- Get ---------- -->
+<section id="get" class="get">
+  <div class="mesh"></div>
+  <div class="wrap get-inner">
+    <span class="eyebrow reveal">Get Pvot</span>
+    <h2 class="reveal" data-delay="60"><span class="grad">Take back your phone.</span></h2>
+    <p class="reveal" data-delay="120">Grab the apps, read the source, or build the whole thing yourself. It is all open.</p>
+    <div class="hero-cta reveal" data-delay="180">
+      <a class="btn btn-primary" href="{{ site.social.github }}" target="_blank" rel="noopener"><span class="ms">code</span> GitHub</a>
+      <a class="btn btn-ghost" href="{{ '/apps/' | relative_url }}"><span class="ms">download</span> Browse apps</a>
+      <a class="btn btn-ghost" href="{{ site.social.telegram }}" target="_blank" rel="noopener"><span class="ms">storefront</span> Telegram</a>
+    </div>
+  </div>
+</section>

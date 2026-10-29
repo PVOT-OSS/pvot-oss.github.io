@@ -1,0 +1,15 @@
+{%- assign app = include.app -%}
+{%- assign delay = include.delay | default: 0 -%}
+{%- case app.status -%}
+{%- when 'stable' -%}{%- assign status_label = 'Available' -%}
+{%- when 'beta' -%}{%- assign status_label = 'Beta' -%}
+{%- else -%}{%- assign status_label = 'In development' -%}
+{%- endcase -%}
+<a class="app-tile reveal" href="{{ app.url | relative_url }}" data-delay="{{ delay }}" style="--accent:{{ app.accent }}">
+  <span class="app-icon" aria-hidden="true"><span class="ms">{{ app.icon }}</span></span>
+  <span class="app-meta">
+    <span class="app-name">{{ app.title }}</span>
+    <span class="app-tagline">{{ app.tagline }}</span>
+  </span>
+  <span class="app-status app-status-{{ app.status }}">{{ status_label }}</span>
+</a>
