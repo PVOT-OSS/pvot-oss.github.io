@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=apps,arrow_forward,arrow_outward,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,edit_note,explore,favorite,folder,keyboard,lock,memory,menu,mic,palette,photo_camera,photo_library,schedule,settings,shield,sms,storefront,straighten,verified,visibility_off,wb_sunny&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=apps,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,equalizer,explore,favorite,folder,grid_view,keyboard,lock,mail,map,menu,mic,music_note,palette,photo_camera,photo_library,public,shield,sms,storefront,straighten,verified,visibility_off,wb_sunny,widgets&display=block" rel="stylesheet" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/main.css" />
@@ -56,8 +56,8 @@
     <span class="eyebrow reveal">The apps</span>
     <h1 class="reveal" data-delay="60"><span class="grad">The whole suite.</span></h1>
     <p class="reveal" data-delay="120">
-      Sixteen first-party apps, each one open source, offline-first, and free of trackers.
-      4 available today, the rest on the way.
+      A full suite of first-party apps, each one open source, offline-first, and free of trackers.
+      5 available today, the rest on the way.
     </p>
   </div>
 </section>
@@ -69,23 +69,39 @@
         <h2>Media</h2>
         <span>See it, hear it, capture it.</span>
       </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/aperture/" data-delay="0" style="--accent:#6B66FF">
+      <div class="app-grid"><a class="app-tile reveal" href="/apps/camera/" data-delay="0" style="--accent:#6B66FF">
   <span class="app-icon" aria-hidden="true"><span class="ms">photo_camera</span></span>
   <span class="app-meta">
-    <span class="app-name">Aperture</span>
-    <span class="app-tagline">Camera, reimagined.</span>
+    <span class="app-name">Camera</span>
+    <span class="app-tagline">Capture it, keep it.</span>
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
-<a class="app-tile reveal" href="/apps/gallery/" data-delay="50" style="--accent:#B57EDC">
+<a class="app-tile reveal" href="/apps/photos/" data-delay="50" style="--accent:#B57EDC">
   <span class="app-icon" aria-hidden="true"><span class="ms">photo_library</span></span>
   <span class="app-meta">
-    <span class="app-name">Gallery</span>
+    <span class="app-name">Photos</span>
     <span class="app-tagline">Your memories, private.</span>
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
-<a class="app-tile reveal" href="/apps/recorder/" data-delay="100" style="--accent:#FF6B9D">
+<a class="app-tile reveal" href="/apps/music/" data-delay="100" style="--accent:#FB7185">
+  <span class="app-icon" aria-hidden="true"><span class="ms">music_note</span></span>
+  <span class="app-meta">
+    <span class="app-name">Music Player</span>
+    <span class="app-tagline">Your library, offline.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
+<a class="app-tile reveal" href="/apps/equaliser/" data-delay="150" style="--accent:#2DD4BF">
+  <span class="app-icon" aria-hidden="true"><span class="ms">equalizer</span></span>
+  <span class="app-meta">
+    <span class="app-name">Audio Equaliser</span>
+    <span class="app-tagline">Tune your sound.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
+<a class="app-tile reveal" href="/apps/recorder/" data-delay="200" style="--accent:#FF6B9D">
   <span class="app-icon" aria-hidden="true"><span class="ms">mic</span></span>
   <span class="app-meta">
     <span class="app-name">Recorder</span>
@@ -109,10 +125,10 @@
   </span>
   <span class="app-status app-status-stable">Available</span>
 </a>
-<a class="app-tile reveal" href="/apps/dialer/" data-delay="50" style="--accent:#34D399">
+<a class="app-tile reveal" href="/apps/phone/" data-delay="50" style="--accent:#34D399">
   <span class="app-icon" aria-hidden="true"><span class="ms">call</span></span>
   <span class="app-meta">
-    <span class="app-name">Dialer</span>
+    <span class="app-name">Phone</span>
     <span class="app-tagline">Calls, clean and fast.</span>
   </span>
   <span class="app-status app-status-soon">In development</span>
@@ -125,6 +141,14 @@
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
+<a class="app-tile reveal" href="/apps/mail/" data-delay="150" style="--accent:#F43F5E">
+  <span class="app-icon" aria-hidden="true"><span class="ms">mail</span></span>
+  <span class="app-meta">
+    <span class="app-name">Mail</span>
+    <span class="app-tagline">Email, on your terms.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
 
       </div>
     </div>
@@ -133,15 +157,7 @@
         <h2>Everyday</h2>
         <span>The rhythm of your day.</span>
       </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/clock/" data-delay="0" style="--accent:#8B7CFF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">schedule</span></span>
-  <span class="app-meta">
-    <span class="app-name">Clock</span>
-    <span class="app-tagline">Alarms, timers, time zones.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/calendar/" data-delay="50" style="--accent:#FF7A6B">
+      <div class="app-grid"><a class="app-tile reveal" href="/apps/calendar/" data-delay="0" style="--accent:#FF7A6B">
   <span class="app-icon" aria-hidden="true"><span class="ms">calendar_month</span></span>
   <span class="app-meta">
     <span class="app-name">Calendar</span>
@@ -149,15 +165,7 @@
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
-<a class="app-tile reveal" href="/apps/notes/" data-delay="100" style="--accent:#FFC24B">
-  <span class="app-icon" aria-hidden="true"><span class="ms">edit_note</span></span>
-  <span class="app-meta">
-    <span class="app-name">Notes</span>
-    <span class="app-tagline">Thoughts, offline.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/weather/" data-delay="150" style="--accent:#38BDF8">
+<a class="app-tile reveal" href="/apps/weather/" data-delay="50" style="--accent:#38BDF8">
   <span class="app-icon" aria-hidden="true"><span class="ms">wb_sunny</span></span>
   <span class="app-meta">
     <span class="app-name">Weather</span>
@@ -165,13 +173,21 @@
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
-<a class="app-tile reveal" href="/apps/compass/" data-delay="200" style="--accent:#22D3EE">
+<a class="app-tile reveal" href="/apps/compass/" data-delay="100" style="--accent:#22D3EE">
   <span class="app-icon" aria-hidden="true"><span class="ms">explore</span></span>
   <span class="app-meta">
     <span class="app-name">Compass</span>
     <span class="app-tagline">True north, simply.</span>
   </span>
   <span class="app-status app-status-beta">Beta</span>
+</a>
+<a class="app-tile reveal" href="/apps/maps/" data-delay="150" style="--accent:#4ADE80">
+  <span class="app-icon" aria-hidden="true"><span class="ms">map</span></span>
+  <span class="app-meta">
+    <span class="app-name">Maps</span>
+    <span class="app-tagline">Find your way, privately.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
 </a>
 
       </div>
@@ -189,15 +205,7 @@
   </span>
   <span class="app-status app-status-stable">Available</span>
 </a>
-<a class="app-tile reveal" href="/apps/files/" data-delay="50" style="--accent:#60A5FA">
-  <span class="app-icon" aria-hidden="true"><span class="ms">folder</span></span>
-  <span class="app-meta">
-    <span class="app-name">Files</span>
-    <span class="app-tagline">Your storage, unlocked.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/measure/" data-delay="100" style="--accent:#F472B6">
+<a class="app-tile reveal" href="/apps/measure/" data-delay="50" style="--accent:#F472B6">
   <span class="app-icon" aria-hidden="true"><span class="ms">straighten</span></span>
   <span class="app-meta">
     <span class="app-name">Measure</span>
@@ -205,7 +213,31 @@
   </span>
   <span class="app-status app-status-beta">Beta</span>
 </a>
-<a class="app-tile reveal" href="/apps/keyboard/" data-delay="150" style="--accent:#818CF8">
+<a class="app-tile reveal" href="/apps/files/" data-delay="100" style="--accent:#60A5FA">
+  <span class="app-icon" aria-hidden="true"><span class="ms">folder</span></span>
+  <span class="app-meta">
+    <span class="app-name">Files</span>
+    <span class="app-tagline">Your storage, unlocked.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
+<a class="app-tile reveal" href="/apps/browser/" data-delay="150" style="--accent:#4F8CFF">
+  <span class="app-icon" aria-hidden="true"><span class="ms">public</span></span>
+  <span class="app-meta">
+    <span class="app-name">Browser</span>
+    <span class="app-tagline">The web, no watchers.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
+<a class="app-tile reveal" href="/apps/store/" data-delay="200" style="--accent:#FACC15">
+  <span class="app-icon" aria-hidden="true"><span class="ms">storefront</span></span>
+  <span class="app-meta">
+    <span class="app-name">Store</span>
+    <span class="app-tagline">Apps, the open way.</span>
+  </span>
+  <span class="app-status app-status-soon">In development</span>
+</a>
+<a class="app-tile reveal" href="/apps/keyboard/" data-delay="250" style="--accent:#818CF8">
   <span class="app-icon" aria-hidden="true"><span class="ms">keyboard</span></span>
   <span class="app-meta">
     <span class="app-name">Keyboard</span>
@@ -213,11 +245,27 @@
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
-<a class="app-tile reveal" href="/apps/settings/" data-delay="200" style="--accent:#94A3B8">
-  <span class="app-icon" aria-hidden="true"><span class="ms">settings</span></span>
+
+      </div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-head reveal">
+        <h2>Design system</h2>
+        <span>The thread that ties it all together.</span>
+      </div>
+      <div class="app-grid"><a class="app-tile reveal" href="/apps/pvotlib/" data-delay="0" style="--accent:#8B7CFF">
+  <span class="app-icon" aria-hidden="true"><span class="ms">widgets</span></span>
   <span class="app-meta">
-    <span class="app-name">Settings</span>
-    <span class="app-tagline">Control, end to end.</span>
+    <span class="app-name">PvotLib</span>
+    <span class="app-tagline">One design system.</span>
+  </span>
+  <span class="app-status app-status-beta">Beta</span>
+</a>
+<a class="app-tile reveal" href="/apps/whats-in-pvot/" data-delay="50" style="--accent:#C084FC">
+  <span class="app-icon" aria-hidden="true"><span class="ms">grid_view</span></span>
+  <span class="app-meta">
+    <span class="app-name">What's in Pvot</span>
+    <span class="app-tagline">See the system, live.</span>
   </span>
   <span class="app-status app-status-soon">In development</span>
 </a>
