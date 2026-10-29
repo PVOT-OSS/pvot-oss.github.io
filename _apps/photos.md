@@ -1,6 +1,6 @@
 ---
 order: 2
-title: Gallery
+title: Photos
 tagline: Your memories, private.
 category: media
 icon: photo_library

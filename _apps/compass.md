@@ -1,5 +1,5 @@
 ---
-order: 11
+order: 12
 title: Compass
 tagline: True north, simply.
 category: everyday

@@ -1,6 +1,6 @@
 ---
-order: 5
-title: Dialer
+order: 7
+title: Phone
 tagline: Calls, clean and fast.
 category: communication
 icon: call

@@ -1,5 +1,5 @@
 ---
-order: 4
+order: 6
 title: Messages
 tagline: SMS without the spyware.
 category: communication

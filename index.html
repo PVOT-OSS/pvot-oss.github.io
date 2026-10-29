@@ -52,7 +52,7 @@ layout: base
   <div class="wrap">
     <div class="section-head center">
       <span class="eyebrow reveal">The apps</span>
-      <h2 class="reveal" data-delay="60">Sixteen apps.<br /><span class="grad">Zero compromises.</span></h2>
+      <h2 class="reveal" data-delay="60">A whole suite.<br /><span class="grad">Zero compromises.</span></h2>
       <p class="reveal" data-delay="120">Every default replaced. Each one does its job offline, then gets out of your way.</p>
     </div>
 
@@ -101,8 +101,9 @@ layout: base
       </div>
     </div>
 
+    {%- assign appcount = site.apps | where_exp: "a", "a.category != 'design'" | size -%}
     <div class="stats">
-      <div class="stat reveal" data-delay="0"><span class="stat-n" style="color:var(--indigo-light)">16</span><span class="stat-l">first-party apps</span></div>
+      <div class="stat reveal" data-delay="0"><span class="stat-n" style="color:var(--indigo-light)">{{ appcount }}</span><span class="stat-l">first-party apps</span></div>
       <div class="stat reveal" data-delay="80"><span class="stat-n" style="color:var(--rose-pop)">0</span><span class="stat-l">trackers, ever</span></div>
       <div class="stat reveal" data-delay="160"><span class="stat-n" style="color:var(--rose)">100%</span><span class="stat-l">open source</span></div>
     </div>

@@ -1,5 +1,5 @@
 ---
-order: 6
+order: 8
 title: Contacts
 tagline: Your people, your device.
 category: communication

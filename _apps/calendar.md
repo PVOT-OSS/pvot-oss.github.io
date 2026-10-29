@@ -1,5 +1,5 @@
 ---
-order: 8
+order: 10
 title: Calendar
 tagline: Plans that stay yours.
 category: everyday

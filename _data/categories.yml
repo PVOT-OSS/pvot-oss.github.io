@@ -12,3 +12,6 @@
 - id: utility
   title: Utility
   blurb: Small tools. Sharp edges.
+- id: design
+  title: Design system
+  blurb: The thread that ties it all together.

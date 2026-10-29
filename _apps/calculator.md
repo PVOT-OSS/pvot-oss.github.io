@@ -1,5 +1,5 @@
 ---
-order: 12
+order: 14
 title: Calculator
 tagline: Numbers, nothing else.
 category: utility

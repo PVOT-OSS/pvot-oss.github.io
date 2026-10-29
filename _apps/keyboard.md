@@ -1,5 +1,5 @@
 ---
-order: 15
+order: 19
 title: Keyboard
 tagline: Types offline, always.
 category: utility
@@ -12,4 +12,5 @@ features:
 - No network permission
 - Gesture typing
 - Open source
+repo: LatinIME
 ---

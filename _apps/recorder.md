@@ -1,5 +1,5 @@
 ---
-order: 3
+order: 5
 title: Recorder
 tagline: Capture sound, on device.
 category: media
