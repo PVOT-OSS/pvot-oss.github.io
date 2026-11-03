@@ -13,5 +13,4 @@ features:
 - Recurring schedules
 - Home-screen widgets
 - Local-first
-repo: PvotCalendar
 ---

@@ -13,5 +13,4 @@ features:
 - Groups and favourites
 - Import and export vCard
 - No sync by default
-repo: PvotContacts
 ---

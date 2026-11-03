@@ -1,5 +1,5 @@
 ---
-order: 11
+order: 14
 title: Weather
 tagline: Forecasts, no profiling.
 category: everyday
@@ -13,5 +13,4 @@ features:
 - No ad tracking
 - Lightweight
 - Privacy-respecting data
-repo: PvotWeather
 ---

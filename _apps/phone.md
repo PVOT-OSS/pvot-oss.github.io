@@ -13,5 +13,4 @@ features:
 - Call history
 - Contact integration
 - No ads or trackers
-repo: PvotDialer
 ---

@@ -1,8 +1,8 @@
 ---
-order: 18
+order: 24
 title: Store
 tagline: Apps, the open way.
-category: utility
+category: tools
 icon: storefront
 accent: "#FACC15"
 status: soon

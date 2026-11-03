@@ -1,7 +1,7 @@
 ---
 order: 5
 title: Recorder
-tagline: Capture sound, on device.
+tagline: Voice memos, on device.
 category: media
 icon: mic
 accent: "#FF6B9D"
@@ -13,5 +13,4 @@ features:
 - No network access
 - Clean waveform view
 - Open source
-repo: PvotRecorder
 ---

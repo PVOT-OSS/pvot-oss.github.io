@@ -1,8 +1,8 @@
 ---
-order: 17
+order: 23
 title: Browser
 tagline: The web, no watchers.
-category: utility
+category: tools
 icon: public
 accent: "#4F8CFF"
 status: soon

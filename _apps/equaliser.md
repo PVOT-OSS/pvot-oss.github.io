@@ -1,6 +1,6 @@
 ---
 order: 4
-title: Audio Equaliser
+title: Equaliser
 tagline: Tune your sound.
 category: media
 icon: equalizer

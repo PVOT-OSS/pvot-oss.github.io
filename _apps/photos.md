@@ -13,5 +13,4 @@ features:
 - Built-in editor
 - Hide and recover
 - Folder organization
-repo: PvotGallery
 ---

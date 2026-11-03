@@ -1,8 +1,8 @@
 ---
-order: 14
+order: 20
 title: Calculator
 tagline: Numbers, nothing else.
-category: utility
+category: tools
 icon: calculate
 accent: "#A78BFA"
 status: stable

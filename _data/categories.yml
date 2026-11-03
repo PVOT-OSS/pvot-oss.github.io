@@ -9,8 +9,11 @@
 - id: everyday
   title: Everyday
   blurb: The rhythm of your day.
-- id: utility
-  title: Utility
+- id: life
+  title: Life
+  blurb: Health, money, and the little records.
+- id: tools
+  title: Tools
   blurb: Small tools. Sharp edges.
 - id: design
   title: Design system

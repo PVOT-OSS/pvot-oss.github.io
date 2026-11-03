@@ -13,5 +13,4 @@ features:
 - QR and barcode scanning
 - No cloud upload
 - Open source
-repo: Aperture
 ---

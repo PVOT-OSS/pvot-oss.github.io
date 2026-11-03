@@ -1,8 +1,8 @@
 ---
-order: 16
+order: 22
 title: Files
 tagline: Your storage, unlocked.
-category: utility
+category: tools
 icon: folder
 accent: "#60A5FA"
 status: soon
@@ -13,5 +13,4 @@ features:
 - Archive support
 - Local-first
 - Open source
-repo: android_packages_apps_DocumentsUI
 ---

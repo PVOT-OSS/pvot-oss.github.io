@@ -1,6 +1,6 @@
 ---
 order: 3
-title: Music Player
+title: Music
 tagline: Your library, offline.
 category: media
 icon: music_note

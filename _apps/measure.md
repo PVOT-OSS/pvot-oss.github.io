@@ -1,8 +1,8 @@
 ---
-order: 15
+order: 21
 title: Measure
 tagline: An AR ruler, on device.
-category: utility
+category: tools
 icon: straighten
 accent: "#F472B6"
 status: beta
