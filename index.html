@@ -1,126 +1,184 @@
 ---
 layout: base
 ---
-{%- assign allapps = site.apps | sort: "order" -%}
+{%- assign apps = site.apps | sort: "order" -%}
+{%- assign shipping = apps | where_exp: "a", "a.status != 'soon'" -%}
+{%- assign building = apps | where: "status", "soon" -%}
+{%- assign appcount = apps | where_exp: "a", "a.category != 'design'" | size -%}
 
-<!-- ---------- Hero ---------- -->
-<section class="hero">
-  <div class="mesh"></div>
+<section class="stage hero" data-stage data-live>
   <div class="wrap hero-inner">
-    <span class="eyebrow reveal">Open source · Privacy first</span>
-    <h1 class="hero-title reveal" data-delay="60">Your phone.<br /><span class="grad">Your rules.</span></h1>
-    <p class="hero-lead reveal" data-delay="120">
-      Pvot is an open-source, AOSP-based Android ecosystem: a full suite of first-party apps built on
-      one shared design system. No ads. No tracking. Just software that answers to you.
-    </p>
-    <div class="hero-cta reveal" data-delay="180">
-      <a class="btn btn-primary" href="{{ '/apps/' | relative_url }}"><span class="ms">apps</span> Explore the apps</a>
-      <a class="btn btn-ghost" href="{{ site.social.github }}" target="_blank" rel="noopener"><span class="ms">code</span> View on GitHub</a>
-    </div>
-  </div>
-  <div class="marquee reveal" data-delay="240" aria-hidden="true">
-    <div class="marquee-track">
-      {%- for app in allapps %}<span class="marquee-icon" style="--accent:{{ app.accent }}"><span class="ms">{{ app.icon }}</span></span>{%- endfor %}
-      {%- for app in allapps %}<span class="marquee-icon" style="--accent:{{ app.accent }}"><span class="ms">{{ app.icon }}</span></span>{%- endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ---------- Value props ---------- -->
-<section class="props">
-  <div class="wrap props-grid">
-    <div class="prop reveal" data-delay="0">
-      <span class="prop-icon ms">visibility_off</span>
-      <h3>No tracking</h3>
-      <p>No ad IDs, no analytics, no phone-home. Apps hold no network permission they do not need.</p>
-    </div>
-    <div class="prop reveal" data-delay="80">
-      <span class="prop-icon ms">shield</span>
-      <h3>Private by design</h3>
-      <p>Everything works offline first. Your data lives on your device, not on someone else’s server.</p>
-    </div>
-    <div class="prop reveal" data-delay="160">
-      <span class="prop-icon ms">code</span>
-      <h3>Fully open</h3>
-      <p>Every line is open source and buildable. Read it, trust it, or fork it yourself.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- Apps ---------- -->
-<section id="apps" class="apps section-pad">
-  <div class="wrap">
-    <div class="section-head center">
-      <span class="eyebrow reveal">The apps</span>
-      <h2 class="reveal" data-delay="60">A whole suite.<br /><span class="grad">Zero compromises.</span></h2>
-      <p class="reveal" data-delay="120">Every default replaced. Each one does its job offline, then gets out of your way.</p>
+    <div class="hero-top hero-meta">
+      <span class="eyebrow"><span class="dot"></span> Pvot OS. Open-source Android.</span>
+      <span class="lens-hint"><span class="ms">pan_tool</span> The glass is live. Drag it over the headline.</span>
     </div>
 
-    {%- for cat in site.data.categories %}
-    {%- assign catapps = site.apps | where: "category", cat.id | sort: "order" %}
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>{{ cat.title }}</h3>
-        <span>{{ cat.blurb }}</span>
-      </div>
-      <div class="app-grid">
-        {%- for app in catapps %}{% assign d = forloop.index0 | times: 50 %}{% include app-tile.html app=app delay=d %}{% endfor %}
-      </div>
+    <div class="hero-title">
+      <h1 class="display">
+        <span class="hero-line" data-paint>Your phone.</span>
+        <span class="hero-line" data-paint>Your rules.</span>
+      </h1>
+      <div class="lens" data-glass="clear" data-glass-blur="0.7" data-glass-lift data-drag data-idle tabindex="0" role="img"
+        aria-label="A piece of PvotLib glass over the headline. Drag it, or move it with the arrow keys."></div>
     </div>
-    {%- endfor %}
-  </div>
-</section>
 
-<!-- ---------- System ---------- -->
-<section id="system" class="system section-pad">
-  <div class="wrap">
-    <div class="section-head center">
-      <span class="eyebrow reveal" style="color:var(--rose);background:rgba(var(--rose-rgb),0.12);border-color:rgba(var(--rose-rgb),0.3)">The system</span>
-      <h2 class="reveal" data-delay="60">Built like an OS.<br /><span class="grad">Not a data business.</span></h2>
-      <p class="reveal" data-delay="120">
-        Pvot forks AOSP and LineageOS at the framework level, so the whole stack is yours to read,
-        build, and trust. Privacy is not a setting here. It is the architecture.
+    <div class="hero-foot hero-meta">
+      <p class="lede">
+        A de-Googled Android and a full suite of apps, drawn in real liquid glass.
+        <strong>No trackers. No accounts. Nothing phoning home.</strong>
       </p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card reveal" data-delay="0" style="--accent:#6b66ff">
-        <span class="feature-icon"><span class="ms">lock</span></span>
-        <h3>Privacy by architecture</h3>
-        <p>No trackers, no ad IDs, no phone-home. Apps request only the permissions they truly need.</p>
+      <div class="btn-row">
+        <a class="btn btn-solid" href="{{ '/apps/' | relative_url }}">Explore the apps</a>
+        <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ '/pvotlib/' | relative_url }}">Meet PvotLib</a>
       </div>
-      <div class="feature-card reveal" data-delay="80" style="--accent:#ff6b9d">
-        <span class="feature-icon"><span class="ms">bolt</span></span>
-        <h3>AOSP at the core</h3>
-        <p>Forks of platform_frameworks_base and system_core: a real, buildable, modern Android base.</p>
-      </div>
-      <div class="feature-card reveal" data-delay="160" style="--accent:#a78bfa">
-        <span class="feature-icon"><span class="ms">palette</span></span>
-        <h3>One design system</h3>
-        <p>Every app is built on PvotLib, so the whole ecosystem moves and feels like a single product.</p>
-      </div>
-    </div>
-
-    {%- assign appcount = site.apps | where_exp: "a", "a.category != 'design'" | size -%}
-    <div class="stats">
-      <div class="stat reveal" data-delay="0"><span class="stat-n" style="color:var(--indigo-light)">{{ appcount }}</span><span class="stat-l">first-party apps</span></div>
-      <div class="stat reveal" data-delay="80"><span class="stat-n" style="color:var(--rose-pop)">0</span><span class="stat-l">trackers, ever</span></div>
-      <div class="stat reveal" data-delay="160"><span class="stat-n" style="color:var(--rose)">100%</span><span class="stat-l">open source</span></div>
     </div>
   </div>
 </section>
 
-<!-- ---------- Get ---------- -->
-<section id="get" class="get">
-  <div class="mesh"></div>
-  <div class="wrap get-inner">
-    <span class="eyebrow reveal">Get Pvot</span>
-    <h2 class="reveal" data-delay="60"><span class="grad">Take back your phone.</span></h2>
-    <p class="reveal" data-delay="120">Grab the apps, read the source, or build the whole thing yourself. It is all open.</p>
-    <div class="hero-cta reveal" data-delay="180">
-      <a class="btn btn-primary" href="{{ site.social.github }}" target="_blank" rel="noopener"><span class="ms">code</span> GitHub</a>
-      <a class="btn btn-ghost" href="{{ '/apps/' | relative_url }}"><span class="ms">download</span> Browse apps</a>
-      <a class="btn btn-ghost" href="{{ site.social.telegram }}" target="_blank" rel="noopener"><span class="ms">storefront</span> Telegram</a>
+<section class="statement" aria-label="What Pvot is">
+  <div class="wrap">
+    <p data-words>Android, minus the part that watches you. Pvot ships <em>without Google,</em> without ad IDs, without a single tracker. What is left is <em>fast, quiet, and yours.</em></p>
+  </div>
+</section>
+
+<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow rv">The apps</span>
+      <h2 class="h2 rv">Everything you open.<br><span class="dim">Rebuilt in the open.</span></h2>
+      <p class="lede rv">{{ appcount }} first-party apps on one design system. The ones in the dock ship today. The rest are being built right now, in public.</p>
+    </div>
+
+    <div class="home">
+      <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#apps">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button role="tab" aria-selected="true" data-cat="all">All</button>
+        {%- for c in site.data.categories %}{% unless c.id == 'design' %}
+        <button role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
+        {%- endunless %}{% endfor %}
+      </div>
+
+      <div class="home-grid">
+        {%- for app in building %}
+        <a class="icon-link" href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
+          {% include app-icon.html app=app %}
+          <span class="icon-label">{{ app.title }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+
+      <div class="dock-wrap">
+        <span class="dock-label">In the dock: shipping today</span>
+        <div class="dock" data-glass="regular">
+          {%- for app in shipping %}
+          <a class="icon-link" href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
+            {% include app-icon.html app=app %}
+            <span class="icon-label">{{ app.title }}</span>
+          </a>
+          {%- endfor %}
+        </div>
+      </div>
+
+      <div class="home-foot">
+        <span class="legend"><i class="on"></i> Available</span>
+        <span class="legend"><i></i> In development</span>
+        <a class="link-arrow" href="{{ '/apps/' | relative_url }}">Every app, in detail <span class="ms">arrow_forward</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow rv">The stack</span>
+      <h2 class="h2 rv">One team.<br><span class="dim">Top to bottom.</span></h2>
+      <p class="lede rv">Most phones are a pile of companies. Pvot is one team, from the kernel that talks to the silicon to the button you tap.</p>
+    </div>
+    <div class="stack">
+      <a class="stack-row rv" href="{{ '/apps/' | relative_url }}">
+        <span class="n">04</span><h3>Apps</h3>
+        <p>{{ appcount }} first-party apps. Offline first, no trackers, one design language.</p>
+        <span class="ms">arrow_forward</span>
+      </a>
+      <a class="stack-row rv" href="{{ '/pvotlib/' | relative_url }}">
+        <span class="n">03</span><h3>PvotLib</h3>
+        <p>The Compose design system. Liquid glass, motion, and every component the apps share.</p>
+        <span class="ms">arrow_forward</span>
+      </a>
+      <a class="stack-row rv" href="{{ site.social.github }}" target="_blank" rel="noopener">
+        <span class="n">02</span><h3>Pvot OS</h3>
+        <p>AOSP and LineageOS, de-Googled and re-themed. Your data leaves only when you send it.</p>
+        <span class="ms">arrow_outward</span>
+      </a>
+      <a class="stack-row rv" href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">
+        <span class="n">01</span><h3>Kernel</h3>
+        <p>StormBreaker kernels, tuned per device by the same people who build the rest.</p>
+        <span class="ms">arrow_outward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="privacy">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow rv">Privacy</span>
+      <h2 class="h2 rv" style="margin-top:20px">Off by default.<br><span class="dim">And it stays off.</span></h2>
+      <p class="lede rv">Privacy is not a settings page you have to go and find. It is how Pvot is built, so the switches that matter come already flipped. Every line is public, so you never have to take our word for it.</p>
+    </div>
+    <div class="settings rv" role="group" aria-label="Pvot defaults">
+      <div class="settings-title">Pvot defaults</div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--pink)"><span class="ms">block</span></span>
+        <div><b>Google Play Services</b><small>Not part of the system</small></div>
+        <span class="set-val">Not installed</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--green)"><span class="ms">shield</span></span>
+        <div><b>Trackers</b><small>Checked by Exodus Privacy</small></div>
+        <span class="set-val good">0</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--blue)"><span class="ms">person_off</span></span>
+        <div><b>Account required</b><small>For any app, ever</small></div>
+        <span class="set-val">Never</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--amber)"><span class="ms">monitoring</span></span>
+        <div><b>Analytics and ad ID</b><small>Nothing to switch off</small></div>
+        <span class="mini-switch" role="img" aria-label="Off"></span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic"><span class="ms">code</span></span>
+        <div><b>Source code</b><small>Apache-2.0, build it yourself</small></div>
+        <span class="set-val">Public</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stage glass-stage" data-stage data-live data-seed="4.2">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">PvotLib</span>
+      <h2 class="h2">The glass is real.</h2>
+      <p class="lede">Every surface in Pvot is drawn by one shader. It bends what sits behind it, splits red from blue at the rim, mirrors the edge and catches the light. This page runs that same shader, ported from AGSL to WebGL. <strong>Hold a control.</strong></p>
+    </div>
+    {% include controls.html %}
+    <div class="btn-row">
+      <a class="btn btn-solid" href="{{ '/pvotlib/' | relative_url }}">Open the glass lab</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 class="h2 rv">Ready when you are.</h2>
+    <p class="lede rv">Pick up an app today, flash the OS when it lands, or help us build the next one. Everything happens in the open.</p>
+    <div class="btn-row rv">
+      <a class="btn btn-solid" href="{{ '/apps/' | relative_url }}">See what ships</a>
+      <a class="btn btn-line" href="{{ site.social.telegram }}" target="_blank" rel="noopener">Join the Telegram</a>
     </div>
   </div>
 </section>

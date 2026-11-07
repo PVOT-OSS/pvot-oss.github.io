@@ -2,35 +2,50 @@
 layout: base
 permalink: /apps/
 title: Apps
-description: "Every Pvot app: a full suite of open-source, privacy-first Android apps built on one design system."
+description: "Every Pvot app: open source, offline first, free of trackers, and built on one design system."
 ---
-{%- assign released = site.apps | where_exp: "a", "a.status != 'soon'" -%}
+{%- assign apps = site.apps | sort: "order" -%}
+{%- assign released = apps | where_exp: "a", "a.status != 'soon'" -%}
+{%- assign appcount = apps | where_exp: "a", "a.category != 'design'" | size -%}
 
-<section class="page-hero">
-  <div class="mesh"></div>
-  <div class="wrap page-hero-inner">
-    <span class="eyebrow reveal">The apps</span>
-    <h1 class="reveal" data-delay="60"><span class="grad">The whole suite.</span></h1>
-    <p class="reveal" data-delay="120">
-      A full suite of first-party apps, each one open source, offline-first, and free of trackers.
-      {{ released.size }} available today, the rest on the way.
-    </p>
-  </div>
-</section>
-
-<section class="apps-page">
+<section class="stage page-stage" id="catalog-top" data-stage data-live data-seed="1.4" data-dim="0.8">
   <div class="wrap">
-    {%- for cat in site.data.categories %}
-    {%- assign catapps = site.apps | where: "category", cat.id | sort: "order" %}
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h2>{{ cat.title }}</h2>
-        <span>{{ cat.blurb }}</span>
-      </div>
-      <div class="app-grid">
-        {%- for app in catapps %}{% assign d = forloop.index0 | times: 50 %}{% include app-tile.html app=app delay=d %}{% endfor %}
-      </div>
+    <span class="eyebrow">{{ appcount }} apps, {{ released.size }} shipping today</span>
+    <h1 class="display" style="margin-top:18px"><span data-paint>Apps.</span></h1>
+    <p class="lede">A full suite of first-party apps to replace the defaults. Every one is open source, works offline first, and carries no trackers. In-development apps are being built right now, in public.</p>
+    <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#catalog">
+      <span class="seg-ind" aria-hidden="true"></span>
+      <button role="tab" aria-selected="true" data-cat="all">All</button>
+      {%- for c in site.data.categories %}
+      <button role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
+      {%- endfor %}
     </div>
-    {%- endfor %}
   </div>
 </section>
+
+<div class="wrap" id="catalog" style="padding-bottom:140px">
+  {%- for c in site.data.categories %}
+  {%- assign in_cat = apps | where: "category", c.id %}
+  {%- if in_cat.size > 0 %}
+  <section class="cat" data-cat="{{ c.id }}" aria-labelledby="cat-{{ c.id }}">
+    <div class="cat-head">
+      <h2 id="cat-{{ c.id }}">{{ c.title }}</h2>
+      <p>{{ c.blurb }}</p>
+    </div>
+    <div class="rows">
+      {%- for app in in_cat %}
+      <a class="row" href="{{ app.url | relative_url }}">
+        {% include app-icon.html app=app %}
+        <span><b>{{ app.title }}</b><span class="t">{{ app.tagline }}</span></span>
+        {%- case app.status -%}
+        {%- when 'stable' %}<span class="pill stable">Available</span>
+        {%- when 'beta' %}<span class="pill beta">Beta</span>
+        {%- else %}<span class="pill">In development</span>
+        {%- endcase %}
+      </a>
+      {%- endfor %}
+    </div>
+  </section>
+  {%- endif %}
+  {%- endfor %}
+</div>

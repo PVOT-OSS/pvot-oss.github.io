@@ -1,9 +1,8 @@
 title: Pvot
-tagline: Open-source Android, built for you
+tagline: Your phone. Your rules.
 description: >-
-  Pvot is an open-source, AOSP-based Android ecosystem: a full suite of
-  first-party apps built on one shared design system. No ads, no tracking,
-  just software that answers to you.
+  Pvot is open-source, de-Googled Android: an OS and a full suite of apps,
+  drawn in real liquid glass. No trackers, no accounts, nothing phoning home.
 url: "https://pvot-oss.github.io"
 baseurl: ""
 lang: en
@@ -35,7 +34,7 @@ social:
 # Primary nav
 nav:
   - { label: "Apps", href: "/apps/" }
-  - { label: "System", href: "/#system" }
+  - { label: "PvotLib", href: "/pvotlib/" }
   - { label: "About", href: "/about/" }
   - { label: "Contribute", href: "/contribute/" }
 

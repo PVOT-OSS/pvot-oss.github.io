@@ -1,0 +1,3 @@
+{%- assign ic_cat = site.data.categories | where: "id", include.app.category | first -%}
+{%- assign ic_on = false -%}{%- if include.app.status != 'soon' -%}{%- assign ic_on = true -%}{%- endif -%}
+<span class="app-icon{% if ic_on %} on{% endif %}" style="--c:{{ ic_cat.color }}" aria-hidden="true"><span class="ms">{{ include.app.icon }}</span></span>
