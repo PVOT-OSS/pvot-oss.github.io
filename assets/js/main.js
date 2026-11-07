@@ -241,6 +241,61 @@
     });
   });
 
+  // ---- Intro: once a session, a big lens sweeps across the hero and settles into the small one --
+  (function intro() {
+    var lens = $('.hero .lens');
+    if (!lens || reduceMotion || !lens.animate) return;
+    try {
+      if (sessionStorage.getItem('pvot-intro')) return;
+      sessionStorage.setItem('pvot-intro', '1');
+    } catch (e) { /* storage blocked: play it anyway */ }
+    var stage = lens.closest('.stage');
+    lens._introing = true;
+    lens.style.setProperty('--dx', '0px');
+    lens.style.setProperty('--dy', '0px');
+    var r = lens.getBoundingClientRect();
+    var big = Math.min(3.4, (window.innerHeight * 0.92) / r.height);
+    var offLeft = -(r.left + r.width / 2) - (r.width * big) / 2 - 40;
+    var start = 'translate(' + offLeft + 'px, ' + (-r.height * 0.35) + 'px) scale(' + big + ')';
+    lens.style.transform = start; // parked off screen until the stage is ready
+
+    var anim = null;
+    var finish = function () {
+      if (!lens._introing) return;
+      lens._introing = false;
+      lens._idleStart = performance.now();
+      lens.style.transform = '';
+      if (lens._glass) { lens._glass.liftTarget = 0; lens._glass.params = null; }
+    };
+    lens.addEventListener('pointerdown', function () { if (anim) anim.cancel(); finish(); }, { once: true });
+
+    var go = function () {
+      if (!lens._introing) return;
+      var mid = 'translate(' + (window.innerWidth * 0.16) + 'px, ' + (-r.height * 0.1) + 'px) scale(' + (1 + (big - 1) * 0.45) + ')';
+      if (lens._glass) lens._glass.liftTarget = 1;
+      // Keep the big lens clear: the frost grows with the glass, which would fog it mid-sweep.
+      if (window.PvotGlass && PvotGlass.setParams) PvotGlass.setParams(lens, { blur: 0.12 });
+      anim = lens.animate([
+        { transform: start },
+        { transform: mid, offset: 0.58 },
+        { transform: 'translate(0px, 0px) scale(1)' }
+      ], { duration: 2100, easing: 'cubic-bezier(0.55, 0, 0.15, 1)' });
+      lens.style.transform = 'translate(0px, 0px) scale(1)';
+      anim.onfinish = finish;
+      anim.oncancel = finish;
+    };
+
+    // Start once the shader has drawn its first frame and the fonts are in, so the
+    // headline it bends is the real one. Give up waiting after a few seconds.
+    var t0 = performance.now();
+    (function wait() {
+      var ready = stage && stage.classList.contains('is-live') && (!document.fonts || document.fonts.status === 'loaded');
+      if (ready) return setTimeout(go, 250);
+      if (performance.now() - t0 > 3500) { finish(); return; }
+      requestAnimationFrame(wait);
+    })();
+  })();
+
   // ---- Lens: hide the hint once it has been picked up -------------------------------------
   $$('.lens').forEach(function (lens) {
     var stage = lens.closest('.stage');

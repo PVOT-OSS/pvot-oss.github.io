@@ -951,11 +951,11 @@
   function idle(stage, now) {
     if (reduceMotion) return;
     Array.prototype.forEach.call(stage.el.querySelectorAll('[data-drag][data-idle]'), function (el) {
-      if (el._touched) return;
-      var t = now / 1000;
+      if (el._touched || el._introing) return;
+      var t = (now - (el._idleStart || 0)) / 1000;
       var ax = parseFloat(el.dataset.idleX || '0.22') * stage.cssW;
       var ay = parseFloat(el.dataset.idleY || '0.06') * stage.cssH;
-      var x = Math.sin(t * 0.32) * ax, y = Math.sin(t * 0.57 + 0.6) * ay;
+      var x = Math.sin(t * 0.32) * ax, y = Math.sin(t * 0.57) * ay;
       el._drag.x = x; el._drag.y = y;
       el.style.setProperty('--dx', x + 'px');
       el.style.setProperty('--dy', y + 'px');
