@@ -1,0 +1,33 @@
+# Public repos shown on /contribute/, grouped. Add one when it goes public.
+- group: Apps in Kotlin and Compose
+  blurb: Built on PvotLib. The quickest way in if you know Android.
+  repos:
+    - { name: Messages, lang: Kotlin, about: "SMS without the spyware. A continuation of QKSMS." }
+    - { name: PvotMeasure, lang: Kotlin, about: "An AR ruler that measures on device." }
+    - { name: PvotCompass, lang: Kotlin, about: "A clean, calm compass." }
+    - { name: PvotEqualizer, lang: Kotlin, about: "6 and 10 band EQ with pre-amp and preset import." }
+    - { name: PvotWeather, lang: Kotlin, about: "Forecasts without an account." }
+    - { name: PvotNotes, lang: Kotlin, about: "Notes that stay on your phone." }
+    - { name: PvotMaps, lang: Kotlin, about: "Maps that do not follow you around." }
+    - { name: Recorder, lang: Kotlin, about: "Voice memos, recorded and kept on device." }
+    - { name: ToolKit, lang: Kotlin, about: "Small system tools for Pvot." }
+- group: Apps from AOSP, in Java
+  blurb: Platform apps we fork and rebuild. Good if you like reading big codebases.
+  repos:
+    - { name: Calculator, lang: Java, about: "Numbers, nothing else." }
+    - { name: Calendar, lang: Java, about: "Your schedule, on your device." }
+    - { name: Phone, lang: Java, about: "The dialer, rebuilt for Pvot." }
+- group: Design system
+  blurb: Every improvement here lands in every app at once.
+  repos:
+    - { name: PvotLib, lang: Kotlin, about: "Liquid glass, motion, and every shared component." }
+- group: Platform and tooling
+  blurb: The OS side, CI, and the scripts that hold it together.
+  repos:
+    - { name: platform_vendor_partner_pvot, lang: Shell, about: "Vendor config for Pvot builds." }
+    - { name: workflows, lang: YAML, about: "Shared CI: DCO, REUSE and build checks." }
+    - { name: pvot-oss.github.io, lang: HTML, about: "This website. Jekyll and a WebGL glass shader." }
+- group: Testing and triage
+  blurb: No code needed. Real devices and sharp reports move things fastest.
+  repos:
+    - { name: public-issues, lang: Issues, about: "Report a bug or request a feature, for any Pvot app." }

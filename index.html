@@ -46,7 +46,7 @@ layout: base
     <div class="section-head center">
       <span class="eyebrow rv">The apps</span>
       <h2 class="h2 rv">Everything you open.<br><span class="dim">Rebuilt in the open.</span></h2>
-      <p class="lede rv">{{ appcount }} first-party apps on one design system. The ones in the dock ship today. The rest are being built right now, in public.</p>
+      <p class="lede rv">{{ appcount }} first-party apps on one design system. The ones in the dock are on Google Play today, each with zero trackers on Exodus. The rest are being built right now, in public.</p>
     </div>
 
     <div class="home">
@@ -68,7 +68,7 @@ layout: base
       </div>
 
       <div class="dock-wrap">
-        <span class="dock-label">In the dock: shipping today</span>
+        <span class="dock-label">In the dock: on Google Play today</span>
         <div class="dock" data-glass="regular">
           {%- for app in shipping %}
           <a class="icon-link" href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
@@ -136,7 +136,7 @@ layout: base
       </div>
       <div class="set-row">
         <span class="set-ic" style="--c:var(--green)"><span class="ms">shield</span></span>
-        <div><b>Trackers</b><small>Checked by Exodus Privacy</small></div>
+        <div><b>Trackers</b><small>Verified by <a href="https://reports.exodus-privacy.eu.org/en/reports/org.prauga.messages/latest/" target="_blank" rel="noopener">Exodus Privacy</a>, app by app</small></div>
         <span class="set-val good">0</span>
       </div>
       <div class="set-row">
@@ -175,7 +175,7 @@ layout: base
 <section class="cta">
   <div class="wrap">
     <h2 class="h2 rv">Ready when you are.</h2>
-    <p class="lede rv">Pick up an app today, flash the OS when it lands, or help us build the next one. Everything happens in the open.</p>
+    <p class="lede rv">Get the apps on Google Play today, flash the OS when it lands, or help us build the next one. Everything happens in the open.</p>
     <div class="btn-row rv">
       <a class="btn btn-solid" href="{{ '/apps/' | relative_url }}">See what ships</a>
       <a class="btn btn-line" href="{{ site.social.telegram }}" target="_blank" rel="noopener">Join the Telegram</a>

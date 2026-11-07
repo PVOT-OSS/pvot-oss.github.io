@@ -23,15 +23,26 @@ layout: base
         <p class="tagline">{{ app.tagline }}</p>
         <div class="btn-row">
           {%- if released %}
+          {%- if app.package %}
+          <a class="btn btn-solid" href="https://play.google.com/store/apps/details?id={{ app.package }}" target="_blank" rel="noopener">{% include play.html %} Get it on Google Play</a>
+          {%- else %}
           <a class="btn btn-solid" href="{{ repo }}/releases" target="_blank" rel="noopener"><span class="ms">download</span> Download</a>
+          {%- endif %}
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ repo }}" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
-          {%- if app.fdroid %}<a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ app.fdroid }}" target="_blank" rel="noopener">F-Droid</a>{%- endif %}
-          {%- if app.play %}<a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ app.play }}" target="_blank" rel="noopener">Play Store</a>{%- endif %}
+          {%- if app.package %}
+          <a class="btn btn-line" href="{{ repo }}/releases" target="_blank" rel="noopener"><span class="ms">download</span> APK</a>
+          {%- endif %}
+          {%- if app.fdroid %}<a class="btn btn-line" href="{{ app.fdroid }}" target="_blank" rel="noopener">F-Droid</a>{%- endif %}
           {%- else %}
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ site.social.telegram }}" target="_blank" rel="noopener"><span class="ms">notifications</span> Follow along</a>
           <a class="btn btn-line" href="{{ '/contribute/' | relative_url }}">Help build it</a>
           {%- endif %}
         </div>
+        {%- if app.package %}
+        <a class="exodus" href="https://reports.exodus-privacy.eu.org/en/reports/{{ app.package }}/latest/" target="_blank" rel="noopener">
+          <span class="ms fill">verified_user</span> 0 trackers, verified by Exodus Privacy <span class="ms">arrow_outward</span>
+        </a>
+        {%- endif %}
       </div>
     </div>
   </div>
@@ -49,7 +60,7 @@ layout: base
       {%- for f in app.features %}
       <li><span class="ms">check_circle</span> {{ f }}</li>
       {%- endfor %}
-      <li><span class="ms">check_circle</span> No trackers, no ads, no account</li>
+      <li><span class="ms">check_circle</span> No ads, no account{% if app.package %}, 0 trackers on Exodus{% else %}, no trackers{% endif %}</li>
     </ul>
   </div>
 

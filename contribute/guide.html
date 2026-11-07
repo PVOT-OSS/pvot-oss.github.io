@@ -1,0 +1,51 @@
+---
+layout: base
+permalink: /contribute/guide/
+title: Contributing guide
+description: "How to contribute to Pvot: setup, sign-off, licence headers, and opening a pull request."
+---
+<section class="doc-head">
+  <div class="wrap">
+    <span class="eyebrow hero-meta">Contributing guide</span>
+    <h1 class="display" style="margin-top:18px"><span class="hero-line">How we</span><span class="hero-line">work.</span></h1>
+    <p class="lede hero-meta">Everything you need to get a change merged into any Pvot repo. It is short on purpose.</p>
+    {% include contribute-nav.html %}
+  </div>
+</section>
+
+<section class="doc">
+  <div class="wrap"><div class="doc-body">
+    <h2>Before you start</h2>
+    <ul>
+      <li>Find the repo on the <a href="{{ '/contribute/' | relative_url }}">where to contribute</a> page, and check its open issues and the <a href="{{ site.social.issues }}" target="_blank" rel="noopener">public tracker</a> so you do not duplicate work.</li>
+      <li>For anything bigger than a fix, say what you plan on <a href="{{ site.social.telegram }}" target="_blank" rel="noopener">Telegram</a> or in an issue first. It saves you rewriting it later.</li>
+      <li>Be kind. Everyone here is giving their own time.</li>
+    </ul>
+
+    <h2>Building an app</h2>
+    <p>New apps are Kotlin and Jetpack Compose, built on <a href="{{ '/pvotlib/' | relative_url }}">PvotLib</a>. Use its components, tokens and glass rather than rolling your own, so the app looks and moves like the rest of Pvot. PvotLib's <a href="{{ site.social.pvotlib }}/blob/main/docs/GUIDE.md" target="_blank" rel="noopener">guide</a> covers the theme, motion and every component, and its docs explain how to start a new app or move an existing one over.</p>
+
+    <h2>Submitting a change</h2>
+    <ol class="steps">
+      <li><strong>Fork</strong> the repo and branch from <code>main</code>: <code>git checkout -b fix/short-description</code>.</li>
+      <li><strong>Keep commits focused</strong>, with messages in the imperative mood, like <code>Fix crash when sharing a photo</code>.</li>
+      <li><strong>Sign off every commit</strong> with <code>git commit -s</code>. CI checks the Developer Certificate of Origin on every pull request.</li>
+      <li><strong>Add licence headers.</strong> New files carry SPDX headers (<code>SPDX-FileCopyrightText</code> and <code>SPDX-License-Identifier</code>), and CI runs a REUSE check.</li>
+      <li><strong>Run pre-commit</strong> where a repo has it. It trims whitespace, checks YAML, and formats Kotlin.</li>
+      <li><strong>Test on a device</strong> before you open the pull request, and say what you tested on.</li>
+      <li><strong>Open the pull request</strong> with what changed and why. Screenshots for anything you can see, logs for anything that broke.</li>
+    </ol>
+
+    <h2>Reporting bugs</h2>
+    <p>Open an issue on the app's repo or the <a href="{{ site.social.issues }}" target="_blank" rel="noopener">public tracker</a> with your device, Android version, app version, the steps to reproduce, and a logcat if you can get one. A clear report is real help.</p>
+
+    <h2>Privacy rules for code</h2>
+    <ul>
+      <li>No analytics, ad, or tracking SDKs, ever. Exodus scans what we ship.</li>
+      <li>Ask only for the permissions a feature needs, and say why in the pull request.</li>
+      <li>Keep data on the device unless the user asked for it to go somewhere.</li>
+    </ul>
+
+    <p class="doc-note">Code you contribute is released under the repo's licence, Apache-2.0 for most of Pvot. Thanks for helping build it.</p>
+  </div></div>
+</section>

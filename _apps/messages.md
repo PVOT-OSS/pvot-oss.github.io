@@ -5,6 +5,7 @@ tagline: SMS without the spyware.
 category: communication
 icon: sms
 accent: "#4CC2FF"
+package: org.prauga.messages
 status: stable
 summary: A fast, open-source SMS app designed to make conversations simple and effortless.
   A continuation of QKSMS, rebuilt around privacy.

@@ -5,6 +5,7 @@ tagline: Numbers, nothing else.
 category: tools
 icon: calculate
 accent: "#A78BFA"
+package: org.prauga.calculator
 status: stable
 summary: A simple, fast calculator with a clean Material interface. No permissions,
   no clutter, just the maths.
@@ -13,5 +14,5 @@ features:
 - Calculation history
 - No permissions
 - Open source
-repo: PvotCalculator
+repo: Calculator
 ---

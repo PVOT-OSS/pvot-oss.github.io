@@ -1,0 +1,6 @@
+<nav class="sub-nav" aria-label="Contribute">
+  {%- assign tabs = "Where to contribute|/contribute/,Contributing guide|/contribute/guide/,Donate|/contribute/donate/,Sponsors|/contribute/sponsors/" | split: "," -%}
+  {%- for t in tabs %}{% assign p = t | split: "|" %}
+  <a href="{{ p[1] | relative_url }}"{% if page.url == p[1] %} aria-current="page"{% endif %}>{{ p[0] }}</a>
+  {%- endfor %}
+</nav>

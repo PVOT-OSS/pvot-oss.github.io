@@ -2,51 +2,58 @@
 layout: base
 permalink: /contribute/
 title: Contribute
-description: "Help build Pvot: code an app, grow the design system, test builds, or report a bug. It is all open."
+description: "Where to contribute to Pvot: every public repo, from Kotlin apps to the design system to the OS."
 ---
 <section class="doc-head">
   <div class="wrap">
     <span class="eyebrow hero-meta">Contribute</span>
     <h1 class="display" style="margin-top:18px"><span class="hero-line">Build it</span><span class="hero-line">with us.</span></h1>
-    <p class="lede hero-meta">Pvot is volunteer-run and fully open. Whether you write Kotlin, design interfaces, or just file a sharp bug report, there is a place for you. No permission needed.</p>
+    <p class="lede hero-meta">Pvot is volunteer-run and fully open. Pick the corner of the stack you like, open a pull request, and it ships to everyone. No permission needed.</p>
+    {% include contribute-nav.html %}
   </div>
 </section>
 
 <section class="doc">
-  <div class="wrap"><div class="doc-body">
-    <h2>Where to jump in</h2>
-    <div class="help-grid">
-      <a class="help-card" href="{{ site.social.github }}" target="_blank" rel="noopener">
-        <span class="ms">code</span>
-        <h3>Build an app</h3>
-        <p>Pick an app, open a pull request. Everything is Kotlin and Jetpack Compose, built on PvotLib.</p>
-      </a>
-      <a class="help-card" href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">
-        <span class="ms">palette</span>
-        <h3>Grow the design system</h3>
-        <p>PvotLib always needs more components, tokens, and polish. Every improvement lands in every app.</p>
-      </a>
-      <a class="help-card" href="{{ site.social.issues }}" target="_blank" rel="noopener">
-        <span class="ms">bug_report</span>
-        <h3>Report a bug</h3>
-        <p>Found something broken? Open an issue with your device, steps, and logs. Triage is real help.</p>
-      </a>
-      <a class="help-card" href="{{ site.social.telegram }}" target="_blank" rel="noopener">
-        <span class="ms">favorite</span>
-        <h3>Test and translate</h3>
-        <p>Flash builds, report regressions, or translate an app. Say hi on Telegram and we will point you somewhere.</p>
-      </a>
+  <div class="wrap">
+    {%- for g in site.data.repos %}
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>{{ g.group }}</h2>
+        <p>{{ g.blurb }}</p>
+      </div>
+      <div class="repo-grid">
+        {%- for r in g.repos %}
+        <a class="repo" href="{{ site.social.github }}/{{ r.name }}" target="_blank" rel="noopener">
+          <span class="repo-top"><b>{{ r.name }}</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">{{ r.about }}</span>
+          <span class="repo-lang" data-lang="{{ r.lang }}">{{ r.lang }}</span>
+        </a>
+        {%- endfor %}
+      </div>
+    </div>
+    {%- endfor %}
+
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Without writing code</h2>
+        <p>Some of the most useful help never touches a compiler.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="{{ site.social.telegram }}" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Test builds</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Flash betas, catch regressions on your device, and share logs.</span>
+        </a>
+        <a class="repo" href="{{ site.social.telegram }}" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Translate</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Bring an app to your language. Strings live in each app's repo.</span>
+        </a>
+        <a class="repo" href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Design</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Icons, motion and layouts. Start from the PvotLib catalog app.</span>
+        </a>
+      </div>
     </div>
 
-    <h2>Before you start</h2>
-    <ul>
-      <li>Fork the relevant repo under <a href="{{ site.social.github }}" target="_blank" rel="noopener">github.com/PVOT-OSS</a> and branch from there.</li>
-      <li>Keep pull requests focused, with clear commit messages.</li>
-      <li>Build on-device before you open a PR where it matters.</li>
-      <li>Be kind. We are all here on our own time.</li>
-    </ul>
-
-    <p class="doc-note">New to open source? That is fine. Reach out on <a href="{{ site.social.telegram }}" target="_blank" rel="noopener">Telegram</a> and someone will help you land your first change.</p>
-  </div>
+    <p class="doc-note">New to open source? That is fine. Read the <a href="{{ '/contribute/guide/' | relative_url }}">contributing guide</a>, then say hi on <a href="{{ site.social.telegram }}" target="_blank" rel="noopener">Telegram</a> and someone will help you land your first change.</p>
   </div>
 </section>
