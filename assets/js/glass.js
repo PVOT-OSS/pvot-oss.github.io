@@ -106,10 +106,46 @@
     'uniform vec4 uC[5];',
     'uniform float uSpeed[5];',
     'uniform sampler2D uPaint;',
+    'uniform float uTime;',
+    'uniform float uSilk;',
+    'uniform float uPx;',
+    '',
+    // Silk: a height field of slow, domain-warped waves, lit by one soft light. Its shadows take
+    // the stage's first color, its sheen the third, and a touch of the second drifts through.
+    'float silkH(vec2 u, float t) {',
+    '  u += 0.42 * vec2(sin(u.y * 1.3 + t * 0.9), cos(u.x * 1.1 - t * 0.7));',
+    '  u += 0.18 * vec2(sin(u.y * 2.7 - t * 0.5), cos(u.x * 2.3 + t * 0.4));',
+    '  return sin(u.x * 1.9 + u.y * 0.9 + t * 0.35) * 0.62 + sin(-u.x * 0.8 + u.y * 2.1 - t * 0.25) * 0.38;',
+    '}',
+    'vec3 silk(vec2 p) {',
+    '  vec2 u = p / (760.0 * uPx);',
+    '  float t = uTime;',
+    '  float e = 0.004;',
+    '  float h = silkH(u, t);',
+    '  float hx = silkH(u + vec2(e, 0.0), t) - h;',
+    '  float hy = silkH(u + vec2(0.0, e), t) - h;',
+    '  vec3 n = normalize(vec3(-hx / e * 0.9, -hy / e * 0.9, 1.0));',
+    '  vec3 L = normalize(vec3(-0.45, -0.7, 0.62));',
+    '  float diff = clamp(dot(n, L), 0.0, 1.0);',
+    '  float spec = pow(clamp(dot(reflect(-L, n), vec3(0.0, 0.0, 1.0)), 0.0, 1.0), 18.0);',
+    '  float fold = smoothstep(0.05, 1.0, diff);',
+    '  vec3 shade = uC[0].rgb * 1.05;',
+    '  vec3 col = mix(uBase, shade, fold * 0.9);',
+    '  float drift = 0.5 + 0.5 * sin(u.x * 0.9 - u.y * 0.6 + t * 0.3);',
+    '  col = mix(col, uC[1].rgb * 0.8, fold * drift * 0.4);',
+    '  col += uC[2].rgb * spec * 0.6;',
+    // Fall to black toward the bottom and the edges, so type always sits on dark.
+    '  vec2 q = p / uRes;',
+    '  float vig = smoothstep(1.35, 0.15, length((q - vec2(0.55, 0.4)) * vec2(0.9, 1.15)));',
+    '  return mix(uBase, col, vig * uDim);',
+    '}',
+    '',
     'void main() {',
     '  vec2 p = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);',
     '  vec3 col = uBase;',
-    '  if (uLive > 0.5) {',
+    '  if (uLive > 0.5 && uSilk > 0.5) {',
+    '    col = silk(p);',
+    '  } else if (uLive > 0.5) {',
     '    float R = min(uRes.x, uRes.y * 1.35);',
     '    for (int i = 0; i < 5; i++) {',
     '      float fi = float(i);',
@@ -482,6 +518,8 @@
   Stage.prototype.readConfig = function () {
     var d = this.el.dataset;
     this.live = 'live' in d;
+    // data-bg="drift" keeps PvotLiveBackground's blobs; silk is the default.
+    this.silk = d.bg !== 'drift';
     var blobs = (d.blobs ? d.blobs.split(',') : DEFAULT_BLOBS).map(hexToRgba);
     while (blobs.length < 5) blobs.push(blobs[blobs.length % Math.max(1, blobs.length)] || [0, 0, 0, 0]);
     this.blobs = blobs.slice(0, 5);
@@ -704,6 +742,9 @@
     gl.uniform1f(ps.u.uPhase, phase);
     gl.uniform1f(ps.u.uLive, this.live ? 1 : 0);
     gl.uniform1f(ps.u.uDim, this.dim);
+    gl.uniform1f(ps.u.uSilk, this.silk ? 1 : 0);
+    gl.uniform1f(ps.u.uPx, this.dpr);
+    gl.uniform1f(ps.u.uTime, this.seed * 7 + (reduceMotion ? 0 : now / 1000 * 0.11));
     gl.uniform3f(ps.u.uBase, this.base[0], this.base[1], this.base[2]);
     var flat = [];
     this.blobs.forEach(function (c) { flat.push(c[0], c[1], c[2], c[3]); });
