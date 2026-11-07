@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>document.documentElement.classList.add('js')</script><title>Contributing guide · Pvot</title>
+  <meta name="description" content="How to contribute to Pvot: setup, sign-off, licence headers, and opening a pull request." />
+  <link rel="canonical" href="https://pvot-oss.github.io/contribute/guide/" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pvot" />
+  <meta property="og:title" content="Contributing guide · Pvot" />
+  <meta property="og:description" content="How to contribute to Pvot: setup, sign-off, licence headers, and opening a pull request." />
+  <meta property="og:url" content="https://pvot-oss.github.io/contribute/guide/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+  <body>
+    <a class="sr-only" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header">
+  <div class="nav-glass">
+    <a class="brand" href="/" aria-label="Pvot home">
+      <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+
+      <span>Pvot</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="/apps/">Apps</a>
+      <a href="/pvotlib/">PvotLib</a>
+      <a href="/about/">About</a>
+      <a href="/contribute/" aria-current="page">Contribute</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <button class="nav-icon nav-menu" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="ms">menu</span>
+      </button>
+    </div>
+  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="nav-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="nav-refract-map" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="soft"/>
+      <feDisplacementMap id="nav-refract-disp" in="soft" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+</header>
+
+    <main id="main">
+      <section class="doc-head">
+  <div class="wrap">
+    <span class="eyebrow hero-meta">Contributing guide</span>
+    <h1 class="display" style="margin-top:18px"><span class="hero-line">How we</span><span class="hero-line">work.</span></h1>
+    <p class="lede hero-meta">Everything you need to get a change merged into any Pvot repo. It is short on purpose.</p>
+    <nav class="sub-nav" aria-label="Contribute">
+  <a href="/contribute/">Where to contribute</a>
+  <a href="/contribute/guide/" aria-current="page">Contributing guide</a>
+  <a href="/contribute/donate/">Donate</a>
+  <a href="/contribute/sponsors/">Sponsors</a>
+</nav>
+
+  </div>
+</section>
+
+<section class="doc">
+  <div class="wrap"><div class="doc-body">
+    <h2>Before you start</h2>
+    <ul>
+      <li>Find the repo on the <a href="/contribute/">where to contribute</a> page, and check its open issues and the <a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">public tracker</a> so you do not duplicate work.</li>
+      <li>For anything bigger than a fix, say what you plan on <a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a> or in an issue first. It saves you rewriting it later.</li>
+      <li>Be kind. Everyone here is giving their own time.</li>
+    </ul>
+
+    <h2>Building an app</h2>
+    <p>New apps are Kotlin and Jetpack Compose, built on <a href="/pvotlib/">PvotLib</a>. Use its components, tokens and glass rather than rolling your own, so the app looks and moves like the rest of Pvot. PvotLib's <a href="https://github.com/PVOT-OSS/PvotLib/blob/main/docs/GUIDE.md" target="_blank" rel="noopener">guide</a> covers the theme, motion and every component, and its docs explain how to start a new app or move an existing one over.</p>
+
+    <h2>Submitting a change</h2>
+    <ol class="steps">
+      <li><strong>Fork</strong> the repo and branch from <code>main</code>: <code>git checkout -b fix/short-description</code>.</li>
+      <li><strong>Keep commits focused</strong>, with messages in the imperative mood, like <code>Fix crash when sharing a photo</code>.</li>
+      <li><strong>Sign off every commit</strong> with <code>git commit -s</code>. CI checks the Developer Certificate of Origin on every pull request.</li>
+      <li><strong>Add licence headers.</strong> New files carry SPDX headers (<code>SPDX-FileCopyrightText</code> and <code>SPDX-License-Identifier</code>), and CI runs a REUSE check.</li>
+      <li><strong>Run pre-commit</strong> where a repo has it. It trims whitespace, checks YAML, and formats Kotlin.</li>
+      <li><strong>Test on a device</strong> before you open the pull request, and say what you tested on.</li>
+      <li><strong>Open the pull request</strong> with what changed and why. Screenshots for anything you can see, logs for anything that broke.</li>
+    </ol>
+
+    <h2>Reporting bugs</h2>
+    <p>Open an issue on the app's repo or the <a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">public tracker</a> with your device, Android version, app version, the steps to reproduce, and a logcat if you can get one. A clear report is real help.</p>
+
+    <h2>Privacy rules for code</h2>
+    <ul>
+      <li>No analytics, ad, or tracking SDKs, ever. Exodus scans what we ship.</li>
+      <li>Ask only for the permissions a feature needs, and say why in the pull request.</li>
+      <li>Keep data on the device unless the user asked for it to go somewhere.</li>
+    </ul>
+
+    <p class="doc-note">Code you contribute is released under the repo's licence, Apache-2.0 for most of Pvot. Thanks for helping build it.</p>
+  </div></div>
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/"><svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+<span>Pvot</span></a>
+        <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pvot</h4>
+        <ul>
+          <li><a href="/apps/">Apps</a></li>
+          <li><a href="/pvotlib/">PvotLib</a></li>
+          <li><a href="/#system">The stack</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Build</h4>
+        <ul>
+          <li><a href="/contribute/">Where to contribute</a></li>
+          <li><a href="/contribute/guide/">Contributing guide</a></li>
+          <li><a href="/contribute/donate/">Donate</a></li>
+          <li><a href="/contribute/sponsors/">Sponsors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">StormBreaker</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Pvot. Apache-2.0.</span>
+      <span>The glass on this site is PvotLib's lens shader, running in WebGL.</span>
+    </div>
+  </div>
+</footer>
+
+    <script src="/assets/js/glass.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+  </body>
+</html>

@@ -2,101 +2,226 @@
 <html lang="en">
   <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" /><title>Contribute · Pvot</title>
-  <meta name="description" content="Help build Pvot: code an app, improve the design system, test builds, or just report a bug. It is all open." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>document.documentElement.classList.add('js')</script><title>Contribute · Pvot</title>
+  <meta name="description" content="Where to contribute to Pvot: every public repo, from Kotlin apps to the design system to the OS." />
   <link rel="canonical" href="https://pvot-oss.github.io/contribute/" />
   <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#08080b" />
-
+  <meta name="theme-color" content="#000000" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pvot" />
   <meta property="og:title" content="Contribute · Pvot" />
-  <meta property="og:description" content="Help build Pvot: code an app, improve the design system, test builds, or just report a bug. It is all open." />
+  <meta property="og:description" content="Where to contribute to Pvot: every public repo, from Kotlin apps to the design system to the OS." />
   <meta property="og:url" content="https://pvot-oss.github.io/contribute/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=account_balance_wallet,apps,backup,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,edit_note,equalizer,explore,favorite,folder,grid_view,key,lock,mail,map,menu,menu_book,mic,monitor_heart,music_note,palette,photo_camera,photo_library,public,rss_feed,schedule,shield,sms,storefront,straighten,task_alt,verified,visibility_off,wb_sunny&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
   <body>
-    <header id="site-header">
-  <div class="wrap nav">
+    <a class="sr-only" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header">
+  <div class="nav-glass">
     <a class="brand" href="/" aria-label="Pvot home">
-      <span class="brand-mark" aria-hidden="true">P</span>
-      <span class="brand-name">Pvot</span>
+      <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+
+      <span>Pvot</span>
     </a>
-
-    <nav class="nav-links" id="nav-links">
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
       <a href="/apps/">Apps</a>
-      <a href="/#system">System</a>
+      <a href="/pvotlib/">PvotLib</a>
       <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
-      <a class="nav-gh-inline" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a>
+      <a href="/contribute/" aria-current="page">Contribute</a>
     </nav>
-
-    <div class="nav-actions">
-      <a class="btn btn-ghost nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">
-        <span class="ms">code</span> GitHub
+    <div class="nav-right">
+      <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
       </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <button class="nav-icon nav-menu" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
         <span class="ms">menu</span>
       </button>
     </div>
   </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="nav-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="nav-refract-map" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="soft"/>
+      <feDisplacementMap id="nav-refract-disp" in="soft" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
 </header>
 
-    <main id="top">
-      <section class="doc-hero">
-  <div class="mesh"></div>
-  <div class="wrap doc-hero-inner">
-    <span class="eyebrow reveal">Contribute</span>
-    <h1 class="reveal" data-delay="60"><span class="grad">Build it with us.</span></h1>
-    <p class="reveal" data-delay="120">
-      Pvot is volunteer-run and fully open. Whether you write Kotlin, design interfaces, or just file
-      a sharp bug report, there is a place for you. No permission needed.
-    </p>
+    <main id="main">
+      <section class="doc-head">
+  <div class="wrap">
+    <span class="eyebrow hero-meta">Contribute</span>
+    <h1 class="display" style="margin-top:18px"><span class="hero-line">Build it</span><span class="hero-line">with us.</span></h1>
+    <p class="lede hero-meta">Pvot is volunteer-run and fully open. Pick the corner of the stack you like, open a pull request, and it ships to everyone. No permission needed.</p>
+    <nav class="sub-nav" aria-label="Contribute">
+  <a href="/contribute/" aria-current="page">Where to contribute</a>
+  <a href="/contribute/guide/">Contributing guide</a>
+  <a href="/contribute/donate/">Donate</a>
+  <a href="/contribute/sponsors/">Sponsors</a>
+</nav>
+
   </div>
 </section>
 
 <section class="doc">
-  <div class="wrap doc-body reveal">
-    <h2>Where to jump in</h2>
-    <div class="help-grid">
-      <a class="help-card" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">
-        <span class="ms">code</span>
-        <h3>Build an app</h3>
-        <p>Pick an app, open a pull request. Everything is Kotlin and Jetpack Compose, built on PvotLib.</p>
-      </a>
-      <a class="help-card" href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">
-        <span class="ms">palette</span>
-        <h3>Grow the design system</h3>
-        <p>PvotLib always needs more components, tokens, and polish. Every improvement lands in every app.</p>
-      </a>
-      <a class="help-card" href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">
-        <span class="ms">bug_report</span>
-        <h3>Report a bug</h3>
-        <p>Found something broken? Open an issue with your device, steps, and logs. Triage is real help.</p>
-      </a>
-      <a class="help-card" href="https://t.me/Pvot_OS" target="_blank" rel="noopener">
-        <span class="ms">favorite</span>
-        <h3>Test and translate</h3>
-        <p>Flash builds, report regressions, or translate an app. Say hi on Telegram and we will point you somewhere.</p>
-      </a>
+  <div class="wrap">
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Apps in Kotlin and Compose</h2>
+        <p>Built on PvotLib. The quickest way in if you know Android.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PVOT-OSS/Messages" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Messages</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">SMS without the spyware. A continuation of QKSMS.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotMeasure" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotMeasure</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">An AR ruler that measures on device.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotCompass" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotCompass</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">A clean, calm compass.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotEqualizer" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotEqualizer</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">6 and 10 band EQ with pre-amp and preset import.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotWeather" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotWeather</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Forecasts without an account.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotNotes" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotNotes</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Notes that stay on your phone.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotMaps" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotMaps</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Maps that do not follow you around.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/Recorder" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Recorder</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Voice memos, recorded and kept on device.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/ToolKit" target="_blank" rel="noopener">
+          <span class="repo-top"><b>ToolKit</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Small system tools for Pvot.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+      </div>
+    </div>
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Apps from AOSP, in Java</h2>
+        <p>Platform apps we fork and rebuild. Good if you like reading big codebases.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PVOT-OSS/Calculator" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Calculator</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Numbers, nothing else.</span>
+          <span class="repo-lang" data-lang="Java">Java</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/Calendar" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Calendar</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Your schedule, on your device.</span>
+          <span class="repo-lang" data-lang="Java">Java</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/Phone" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Phone</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">The dialer, rebuilt for Pvot.</span>
+          <span class="repo-lang" data-lang="Java">Java</span>
+        </a>
+      </div>
+    </div>
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Design system</h2>
+        <p>Every improvement here lands in every app at once.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">
+          <span class="repo-top"><b>PvotLib</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Liquid glass, motion, and every shared component.</span>
+          <span class="repo-lang" data-lang="Kotlin">Kotlin</span>
+        </a>
+      </div>
+    </div>
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Platform and tooling</h2>
+        <p>The OS side, CI, and the scripts that hold it together.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PVOT-OSS/platform_vendor_partner_pvot" target="_blank" rel="noopener">
+          <span class="repo-top"><b>platform_vendor_partner_pvot</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Vendor config for Pvot builds.</span>
+          <span class="repo-lang" data-lang="Shell">Shell</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/workflows" target="_blank" rel="noopener">
+          <span class="repo-top"><b>workflows</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Shared CI: DCO, REUSE and build checks.</span>
+          <span class="repo-lang" data-lang="YAML">YAML</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/pvot-oss.github.io" target="_blank" rel="noopener">
+          <span class="repo-top"><b>pvot-oss.github.io</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">This website. Jekyll and a WebGL glass shader.</span>
+          <span class="repo-lang" data-lang="HTML">HTML</span>
+        </a>
+      </div>
+    </div>
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Testing and triage</h2>
+        <p>No code needed. Real devices and sharp reports move things fastest.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">
+          <span class="repo-top"><b>public-issues</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Report a bug or request a feature, for any Pvot app.</span>
+          <span class="repo-lang" data-lang="Issues">Issues</span>
+        </a>
+      </div>
     </div>
 
-    <h2>Before you start</h2>
-    <ul>
-      <li>Fork the relevant repo under <a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">github.com/PVOT-OSS</a> and branch from there.</li>
-      <li>Keep pull requests focused, with clear commit messages.</li>
-      <li>Build on-device before you open a PR where it matters.</li>
-      <li>Be kind. We are all here on our own time.</li>
-    </ul>
+    <div class="repo-group rv">
+      <div class="cat-head">
+        <h2>Without writing code</h2>
+        <p>Some of the most useful help never touches a compiler.</p>
+      </div>
+      <div class="repo-grid">
+        <a class="repo" href="https://t.me/Pvot_OS" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Test builds</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Flash betas, catch regressions on your device, and share logs.</span>
+        </a>
+        <a class="repo" href="https://t.me/Pvot_OS" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Translate</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Bring an app to your language. Strings live in each app's repo.</span>
+        </a>
+        <a class="repo" href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">
+          <span class="repo-top"><b>Design</b><span class="ms">arrow_outward</span></span>
+          <span class="repo-about">Icons, motion and layouts. Start from the PvotLib catalog app.</span>
+        </a>
+      </div>
+    </div>
 
-    <p class="doc-note">New to open source? That is fine. Reach out on <a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a> and someone will help you land your first change.</p>
+    <p class="doc-note">New to open source? That is fine. Read the <a href="/contribute/guide/">contributing guide</a>, then say hi on <a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a> and someone will help you land your first change.</p>
   </div>
 </section>
 
@@ -105,49 +230,47 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true">P</span>
-          <span class="brand-name">Pvot</span>
-        </a>
-        <p>Open-source Android that answers to you. No ads, no tracking, built in the open.</p>
+        <a class="brand" href="/"><svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+<span>Pvot</span></a>
+        <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
-
       <div class="footer-col">
         <h4>Pvot</h4>
         <ul>
           <li><a href="/apps/">Apps</a></li>
-          <li><a href="/#system">The system</a></li>
+          <li><a href="/pvotlib/">PvotLib</a></li>
+          <li><a href="/#system">The stack</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="/privacy/">Privacy</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Build</h4>
         <ul>
-          <li><a href="/contribute/">Contribute</a></li>
-          <li><a href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">PvotLib</a></li>
-          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
-          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">Organization</a></li>
+          <li><a href="/contribute/">Where to contribute</a></li>
+          <li><a href="/contribute/guide/">Contributing guide</a></li>
+          <li><a href="/contribute/donate/">Donate</a></li>
+          <li><a href="/contribute/sponsors/">Sponsors</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Community</h4>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">StormBreaker</a></li>
         </ul>
       </div>
     </div>
-
     <div class="footer-base">
-      <span>© 2026 Pvot · Apache-2.0</span>
-      <span>Built with PvotLib, the same design system that ships in the OS.</span>
+      <span>© 2026 Pvot. Apache-2.0.</span>
+      <span>The glass on this site is PvotLib's lens shader, running in WebGL.</span>
     </div>
   </div>
 </footer>
 
+    <script src="/assets/js/glass.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
   </body>
 </html>

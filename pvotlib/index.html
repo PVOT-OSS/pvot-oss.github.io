@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>document.documentElement.classList.add('js')</script><title>PvotLib · Pvot</title>
+  <meta name="description" content="PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser." />
+  <link rel="canonical" href="https://pvot-oss.github.io/pvotlib/" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#000000" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Pvot" />
+  <meta property="og:title" content="PvotLib · Pvot" />
+  <meta property="og:description" content="PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser." />
+  <meta property="og:url" content="https://pvot-oss.github.io/pvotlib/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+  <body>
+    <a class="sr-only" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header">
+  <div class="nav-glass">
+    <a class="brand" href="/" aria-label="Pvot home">
+      <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+
+      <span>Pvot</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <a href="/apps/">Apps</a>
+      <a href="/pvotlib/" aria-current="page">PvotLib</a>
+      <a href="/about/">About</a>
+      <a href="/contribute/">Contribute</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+      </a>
+      <button class="nav-icon nav-menu" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="ms">menu</span>
+      </button>
+    </div>
+  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="nav-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="nav-refract-map" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="soft"/>
+      <feDisplacementMap id="nav-refract-disp" in="soft" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+</header>
+
+    <main id="main">
+      <section class="stage lab" data-stage data-live data-seed="0.6">
+  <div class="wrap">
+    <div class="lab-grid">
+      <div class="lab-copy">
+        <div class="hero-top"><span class="eyebrow">PvotLib 1.0. Jetpack Compose.</span><span class="lens-hint"><span class="ms">pan_tool</span> Drag the glass. Tune it in the panel.</span></div>
+        <div class="hero-title" style="margin-top:20px">
+          <h1 class="display">
+            <span class="hero-line" data-paint>Liquid glass,</span>
+            <span class="hero-line" data-paint>for Android.</span>
+          </h1>
+          <div class="lens" id="lab-lens" data-glass="clear" data-glass-lift data-drag data-idle data-idle-x="0.16" tabindex="0" role="img"
+            aria-label="A piece of PvotLib glass. Drag it, or move it with the arrow keys, and tune it with the panel."></div>
+        </div>
+        <p class="lede hero-meta">The design system every Pvot app is built on. Its glass is a real lens, and this is it: the shader from <code class="mono">PvotGlass.kt</code>, running in your browser.</p>
+        <div class="btn-row hero-meta">
+          <span class="install-chip"><code id="dep">implementation("com.prauga.pvot:design-system:1.0.0")</code><button class="copy" data-copy="#dep" aria-label="Copy dependency"><span class="ms">content_copy</span></button></span>
+          <a class="btn btn-glass" data-glass="clear" data-glass-press href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
+        </div>
+      </div>
+
+      <form class="panel hero-meta" data-glass="thick" data-glass-fixed id="lab-panel" aria-label="Glass controls" onsubmit="return false">
+        <h2>The glass <button type="button" id="lab-reset">Reset</button></h2>
+        <div class="seg" role="tablist" aria-label="Material" data-material>
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button type="button" role="tab" aria-selected="true" data-value="clear">Clear</button>
+          <button type="button" role="tab" aria-selected="false" data-value="regular">Regular</button>
+          <button type="button" role="tab" aria-selected="false" data-value="thick">Thick</button>
+        </div>
+        <div class="knob"><label for="k-strength">Bend <output data-for="k-strength"></output></label><input id="k-strength" type="range" min="0" max="30" step="0.5" value="11" data-param="strength"></div>
+        <div class="knob"><label for="k-aberration">Split <output data-for="k-aberration"></output></label><input id="k-aberration" type="range" min="0" max="10" step="0.25" value="3" data-param="aberration"></div>
+        <div class="knob"><label for="k-reflection">Mirror <output data-for="k-reflection"></output></label><input id="k-reflection" type="range" min="0" max="1" step="0.01" value="0.85" data-param="reflection"></div>
+        <div class="knob"><label for="k-glow">Light <output data-for="k-glow"></output></label><input id="k-glow" type="range" min="0" max="0.8" step="0.01" value="0.22" data-param="glow"></div>
+        <div class="knob"><label for="k-blur">Frost <output data-for="k-blur"></output></label><input id="k-blur" type="range" min="0" max="20" step="0.5" value="1" data-param="blur"></div>
+        <div class="knob"><label for="k-intensity">Intensity, whole page <output data-for="k-intensity"></output></label><input id="k-intensity" type="range" min="0" max="1" step="0.01" value="1" data-intensity></div>
+        <p class="panel-note">Values are PvotGlassStyle's, in dp for a glass 46dp across. Intensity is LocalPvotGlassIntensity: 1 is glass, 0.1 frosted, 0 solid.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow rv">How it works</span>
+      <h2 class="h2 rv">A lens, not a blur.<br><span class="dim">Four things at the rim.</span></h2>
+    </div>
+    <div class="stack">
+      <div class="stack-row rv"><span class="n">01</span><h3>Bend</h3><p>Near the edge, the glass reads what lies just outside it and pulls it in, eased so the middle stays calm.</p><span></span></div>
+      <div class="stack-row rv"><span class="n">02</span><h3>Split</h3><p>Red and blue are read a little apart along the edge's normal, the fringe real glass gives.</p><span></span></div>
+      <div class="stack-row rv"><span class="n">03</span><h3>Mirror</h3><p>The rim reflects what sits as far outside the edge as the point is inside it, and vivid colors bleed further in.</p><span></span></div>
+      <div class="stack-row rv"><span class="n">04</span><h3>Light</h3><p>A soft light on the side facing the light. On the phone it follows the tilt. Here it follows your pointer.</p><span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="stage section" id="components" data-stage data-live data-seed="3.3" data-dim="0.85">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Components</span>
+      <h2 class="h2">Hold them.<br><span class="dim">They turn to glass.</span></h2>
+      <p class="lede">A few of PvotLib's components, rebuilt for the web on the same glass. The code under each is the real Compose API.</p>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp">
+        <div class="comp-demo">
+          <div class="navbar" data-glass="regular" role="tablist" aria-label="Demo navigation" data-navbar>
+            <button role="tab" aria-selected="true"><span class="ms">home</span><span class="lbl">Home</span></button>
+            <button role="tab" aria-selected="false"><span class="ms">search</span><span class="lbl">Search</span></button>
+            <button role="tab" aria-selected="false"><span class="ms">photo_library</span><span class="lbl">Library</span></button>
+            <button role="tab" aria-selected="false"><span class="ms">settings</span><span class="lbl">Settings</span></button>
+          </div>
+        </div>
+        <div class="comp-info">
+          <h3>PvotNavBar</h3>
+          <p>A glass bar whose chosen item grows into a pill.</p>
+<pre class="code"><span class="f">PvotNavBar</span>(
+    selectedTab = tab,
+    onTabClick = { tab = it },
+    tabs = tabs,
+)</pre>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-demo">
+          <div class="seg" role="tablist" aria-label="Range" data-glass="regular">
+            <span class="seg-ind" aria-hidden="true"></span>
+            <button role="tab" aria-selected="false">Day</button>
+            <button role="tab" aria-selected="true">Week</button>
+            <button role="tab" aria-selected="false">Month</button>
+          </div>
+        </div>
+        <div class="comp-info">
+          <h3>PvotSegmentedControl</h3>
+          <p>Options in a capsule, the selection sliding between them.</p>
+<pre class="code"><span class="f">PvotSegmentedControl</span>(
+    options = listOf(<span class="s">"Day"</span>, <span class="s">"Week"</span>, <span class="s">"Month"</span>),
+    selectedIndex = range,
+    onSelect = { range = it },
+)</pre>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-demo">
+          <div class="g-slider" role="slider" tabindex="0" aria-label="Brightness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62" data-lift-host style="--v:62">
+            <span class="g-slider-track" data-paint="box"></span>
+            <span class="g-slider-fill" data-paint="box"></span>
+            <span class="g-slider-knob" data-glass="clear" data-glass-lift data-glass-rest="#ffffff"></span>
+          </div>
+        </div>
+        <div class="comp-info">
+          <h3>PvotSlider</h3>
+          <p>Hold the knob and it lifts into a lens over the track.</p>
+<pre class="code"><span class="f">PvotSlider</span>(
+    value = brightness,
+    onValueChange = { brightness = it },
+)</pre>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-demo">
+          <button class="g-switch" role="switch" aria-checked="true" aria-label="Bluetooth" data-lift-host>
+            <span class="g-switch-track" data-paint="box"></span>
+            <span class="g-switch-knob" data-glass="clear" data-glass-lift data-glass-rest="#ffffff"></span>
+          </button>
+        </div>
+        <div class="comp-info">
+          <h3>PvotSwitchRow</h3>
+          <p>The knob turns to glass while you hold it.</p>
+<pre class="code"><span class="f">PvotSwitchRow</span>(
+    title = <span class="s">"Bluetooth"</span>,
+    checked = on,
+    onCheckedChange = { on = it },
+)</pre>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-demo">
+          <div class="g-icons">
+            <button class="g-icon" data-glass="clear" data-glass-press aria-label="Flash"><span class="ms">flash_on</span></button>
+            <button class="g-icon" data-glass="clear" data-glass-press aria-label="Timer"><span class="ms">timer</span></button>
+            <button class="g-icon" data-glass="clear" data-glass-press aria-label="Switch camera"><span class="ms">cameraswitch</span></button>
+          </div>
+        </div>
+        <div class="comp-info">
+          <h3>PvotGlassIconButton</h3>
+          <p>Round glass for an icon floating over content, like the camera's controls.</p>
+<pre class="code"><span class="f">PvotGlassIconButton</span>(onClick = flip) {
+    <span class="f">Icon</span>(flipIcon, <span class="s">"Switch camera"</span>)
+}</pre>
+        </div>
+      </div>
+
+      <div class="comp">
+        <div class="comp-demo">
+          <div class="glass-card" data-glass="regular" data-glass-press data-glass-ref="80">
+            <b>Next up</b>
+            <span>Design review at 4:30. Room 2, or join from your phone.</span>
+          </div>
+        </div>
+        <div class="comp-info">
+          <h3>PvotGlassCard</h3>
+          <p>A card of glass, with a rim of light that follows the tilt.</p>
+<pre class="code"><span class="f">PvotGlassCard</span>(onClick = open) {
+    <span class="f">Text</span>(<span class="s">"Next up"</span>)
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section mat-intro">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow rv">Materials</span>
+      <h2 class="h2 rv">Pick the glass<br><span class="dim">by what sits on it.</span></h2>
+      <p class="lede rv">The same words run behind all three. Clear lets them through, Regular softens them, Thick keeps text on top readable.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stage mat-stage" data-stage data-base="#000000">
+  <div class="mat-wall" aria-hidden="true">
+    <span data-paint>Messages Camera Phone</span>
+    <span data-paint>Photos Music Calendar</span>
+    <span data-paint>Weather Maps Notes</span>
+    <span data-paint>Files Browser Clock</span>
+    <span data-paint>Health Journal Store</span>
+    <span data-paint>Backup Mail Contacts</span>
+    <span data-paint>Compass Reminders</span>
+    <span data-paint>Recorder Equaliser</span>
+  </div>
+  <div class="wrap">
+    <div class="mats">
+      <div class="mat" data-glass="clear" data-glass-ref="90" data-glass-blur="0.6">
+        <div><h3>Clear</h3><p>A faint haze. For icon-only controls, where nothing needs reading.</p></div>
+        <code>PvotGlassMaterial.Clear</code>
+      </div>
+      <div class="mat" data-glass="regular" data-glass-ref="90">
+        <div><h3>Regular</h3><p>A half-strength tint and a deeper blur. For bars, search fields, titled cards.</p></div>
+        <code>PvotGlassMaterial.Regular</code>
+      </div>
+      <div class="mat" data-glass="thick" data-glass-ref="90">
+        <div><h3>Thick</h3><p>Nearly opaque, the deepest blur. For sheets and dialogs with body text.</p></div>
+        <code>PvotGlassMaterial.Thick</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow rv">Install</span>
+      <h2 class="h2 rv">No account.<br><span class="dim">No token.</span></h2>
+      <p class="lede rv">PvotLib is published from its own repository. Add the Maven repo, then the libraries. It builds in AOSP too, as <code class="mono">PvotDesignSystem</code>.</p>
+    </div>
+    <div class="install">
+      <div class="install-step rv">
+        <h3>settings.gradle.kts</h3>
+<pre class="code">dependencyResolutionManagement {
+    repositories {
+        <span class="f">google</span>()
+        <span class="f">mavenCentral</span>()
+        <span class="f">maven</span>(<span class="s">"https://pvot-oss.github.io/PvotLib/maven"</span>) {
+            content { <span class="f">includeGroup</span>(<span class="s">"com.prauga.pvot"</span>) }
+        }
+    }
+}</pre>
+      </div>
+      <div class="install-step rv">
+        <h3>Glass over your content</h3>
+<pre class="code"><span class="k">val</span> backdrop = <span class="f">rememberPvotGlassBackdrop</span>()
+<span class="f">Box</span> {
+    <span class="f">LazyColumn</span>(Modifier.<span class="f">pvotGlassBackdrop</span>(backdrop)) { <span class="c">/* … */</span> }
+    <span class="f">Box</span>(
+        Modifier
+            .<span class="f">height</span>(46.dp)
+            .<span class="f">fillMaxWidth</span>()
+            .<span class="f">pvotGlass</span>(backdrop)
+            .<span class="f">pvotGlassRim</span>()
+    )
+}</pre>
+      </div>
+    </div>
+    <div class="btn-row rv" style="margin-top:40px">
+      <a class="btn btn-solid" href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">PvotLib on GitHub</a>
+      <a class="btn btn-line" href="https://github.com/PVOT-OSS/PvotLib/blob/main/docs/GUIDE.md" target="_blank" rel="noopener">Read the guide</a>
+      <a class="btn btn-line" href="/apps/whats-in-pvot/">Try the catalog app</a>
+    </div>
+  </div>
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/"><svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+<span>Pvot</span></a>
+        <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Pvot</h4>
+        <ul>
+          <li><a href="/apps/">Apps</a></li>
+          <li><a href="/pvotlib/">PvotLib</a></li>
+          <li><a href="/#system">The stack</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Build</h4>
+        <ul>
+          <li><a href="/contribute/">Where to contribute</a></li>
+          <li><a href="/contribute/guide/">Contributing guide</a></li>
+          <li><a href="/contribute/donate/">Donate</a></li>
+          <li><a href="/contribute/sponsors/">Sponsors</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">StormBreaker</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Pvot. Apache-2.0.</span>
+      <span>The glass on this site is PvotLib's lens shader, running in WebGL.</span>
+    </div>
+  </div>
+</footer>
+
+    <script src="/assets/js/glass.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+  </body>
+</html>

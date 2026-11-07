@@ -2,426 +2,384 @@
 <html lang="en">
   <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" /><title>Pvot · Open-source Android, built for you</title>
-  <meta name="description" content="Pvot is an open-source, AOSP-based Android ecosystem: a full suite of first-party apps built on one shared design system. No ads, no tracking, just software that answers to you." />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <script>document.documentElement.classList.add('js')</script><title>Pvot · Your phone. Your rules.</title>
+  <meta name="description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
   <link rel="canonical" href="https://pvot-oss.github.io/" />
   <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#08080b" />
-
+  <meta name="theme-color" content="#000000" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Pvot · Open-source Android, built for you" />
-  <meta property="og:description" content="Pvot is an open-source, AOSP-based Android ecosystem: a full suite of first-party apps built on one shared design system. No ads, no tracking, just software that answers to you." />
+  <meta property="og:site_name" content="Pvot" />
+  <meta property="og:title" content="Pvot · Your phone. Your rules." />
+  <meta property="og:description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
   <meta property="og:url" content="https://pvot-oss.github.io/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&icon_names=account_balance_wallet,apps,backup,bolt,bug_report,calculate,calendar_month,call,chevron_right,close,code,contacts,download,edit_note,equalizer,explore,favorite,folder,grid_view,key,lock,mail,map,menu,menu_book,mic,monitor_heart,music_note,palette,photo_camera,photo_library,public,rss_feed,schedule,shield,sms,storefront,straighten,task_alt,verified,visibility_off,wb_sunny&display=block" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/css/main.css" />
 </head>
 
   <body>
-    <header id="site-header">
-  <div class="wrap nav">
+    <a class="sr-only" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header">
+  <div class="nav-glass">
     <a class="brand" href="/" aria-label="Pvot home">
-      <span class="brand-mark" aria-hidden="true">P</span>
-      <span class="brand-name">Pvot</span>
-    </a>
+      <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
-    <nav class="nav-links" id="nav-links">
+      <span>Pvot</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
       <a href="/apps/">Apps</a>
-      <a href="/#system">System</a>
+      <a href="/pvotlib/">PvotLib</a>
       <a href="/about/">About</a>
       <a href="/contribute/">Contribute</a>
-      <a class="nav-gh-inline" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a>
     </nav>
-
-    <div class="nav-actions">
-      <a class="btn btn-ghost nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">
-        <span class="ms">code</span> GitHub
+    <div class="nav-right">
+      <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
       </a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <button class="nav-icon nav-menu" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
         <span class="ms">menu</span>
       </button>
     </div>
   </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="nav-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="nav-refract-map" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="soft"/>
+      <feDisplacementMap id="nav-refract-disp" in="soft" in2="map" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
 </header>
 
-    <main id="top">
-      <!-- ---------- Hero ---------- -->
-<section class="hero">
-  <div class="mesh"></div>
+    <main id="main">
+      <section class="stage hero" data-stage data-live>
   <div class="wrap hero-inner">
-    <span class="eyebrow reveal">Open source · Privacy first</span>
-    <h1 class="hero-title reveal" data-delay="60">Your phone.<br /><span class="grad">Your rules.</span></h1>
-    <p class="hero-lead reveal" data-delay="120">
-      Pvot is an open-source, AOSP-based Android ecosystem: a full suite of first-party apps built on
-      one shared design system. No ads. No tracking. Just software that answers to you.
-    </p>
-    <div class="hero-cta reveal" data-delay="180">
-      <a class="btn btn-primary" href="/apps/"><span class="ms">apps</span> Explore the apps</a>
-      <a class="btn btn-ghost" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener"><span class="ms">code</span> View on GitHub</a>
+    <div class="hero-top hero-meta">
+      <span class="eyebrow"><span class="dot"></span> Pvot OS. Open-source Android.</span>
+      <span class="lens-hint"><span class="ms">pan_tool</span> The glass is live. Drag it over the headline.</span>
     </div>
-  </div>
-  <div class="marquee reveal" data-delay="240" aria-hidden="true">
-    <div class="marquee-track"><span class="marquee-icon" style="--accent:#6B66FF"><span class="ms">photo_camera</span></span><span class="marquee-icon" style="--accent:#B57EDC"><span class="ms">photo_library</span></span><span class="marquee-icon" style="--accent:#FB7185"><span class="ms">music_note</span></span><span class="marquee-icon" style="--accent:#2DD4BF"><span class="ms">equalizer</span></span><span class="marquee-icon" style="--accent:#FF6B9D"><span class="ms">mic</span></span><span class="marquee-icon" style="--accent:#4CC2FF"><span class="ms">sms</span></span><span class="marquee-icon" style="--accent:#34D399"><span class="ms">call</span></span><span class="marquee-icon" style="--accent:#F59E0B"><span class="ms">contacts</span></span><span class="marquee-icon" style="--accent:#F43F5E"><span class="ms">mail</span></span><span class="marquee-icon" style="--accent:#FF7A6B"><span class="ms">calendar_month</span></span><span class="marquee-icon" style="--accent:#8B7CFF"><span class="ms">schedule</span></span><span class="marquee-icon" style="--accent:#FDBA74"><span class="ms">task_alt</span></span><span class="marquee-icon" style="--accent:#FFC24B"><span class="ms">edit_note</span></span><span class="marquee-icon" style="--accent:#38BDF8"><span class="ms">wb_sunny</span></span><span class="marquee-icon" style="--accent:#4ADE80"><span class="ms">map</span></span><span class="marquee-icon" style="--accent:#22D3EE"><span class="ms">explore</span></span><span class="marquee-icon" style="--accent:#F87171"><span class="ms">monitor_heart</span></span><span class="marquee-icon" style="--accent:#10B981"><span class="ms">account_balance_wallet</span></span><span class="marquee-icon" style="--accent:#C4B5FD"><span class="ms">menu_book</span></span><span class="marquee-icon" style="--accent:#A78BFA"><span class="ms">calculate</span></span><span class="marquee-icon" style="--accent:#F472B6"><span class="ms">straighten</span></span><span class="marquee-icon" style="--accent:#60A5FA"><span class="ms">folder</span></span><span class="marquee-icon" style="--accent:#4F8CFF"><span class="ms">public</span></span><span class="marquee-icon" style="--accent:#FACC15"><span class="ms">storefront</span></span><span class="marquee-icon" style="--accent:#818CF8"><span class="ms">backup</span></span><span class="marquee-icon" style="--accent:#EAB308"><span class="ms">key</span></span><span class="marquee-icon" style="--accent:#FB923C"><span class="ms">rss_feed</span></span><span class="marquee-icon" style="--accent:#C084FC"><span class="ms">grid_view</span></span><span class="marquee-icon" style="--accent:#6B66FF"><span class="ms">photo_camera</span></span><span class="marquee-icon" style="--accent:#B57EDC"><span class="ms">photo_library</span></span><span class="marquee-icon" style="--accent:#FB7185"><span class="ms">music_note</span></span><span class="marquee-icon" style="--accent:#2DD4BF"><span class="ms">equalizer</span></span><span class="marquee-icon" style="--accent:#FF6B9D"><span class="ms">mic</span></span><span class="marquee-icon" style="--accent:#4CC2FF"><span class="ms">sms</span></span><span class="marquee-icon" style="--accent:#34D399"><span class="ms">call</span></span><span class="marquee-icon" style="--accent:#F59E0B"><span class="ms">contacts</span></span><span class="marquee-icon" style="--accent:#F43F5E"><span class="ms">mail</span></span><span class="marquee-icon" style="--accent:#FF7A6B"><span class="ms">calendar_month</span></span><span class="marquee-icon" style="--accent:#8B7CFF"><span class="ms">schedule</span></span><span class="marquee-icon" style="--accent:#FDBA74"><span class="ms">task_alt</span></span><span class="marquee-icon" style="--accent:#FFC24B"><span class="ms">edit_note</span></span><span class="marquee-icon" style="--accent:#38BDF8"><span class="ms">wb_sunny</span></span><span class="marquee-icon" style="--accent:#4ADE80"><span class="ms">map</span></span><span class="marquee-icon" style="--accent:#22D3EE"><span class="ms">explore</span></span><span class="marquee-icon" style="--accent:#F87171"><span class="ms">monitor_heart</span></span><span class="marquee-icon" style="--accent:#10B981"><span class="ms">account_balance_wallet</span></span><span class="marquee-icon" style="--accent:#C4B5FD"><span class="ms">menu_book</span></span><span class="marquee-icon" style="--accent:#A78BFA"><span class="ms">calculate</span></span><span class="marquee-icon" style="--accent:#F472B6"><span class="ms">straighten</span></span><span class="marquee-icon" style="--accent:#60A5FA"><span class="ms">folder</span></span><span class="marquee-icon" style="--accent:#4F8CFF"><span class="ms">public</span></span><span class="marquee-icon" style="--accent:#FACC15"><span class="ms">storefront</span></span><span class="marquee-icon" style="--accent:#818CF8"><span class="ms">backup</span></span><span class="marquee-icon" style="--accent:#EAB308"><span class="ms">key</span></span><span class="marquee-icon" style="--accent:#FB923C"><span class="ms">rss_feed</span></span><span class="marquee-icon" style="--accent:#C084FC"><span class="ms">grid_view</span></span>
-    </div>
-  </div>
-</section>
 
-<!-- ---------- Value props ---------- -->
-<section class="props">
-  <div class="wrap props-grid">
-    <div class="prop reveal" data-delay="0">
-      <span class="prop-icon ms">visibility_off</span>
-      <h3>No tracking</h3>
-      <p>No ad IDs, no analytics, no phone-home. Apps hold no network permission they do not need.</p>
+    <div class="hero-title">
+      <h1 class="display">
+        <span class="hero-line" data-paint>Your phone.</span>
+        <span class="hero-line" data-paint>Your rules.</span>
+      </h1>
+      <div class="lens" data-glass="clear" data-glass-blur="0.7" data-glass-lift data-drag data-idle tabindex="0" role="img"
+        aria-label="A piece of PvotLib glass over the headline. Drag it, or move it with the arrow keys."></div>
     </div>
-    <div class="prop reveal" data-delay="80">
-      <span class="prop-icon ms">shield</span>
-      <h3>Private by design</h3>
-      <p>Everything works offline first. Your data lives on your device, not on someone else’s server.</p>
-    </div>
-    <div class="prop reveal" data-delay="160">
-      <span class="prop-icon ms">code</span>
-      <h3>Fully open</h3>
-      <p>Every line is open source and buildable. Read it, trust it, or fork it yourself.</p>
-    </div>
-  </div>
-</section>
 
-<!-- ---------- Apps ---------- -->
-<section id="apps" class="apps section-pad">
-  <div class="wrap">
-    <div class="section-head center">
-      <span class="eyebrow reveal">The apps</span>
-      <h2 class="reveal" data-delay="60">A whole suite.<br /><span class="grad">Zero compromises.</span></h2>
-      <p class="reveal" data-delay="120">Every default replaced. Each one does its job offline, then gets out of your way.</p>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Media</h3>
-        <span>See it, hear it, capture it.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/camera/" data-delay="0" style="--accent:#6B66FF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">photo_camera</span></span>
-  <span class="app-meta">
-    <span class="app-name">Camera</span>
-    <span class="app-tagline">Capture it, keep it.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/photos/" data-delay="50" style="--accent:#B57EDC">
-  <span class="app-icon" aria-hidden="true"><span class="ms">photo_library</span></span>
-  <span class="app-meta">
-    <span class="app-name">Photos</span>
-    <span class="app-tagline">Your memories, private.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/music/" data-delay="100" style="--accent:#FB7185">
-  <span class="app-icon" aria-hidden="true"><span class="ms">music_note</span></span>
-  <span class="app-meta">
-    <span class="app-name">Music</span>
-    <span class="app-tagline">Your library, offline.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/equaliser/" data-delay="150" style="--accent:#2DD4BF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">equalizer</span></span>
-  <span class="app-meta">
-    <span class="app-name">Equaliser</span>
-    <span class="app-tagline">Tune your sound.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/recorder/" data-delay="200" style="--accent:#FF6B9D">
-  <span class="app-icon" aria-hidden="true"><span class="ms">mic</span></span>
-  <span class="app-meta">
-    <span class="app-name">Recorder</span>
-    <span class="app-tagline">Voice memos, on device.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-
-      </div>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Communication</h3>
-        <span>Reach anyone. Leak nothing.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/messages/" data-delay="0" style="--accent:#4CC2FF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">sms</span></span>
-  <span class="app-meta">
-    <span class="app-name">Messages</span>
-    <span class="app-tagline">SMS without the spyware.</span>
-  </span>
-  <span class="app-status app-status-stable">Available</span>
-</a>
-<a class="app-tile reveal" href="/apps/phone/" data-delay="50" style="--accent:#34D399">
-  <span class="app-icon" aria-hidden="true"><span class="ms">call</span></span>
-  <span class="app-meta">
-    <span class="app-name">Phone</span>
-    <span class="app-tagline">Calls, clean and fast.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/contacts/" data-delay="100" style="--accent:#F59E0B">
-  <span class="app-icon" aria-hidden="true"><span class="ms">contacts</span></span>
-  <span class="app-meta">
-    <span class="app-name">Contacts</span>
-    <span class="app-tagline">Your people, your device.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/mail/" data-delay="150" style="--accent:#F43F5E">
-  <span class="app-icon" aria-hidden="true"><span class="ms">mail</span></span>
-  <span class="app-meta">
-    <span class="app-name">Mail</span>
-    <span class="app-tagline">Email, on your terms.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-
-      </div>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Everyday</h3>
-        <span>The rhythm of your day.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/calendar/" data-delay="0" style="--accent:#FF7A6B">
-  <span class="app-icon" aria-hidden="true"><span class="ms">calendar_month</span></span>
-  <span class="app-meta">
-    <span class="app-name">Calendar</span>
-    <span class="app-tagline">Plans that stay yours.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/clock/" data-delay="50" style="--accent:#8B7CFF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">schedule</span></span>
-  <span class="app-meta">
-    <span class="app-name">Clock</span>
-    <span class="app-tagline">Alarms, timers, time zones.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/reminders/" data-delay="100" style="--accent:#FDBA74">
-  <span class="app-icon" aria-hidden="true"><span class="ms">task_alt</span></span>
-  <span class="app-meta">
-    <span class="app-name">Reminders</span>
-    <span class="app-tagline">Never forget, quietly.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/notes/" data-delay="150" style="--accent:#FFC24B">
-  <span class="app-icon" aria-hidden="true"><span class="ms">edit_note</span></span>
-  <span class="app-meta">
-    <span class="app-name">Notes</span>
-    <span class="app-tagline">Thoughts, offline.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/weather/" data-delay="200" style="--accent:#38BDF8">
-  <span class="app-icon" aria-hidden="true"><span class="ms">wb_sunny</span></span>
-  <span class="app-meta">
-    <span class="app-name">Weather</span>
-    <span class="app-tagline">Forecasts, no profiling.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/maps/" data-delay="250" style="--accent:#4ADE80">
-  <span class="app-icon" aria-hidden="true"><span class="ms">map</span></span>
-  <span class="app-meta">
-    <span class="app-name">Maps</span>
-    <span class="app-tagline">Find your way, privately.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/compass/" data-delay="300" style="--accent:#22D3EE">
-  <span class="app-icon" aria-hidden="true"><span class="ms">explore</span></span>
-  <span class="app-meta">
-    <span class="app-name">Compass</span>
-    <span class="app-tagline">True north, simply.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-
-      </div>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Life</h3>
-        <span>Health, money, and the little records.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/health/" data-delay="0" style="--accent:#F87171">
-  <span class="app-icon" aria-hidden="true"><span class="ms">monitor_heart</span></span>
-  <span class="app-meta">
-    <span class="app-name">Health and Fitness</span>
-    <span class="app-tagline">Your body, your data.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/expenses/" data-delay="50" style="--accent:#10B981">
-  <span class="app-icon" aria-hidden="true"><span class="ms">account_balance_wallet</span></span>
-  <span class="app-meta">
-    <span class="app-name">Expense Manager</span>
-    <span class="app-tagline">Money, minus the snooping.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/journal/" data-delay="100" style="--accent:#C4B5FD">
-  <span class="app-icon" aria-hidden="true"><span class="ms">menu_book</span></span>
-  <span class="app-meta">
-    <span class="app-name">Journal</span>
-    <span class="app-tagline">Your days, for your eyes.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-
-      </div>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Tools</h3>
-        <span>Small tools. Sharp edges.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/calculator/" data-delay="0" style="--accent:#A78BFA">
-  <span class="app-icon" aria-hidden="true"><span class="ms">calculate</span></span>
-  <span class="app-meta">
-    <span class="app-name">Calculator</span>
-    <span class="app-tagline">Numbers, nothing else.</span>
-  </span>
-  <span class="app-status app-status-stable">Available</span>
-</a>
-<a class="app-tile reveal" href="/apps/measure/" data-delay="50" style="--accent:#F472B6">
-  <span class="app-icon" aria-hidden="true"><span class="ms">straighten</span></span>
-  <span class="app-meta">
-    <span class="app-name">Measure</span>
-    <span class="app-tagline">An AR ruler, on device.</span>
-  </span>
-  <span class="app-status app-status-beta">Beta</span>
-</a>
-<a class="app-tile reveal" href="/apps/files/" data-delay="100" style="--accent:#60A5FA">
-  <span class="app-icon" aria-hidden="true"><span class="ms">folder</span></span>
-  <span class="app-meta">
-    <span class="app-name">Files</span>
-    <span class="app-tagline">Your storage, unlocked.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/browser/" data-delay="150" style="--accent:#4F8CFF">
-  <span class="app-icon" aria-hidden="true"><span class="ms">public</span></span>
-  <span class="app-meta">
-    <span class="app-name">Browser</span>
-    <span class="app-tagline">The web, no watchers.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/store/" data-delay="200" style="--accent:#FACC15">
-  <span class="app-icon" aria-hidden="true"><span class="ms">storefront</span></span>
-  <span class="app-meta">
-    <span class="app-name">Store</span>
-    <span class="app-tagline">Apps, the open way.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/backup/" data-delay="250" style="--accent:#818CF8">
-  <span class="app-icon" aria-hidden="true"><span class="ms">backup</span></span>
-  <span class="app-meta">
-    <span class="app-name">Backup</span>
-    <span class="app-tagline">Your data, portable.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/authenticator/" data-delay="300" style="--accent:#EAB308">
-  <span class="app-icon" aria-hidden="true"><span class="ms">key</span></span>
-  <span class="app-meta">
-    <span class="app-name">Authenticator</span>
-    <span class="app-tagline">2FA, stays on device.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-<a class="app-tile reveal" href="/apps/news-feed/" data-delay="350" style="--accent:#FB923C">
-  <span class="app-icon" aria-hidden="true"><span class="ms">rss_feed</span></span>
-  <span class="app-meta">
-    <span class="app-name">News Feed</span>
-    <span class="app-tagline">Your feeds, no algorithm.</span>
-  </span>
-  <span class="app-status app-status-soon">In development</span>
-</a>
-
-      </div>
-    </div>
-    <div class="cat-block">
-      <div class="cat-head reveal">
-        <h3>Design system</h3>
-        <span>The thread that ties it all together.</span>
-      </div>
-      <div class="app-grid"><a class="app-tile reveal" href="/apps/whats-in-pvot/" data-delay="0" style="--accent:#C084FC">
-  <span class="app-icon" aria-hidden="true"><span class="ms">grid_view</span></span>
-  <span class="app-meta">
-    <span class="app-name">What's in Pvot</span>
-    <span class="app-tagline">See the system, live.</span>
-  </span>
-  <span class="app-status app-status-beta">Beta</span>
-</a>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- System ---------- -->
-<section id="system" class="system section-pad">
-  <div class="wrap">
-    <div class="section-head center">
-      <span class="eyebrow reveal" style="color:var(--rose);background:rgba(var(--rose-rgb),0.12);border-color:rgba(var(--rose-rgb),0.3)">The system</span>
-      <h2 class="reveal" data-delay="60">Built like an OS.<br /><span class="grad">Not a data business.</span></h2>
-      <p class="reveal" data-delay="120">
-        Pvot forks AOSP and LineageOS at the framework level, so the whole stack is yours to read,
-        build, and trust. Privacy is not a setting here. It is the architecture.
+    <div class="hero-foot hero-meta">
+      <p class="lede">
+        A de-Googled Android and a full suite of apps, drawn in real liquid glass.
+        <strong>No trackers. No accounts. Nothing phoning home.</strong>
       </p>
-    </div>
-
-    <div class="feature-grid">
-      <div class="feature-card reveal" data-delay="0" style="--accent:#6b66ff">
-        <span class="feature-icon"><span class="ms">lock</span></span>
-        <h3>Privacy by architecture</h3>
-        <p>No trackers, no ad IDs, no phone-home. Apps request only the permissions they truly need.</p>
+      <div class="btn-row">
+        <a class="btn btn-solid" href="/apps/">Explore the apps</a>
+        <a class="btn btn-glass" data-glass="clear" data-glass-press href="/pvotlib/">Meet PvotLib</a>
       </div>
-      <div class="feature-card reveal" data-delay="80" style="--accent:#ff6b9d">
-        <span class="feature-icon"><span class="ms">bolt</span></span>
-        <h3>AOSP at the core</h3>
-        <p>Forks of platform_frameworks_base and system_core: a real, buildable, modern Android base.</p>
-      </div>
-      <div class="feature-card reveal" data-delay="160" style="--accent:#a78bfa">
-        <span class="feature-icon"><span class="ms">palette</span></span>
-        <h3>One design system</h3>
-        <p>Every app is built on PvotLib, so the whole ecosystem moves and feels like a single product.</p>
-      </div>
-    </div><div class="stats">
-      <div class="stat reveal" data-delay="0"><span class="stat-n" style="color:var(--indigo-light)">27</span><span class="stat-l">first-party apps</span></div>
-      <div class="stat reveal" data-delay="80"><span class="stat-n" style="color:var(--rose-pop)">0</span><span class="stat-l">trackers, ever</span></div>
-      <div class="stat reveal" data-delay="160"><span class="stat-n" style="color:var(--rose)">100%</span><span class="stat-l">open source</span></div>
     </div>
   </div>
 </section>
 
-<!-- ---------- Get ---------- -->
-<section id="get" class="get">
-  <div class="mesh"></div>
-  <div class="wrap get-inner">
-    <span class="eyebrow reveal">Get Pvot</span>
-    <h2 class="reveal" data-delay="60"><span class="grad">Take back your phone.</span></h2>
-    <p class="reveal" data-delay="120">Grab the apps, read the source, or build the whole thing yourself. It is all open.</p>
-    <div class="hero-cta reveal" data-delay="180">
-      <a class="btn btn-primary" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener"><span class="ms">code</span> GitHub</a>
-      <a class="btn btn-ghost" href="/apps/"><span class="ms">download</span> Browse apps</a>
-      <a class="btn btn-ghost" href="https://t.me/Pvot_OS" target="_blank" rel="noopener"><span class="ms">storefront</span> Telegram</a>
+<section class="statement" aria-label="What Pvot is">
+  <div class="wrap">
+    <p data-words>Android, minus the part that watches you. Pvot ships <em>without Google,</em> without ad IDs, without a single tracker. What is left is <em>fast, quiet, and yours.</em></p>
+  </div>
+</section>
+
+<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow rv">The apps</span>
+      <h2 class="h2 rv">Everything you open.<br><span class="dim">Rebuilt in the open.</span></h2>
+      <p class="lede rv">27 first-party apps on one design system. The ones in the dock are on Google Play today, each with zero trackers on Exodus. The rest are being built right now, in public.</p>
+    </div>
+
+    <div class="home">
+      <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#apps">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button role="tab" aria-selected="true" data-cat="all">All</button>
+        <button role="tab" aria-selected="false" data-cat="media">Media</button>
+        <button role="tab" aria-selected="false" data-cat="communication">Communication</button>
+        <button role="tab" aria-selected="false" data-cat="everyday">Everyday</button>
+        <button role="tab" aria-selected="false" data-cat="life">Life</button>
+        <button role="tab" aria-selected="false" data-cat="tools">Tools</button>
+      </div>
+
+      <div class="home-grid">
+        <a class="icon-link" href="/apps/camera/" data-cat="media" title="Camera: Capture it, keep it.">
+          <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_camera</span></span>
+
+          <span class="icon-label">Camera</span>
+        </a>
+        <a class="icon-link" href="/apps/photos/" data-cat="media" title="Photos: Your memories, private.">
+          <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_library</span></span>
+
+          <span class="icon-label">Photos</span>
+        </a>
+        <a class="icon-link" href="/apps/music/" data-cat="media" title="Music: Your library, offline.">
+          <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">music_note</span></span>
+
+          <span class="icon-label">Music</span>
+        </a>
+        <a class="icon-link" href="/apps/equaliser/" data-cat="media" title="Equaliser: Tune your sound.">
+          <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">equalizer</span></span>
+
+          <span class="icon-label">Equaliser</span>
+        </a>
+        <a class="icon-link" href="/apps/recorder/" data-cat="media" title="Recorder: Voice memos, on device.">
+          <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">mic</span></span>
+
+          <span class="icon-label">Recorder</span>
+        </a>
+        <a class="icon-link" href="/apps/phone/" data-cat="communication" title="Phone: Calls, clean and fast.">
+          <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">call</span></span>
+
+          <span class="icon-label">Phone</span>
+        </a>
+        <a class="icon-link" href="/apps/contacts/" data-cat="communication" title="Contacts: Your people, your device.">
+          <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">contacts</span></span>
+
+          <span class="icon-label">Contacts</span>
+        </a>
+        <a class="icon-link" href="/apps/mail/" data-cat="communication" title="Mail: Email, on your terms.">
+          <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">mail</span></span>
+
+          <span class="icon-label">Mail</span>
+        </a>
+        <a class="icon-link" href="/apps/calendar/" data-cat="everyday" title="Calendar: Plans that stay yours.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">calendar_month</span></span>
+
+          <span class="icon-label">Calendar</span>
+        </a>
+        <a class="icon-link" href="/apps/clock/" data-cat="everyday" title="Clock: Alarms, timers, time zones.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">schedule</span></span>
+
+          <span class="icon-label">Clock</span>
+        </a>
+        <a class="icon-link" href="/apps/reminders/" data-cat="everyday" title="Reminders: Never forget, quietly.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">task_alt</span></span>
+
+          <span class="icon-label">Reminders</span>
+        </a>
+        <a class="icon-link" href="/apps/notes/" data-cat="everyday" title="Notes: Thoughts, offline.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">edit_note</span></span>
+
+          <span class="icon-label">Notes</span>
+        </a>
+        <a class="icon-link" href="/apps/weather/" data-cat="everyday" title="Weather: Forecasts, no profiling.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">wb_sunny</span></span>
+
+          <span class="icon-label">Weather</span>
+        </a>
+        <a class="icon-link" href="/apps/maps/" data-cat="everyday" title="Maps: Find your way, privately.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">map</span></span>
+
+          <span class="icon-label">Maps</span>
+        </a>
+        <a class="icon-link" href="/apps/compass/" data-cat="everyday" title="Compass: True north, simply.">
+          <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">explore</span></span>
+
+          <span class="icon-label">Compass</span>
+        </a>
+        <a class="icon-link" href="/apps/health/" data-cat="life" title="Health and Fitness: Your body, your data.">
+          <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">monitor_heart</span></span>
+
+          <span class="icon-label">Health and Fitness</span>
+        </a>
+        <a class="icon-link" href="/apps/expenses/" data-cat="life" title="Expense Manager: Money, minus the snooping.">
+          <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">account_balance_wallet</span></span>
+
+          <span class="icon-label">Expense Manager</span>
+        </a>
+        <a class="icon-link" href="/apps/journal/" data-cat="life" title="Journal: Your days, for your eyes.">
+          <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">menu_book</span></span>
+
+          <span class="icon-label">Journal</span>
+        </a>
+        <a class="icon-link" href="/apps/files/" data-cat="tools" title="Files: Your storage, unlocked.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">folder</span></span>
+
+          <span class="icon-label">Files</span>
+        </a>
+        <a class="icon-link" href="/apps/browser/" data-cat="tools" title="Browser: The web, no watchers.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">public</span></span>
+
+          <span class="icon-label">Browser</span>
+        </a>
+        <a class="icon-link" href="/apps/store/" data-cat="tools" title="Store: Apps, the open way.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">storefront</span></span>
+
+          <span class="icon-label">Store</span>
+        </a>
+        <a class="icon-link" href="/apps/backup/" data-cat="tools" title="Backup: Your data, portable.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">backup</span></span>
+
+          <span class="icon-label">Backup</span>
+        </a>
+        <a class="icon-link" href="/apps/authenticator/" data-cat="tools" title="Authenticator: 2FA, stays on device.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">key</span></span>
+
+          <span class="icon-label">Authenticator</span>
+        </a>
+        <a class="icon-link" href="/apps/news-feed/" data-cat="tools" title="News Feed: Your feeds, no algorithm.">
+          <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">rss_feed</span></span>
+
+          <span class="icon-label">News Feed</span>
+        </a>
+      </div>
+
+      <div class="dock-wrap">
+        <span class="dock-label">In the dock: on Google Play today</span>
+        <div class="dock" data-glass="regular">
+          <a class="icon-link" href="/apps/messages/" data-cat="communication" title="Messages: SMS without the spyware.">
+            <span class="app-icon on" style="--c:#5FD48A" aria-hidden="true"><span class="ms">sms</span></span>
+
+            <span class="icon-label">Messages</span>
+          </a>
+          <a class="icon-link" href="/apps/calculator/" data-cat="tools" title="Calculator: Numbers, nothing else.">
+            <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">calculate</span></span>
+
+            <span class="icon-label">Calculator</span>
+          </a>
+          <a class="icon-link" href="/apps/measure/" data-cat="tools" title="Measure: An AR ruler, on device.">
+            <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">straighten</span></span>
+
+            <span class="icon-label">Measure</span>
+          </a>
+          <a class="icon-link" href="/apps/whats-in-pvot/" data-cat="design" title="What's in Pvot: See the system, live.">
+            <span class="app-icon on" style="--c:#E4E0FF" aria-hidden="true"><span class="ms">grid_view</span></span>
+
+            <span class="icon-label">What's in Pvot</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-foot">
+        <span class="legend"><i class="on"></i> Available</span>
+        <span class="legend"><i></i> In development</span>
+        <a class="link-arrow" href="/apps/">Every app, in detail <span class="ms">arrow_forward</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="system">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow rv">The stack</span>
+      <h2 class="h2 rv">One team.<br><span class="dim">Top to bottom.</span></h2>
+      <p class="lede rv">Most phones are a pile of companies. Pvot is one team, from the kernel that talks to the silicon to the button you tap.</p>
+    </div>
+    <div class="stack">
+      <a class="stack-row rv" href="/apps/">
+        <span class="n">04</span><h3>Apps</h3>
+        <p>27 first-party apps. Offline first, no trackers, one design language.</p>
+        <span class="ms">arrow_forward</span>
+      </a>
+      <a class="stack-row rv" href="/pvotlib/">
+        <span class="n">03</span><h3>PvotLib</h3>
+        <p>The Compose design system. Liquid glass, motion, and every component the apps share.</p>
+        <span class="ms">arrow_forward</span>
+      </a>
+      <a class="stack-row rv" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">
+        <span class="n">02</span><h3>Pvot OS</h3>
+        <p>AOSP and LineageOS, de-Googled and re-themed. Your data leaves only when you send it.</p>
+        <span class="ms">arrow_outward</span>
+      </a>
+      <a class="stack-row rv" href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">
+        <span class="n">01</span><h3>Kernel</h3>
+        <p>StormBreaker kernels, tuned per device by the same people who build the rest.</p>
+        <span class="ms">arrow_outward</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="privacy">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow rv">Privacy</span>
+      <h2 class="h2 rv" style="margin-top:20px">Off by default.<br><span class="dim">And it stays off.</span></h2>
+      <p class="lede rv">Privacy is not a settings page you have to go and find. It is how Pvot is built, so the switches that matter come already flipped. Every line is public, so you never have to take our word for it.</p>
+    </div>
+    <div class="settings rv" role="group" aria-label="Pvot defaults">
+      <div class="settings-title">Pvot defaults</div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--pink)"><span class="ms">block</span></span>
+        <div><b>Google Play Services</b><small>Not part of the system</small></div>
+        <span class="set-val">Not installed</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--green)"><span class="ms">shield</span></span>
+        <div><b>Trackers</b><small>Verified by <a href="https://reports.exodus-privacy.eu.org/en/reports/org.prauga.messages/latest/" target="_blank" rel="noopener">Exodus Privacy</a>, app by app</small></div>
+        <span class="set-val good">0</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--blue)"><span class="ms">person_off</span></span>
+        <div><b>Account required</b><small>For any app, ever</small></div>
+        <span class="set-val">Never</span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic" style="--c:var(--amber)"><span class="ms">monitoring</span></span>
+        <div><b>Analytics and ad ID</b><small>Nothing to switch off</small></div>
+        <span class="mini-switch" role="img" aria-label="Off"></span>
+      </div>
+      <div class="set-row">
+        <span class="set-ic"><span class="ms">code</span></span>
+        <div><b>Source code</b><small>Apache-2.0, build it yourself</small></div>
+        <span class="set-val">Public</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stage glass-stage" data-stage data-live data-seed="4.2">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">PvotLib</span>
+      <h2 class="h2">The glass is real.</h2>
+      <p class="lede">Every surface in Pvot is drawn by one shader. It bends what sits behind it, splits red from blue at the rim, mirrors the edge and catches the light. This page runs that same shader, ported from AGSL to WebGL. <strong>Hold a control.</strong></p>
+    </div>
+    <div class="controls">
+  <button class="g-switch" role="switch" aria-checked="true" aria-label="Wi-Fi" data-lift-host>
+    <span class="g-switch-track" data-paint="box"></span>
+    <span class="g-switch-knob" data-glass="clear" data-glass-lift data-glass-rest="#ffffff"></span>
+  </button>
+  <div class="g-slider" role="slider" tabindex="0" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" data-lift-host>
+    <span class="g-slider-track" data-paint="box"></span>
+    <span class="g-slider-fill" data-paint="box"></span>
+    <span class="g-slider-knob" data-glass="clear" data-glass-lift data-glass-rest="#ffffff"></span>
+  </div>
+  <div class="g-icons">
+    <button class="g-icon" data-glass="clear" data-glass-press aria-label="Previous"><span class="ms fill">skip_previous</span></button>
+    <button class="g-icon" data-glass="clear" data-glass-press aria-label="Play" data-toggle-icon="play_arrow pause"><span class="ms fill">play_arrow</span></button>
+    <button class="g-icon" data-glass="clear" data-glass-press aria-label="Next"><span class="ms fill">skip_next</span></button>
+  </div>
+  <button class="g-switch" role="switch" aria-checked="false" aria-label="Airplane mode" data-lift-host>
+    <span class="g-switch-track" data-paint="box"></span>
+    <span class="g-switch-knob" data-glass="clear" data-glass-lift data-glass-rest="#ffffff"></span>
+  </button>
+</div>
+
+    <div class="btn-row">
+      <a class="btn btn-solid" href="/pvotlib/">Open the glass lab</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2 class="h2 rv">Ready when you are.</h2>
+    <p class="lede rv">Get the apps on Google Play today, flash the OS when it lands, or help us build the next one. Everything happens in the open.</p>
+    <div class="btn-row rv">
+      <a class="btn btn-solid" href="/apps/">See what ships</a>
+      <a class="btn btn-line" href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Join the Telegram</a>
     </div>
   </div>
 </section>
@@ -431,49 +389,47 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true">P</span>
-          <span class="brand-name">Pvot</span>
-        </a>
-        <p>Open-source Android that answers to you. No ads, no tracking, built in the open.</p>
+        <a class="brand" href="/"><svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
+<span>Pvot</span></a>
+        <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
-
       <div class="footer-col">
         <h4>Pvot</h4>
         <ul>
           <li><a href="/apps/">Apps</a></li>
-          <li><a href="/#system">The system</a></li>
+          <li><a href="/pvotlib/">PvotLib</a></li>
+          <li><a href="/#system">The stack</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="/privacy/">Privacy</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Build</h4>
         <ul>
-          <li><a href="/contribute/">Contribute</a></li>
-          <li><a href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener">PvotLib</a></li>
-          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
-          <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">Organization</a></li>
+          <li><a href="/contribute/">Where to contribute</a></li>
+          <li><a href="/contribute/guide/">Contributing guide</a></li>
+          <li><a href="/contribute/donate/">Donate</a></li>
+          <li><a href="/contribute/sponsors/">Sponsors</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Community</h4>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://github.com/PVOT-OSS/public-issues" target="_blank" rel="noopener">Report an issue</a></li>
+          <li><a href="https://stormbreaker.squadri.me" target="_blank" rel="noopener">StormBreaker</a></li>
         </ul>
       </div>
     </div>
-
     <div class="footer-base">
-      <span>© 2026 Pvot · Apache-2.0</span>
-      <span>Built with PvotLib, the same design system that ships in the OS.</span>
+      <span>© 2026 Pvot. Apache-2.0.</span>
+      <span>The glass on this site is PvotLib's lens shader, running in WebGL.</span>
     </div>
   </div>
 </footer>
 
+    <script src="/assets/js/glass.js" defer></script>
     <script src="/assets/js/main.js" defer></script>
   </body>
 </html>
