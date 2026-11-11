@@ -2,6 +2,7 @@
 order: 16
 title: Compass
 tagline: True north, simply.
+kind: compass app
 category: everyday
 icon: explore
 accent: "#22D3EE"

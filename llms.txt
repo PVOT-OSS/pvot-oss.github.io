@@ -1,0 +1,50 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+{%- assign apps = site.apps | sort: "order" -%}
+{%- assign shipping = apps | where_exp: "a", "a.status != 'soon'" -%}
+{%- assign building = apps | where: "status", "soon" -%}
+# Pvot
+
+> Pvot is open-source, de-Googled Android: an AOSP and LineageOS based OS plus a full suite of first-party apps, all built on one Jetpack Compose design system, PvotLib. No Google services, no trackers, no accounts. Built in the open by Team StormBreaker and contributors, licensed Apache-2.0 for most of the project.
+
+Key facts:
+
+- Every shipping app is free on Google Play and scanned by Exodus Privacy, which reports 0 trackers in each.
+- Apps are offline first and keep data on the device unless the user sends it somewhere.
+- PvotLib renders real liquid glass (a refracting lens shader) on Android 13+, with frosted and solid fallbacks.
+- Source code lives at {{ site.social.github }}. Bugs go to {{ site.social.issues }}.
+
+## Shipping apps
+
+{% for a in shipping -%}
+- [{% if a.title contains 'Pvot' %}{{ a.title }}{% else %}Pvot {{ a.title }}{% endif %}]({{ a.url | absolute_url }}): {{ a.tagline }} Open-source {{ a.kind }} for Android.{% if a.package %} Google Play: https://play.google.com/store/apps/details?id={{ a.package }}{% endif %}{% if a.repo %} Source: https://github.com/PVOT-OSS/{{ a.repo }}{% endif %}
+{% endfor %}
+## Apps in development
+
+{% for a in building -%}
+- [Pvot {{ a.title }}]({{ a.url | absolute_url }}): {{ a.tagline }} Open-source {{ a.kind }}, in development.
+{% endfor %}
+## Design system
+
+- [PvotLib]({{ '/pvotlib/' | absolute_url }}): Jetpack Compose design system with liquid glass, motion and shared components. Maven repo https://pvot-oss.github.io/PvotLib/maven, group com.prauga.pvot.
+- [PvotLib guide]({{ site.social.pvotlib }}/blob/main/docs/GUIDE.md): tokens, motion, components and glass.
+
+## Project
+
+- [About]({{ '/about/' | absolute_url }}): what Pvot is and who builds it.
+- [Privacy]({{ '/privacy/' | absolute_url }}): what the apps, the OS and this website collect (nothing).
+- [All apps]({{ '/apps/' | absolute_url }}): the full catalog by category.
+
+## Contribute
+
+- [Where to contribute]({{ '/contribute/' | absolute_url }}): every public repo, grouped.
+- [Contributing guide]({{ '/contribute/guide/' | absolute_url }}): DCO sign-off, SPDX headers, pull requests.
+- [Donate]({{ '/contribute/donate/' | absolute_url }}) and [Sponsors]({{ '/contribute/sponsors/' | absolute_url }})
+
+## Optional
+
+- [Telegram]({{ site.social.telegram }}): community chat.
+- [StormBreaker](https://stormbreaker.squadri.me): the kernel project from the same team.

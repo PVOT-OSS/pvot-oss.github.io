@@ -275,6 +275,7 @@
       if (lens._glass) lens._glass.liftTarget = 1;
       // Keep the big lens clear: the frost grows with the glass, which would fog it mid-sweep.
       if (window.PvotGlass && PvotGlass.setParams) PvotGlass.setParams(lens, { blur: 0.12 });
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(2400);
       anim = lens.animate([
         { transform: start },
         { transform: mid, offset: 0.58 },
@@ -291,7 +292,7 @@
     (function wait() {
       var ready = stage && stage.classList.contains('is-live') && (!document.fonts || document.fonts.status === 'loaded');
       if (ready) return setTimeout(go, 250);
-      if (performance.now() - t0 > 3500) { finish(); return; }
+      if (performance.now() - t0 > 6000) { finish(); return; }
       requestAnimationFrame(wait);
     })();
   })();

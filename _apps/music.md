@@ -2,6 +2,7 @@
 order: 3
 title: Music
 tagline: Your library, offline.
+kind: music player
 category: media
 icon: music_note
 accent: "#FB7185"

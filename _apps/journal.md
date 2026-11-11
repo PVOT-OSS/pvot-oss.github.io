@@ -2,6 +2,7 @@
 order: 19
 title: Journal
 tagline: Your days, for your eyes.
+kind: journal app
 category: life
 icon: menu_book
 accent: "#C4B5FD"

@@ -11,11 +11,43 @@
   initial-value: 1;
 }
 
+/* Fonts are self-hosted: no request ever goes to Google. Rebuild the icon subset with scripts/fonts.sh. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/assets/fonts/jetbrains-mono-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 300 500;
+  font-display: block;
+  src: url('/assets/fonts/material-symbols-rounded.woff2') format('woff2');
+}
+
 :root {
   --bg: #000;
   --ink: #f5f5f7;
   --ink-2: rgba(245, 245, 247, 0.66);
-  --ink-3: rgba(245, 245, 247, 0.42);
+  --ink-3: rgba(245, 245, 247, 0.52);
   --line: rgba(255, 255, 255, 0.09);
   --line-2: rgba(255, 255, 255, 0.14);
   --surface: #0b0b0e;
@@ -314,6 +346,7 @@ html.refract .nav-glass {
 }
 .hero-foot .lede { max-width: 29em; }
 .hero-line { animation: rise 1.1s var(--ease) both; }
+.stage .hero-line { animation: none; }
 .hero-line:nth-child(2) { animation-delay: 0.12s; }
 @keyframes rise {
   from { opacity: 0; transform: translateY(0.3em); }
@@ -633,7 +666,7 @@ a.stack-row:hover > .ms { color: var(--ink); transform: translateX(4px); }
 .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
 .footer-brand .brand { color: var(--ink); }
 .footer-brand p { margin: 16px 0 0; max-width: 26em; line-height: 1.55; }
-.footer-col h4 { margin: 0 0 14px; font-size: 13px; font-weight: 600; color: var(--ink); }
+.footer-col h2 { margin: 0 0 14px; font-size: 13px; font-weight: 600; color: var(--ink); }
 .footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .footer-col a:hover { color: var(--ink); }
 .footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line); }
@@ -1034,3 +1067,10 @@ html:not(.js) .rv { opacity: 1; transform: none; }
   .nav-links a:active, .footer-col a:active, .sub-nav a:active, .crumb:active,
   .link-arrow:active, .row:active, .repo:active, .stack-row:active, .icon-link:active { opacity: 0.6; }
 }
+
+/* ---- 404 --------------------------------------------------------------------------------- */
+.nf { min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; }
+.nf .display { font-size: clamp(140px, 30vw, 360px); letter-spacing: -0.07em; line-height: 0.85; margin: 18px 0 8px -0.04em; }
+.nf .lens { left: 18%; top: 50%; margin-top: -86px; }
+.nf .lede { margin-bottom: 32px; }
+@media (max-width: 760px) { .nf .lens { left: 10%; margin-top: -56px; } }

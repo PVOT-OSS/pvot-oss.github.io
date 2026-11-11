@@ -2,6 +2,8 @@
 order: 28
 title: What's in Pvot
 tagline: See the system, live.
+kind: design system catalog
+seo_title: "What's in Pvot · PvotLib design system catalog for Android"
 category: design
 icon: grid_view
 accent: "#C084FC"

@@ -2,6 +2,7 @@
 order: 24
 title: Store
 tagline: Apps, the open way.
+kind: app store
 category: tools
 icon: storefront
 accent: "#FACC15"

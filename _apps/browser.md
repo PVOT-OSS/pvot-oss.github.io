@@ -2,6 +2,7 @@
 order: 23
 title: Browser
 tagline: The web, no watchers.
+kind: web browser
 category: tools
 icon: public
 accent: "#4F8CFF"

@@ -2,6 +2,7 @@
 order: 1
 title: Camera
 tagline: Capture it, keep it.
+kind: camera app
 category: media
 icon: photo_camera
 accent: "#6B66FF"

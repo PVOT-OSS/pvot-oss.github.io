@@ -2,6 +2,7 @@
 order: 10
 title: Calendar
 tagline: Plans that stay yours.
+kind: calendar app
 category: everyday
 icon: calendar_month
 accent: "#FF7A6B"

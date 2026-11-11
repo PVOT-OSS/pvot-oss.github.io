@@ -2,6 +2,7 @@
 order: 27
 title: News Feed
 tagline: Your feeds, no algorithm.
+kind: RSS reader
 category: tools
 icon: rss_feed
 accent: "#FB923C"

@@ -2,6 +2,7 @@
 order: 12
 title: Reminders
 tagline: Never forget, quietly.
+kind: reminders app
 category: everyday
 icon: task_alt
 accent: "#FDBA74"

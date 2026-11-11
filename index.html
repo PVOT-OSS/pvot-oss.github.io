@@ -1,5 +1,6 @@
 ---
 layout: base
+seo_title: "Pvot · De-Googled, open-source Android and apps"
 ---
 {%- assign apps = site.apps | sort: "order" -%}
 {%- assign shipping = apps | where_exp: "a", "a.status != 'soon'" -%}

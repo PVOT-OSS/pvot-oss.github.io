@@ -2,31 +2,37 @@
 # color: the glyph and lit-icon color, from PvotLib's dark roles.
 # blobs: the PvotLiveBackground drift on that category's app pages (container colors, dark).
 - id: media
+  schema: MultimediaApplication
   title: Media
   blurb: See it, hear it, capture it.
   color: "#FF6BA6"
   blobs: "#A8104F,#5A1033,#FF6BA680,#3B2DB8,#A8104FCC"
 - id: communication
+  schema: CommunicationApplication
   title: Communication
   blurb: Reach anyone. Leak nothing.
   color: "#5FD48A"
   blobs: "#005A2C,#0F3FA8,#5FD48A70,#00391A,#005A2CCC"
 - id: everyday
+  schema: UtilitiesApplication
   title: Everyday
   blurb: The rhythm of your day.
   color: "#6FA3FF"
   blobs: "#0F3FA8,#3B2DB8,#6FA3FF80,#00123A,#0F3FA8CC"
 - id: life
+  schema: LifestyleApplication
   title: Life
   blurb: Health, money, and the little records.
   color: "#F5C451"
   blobs: "#634100,#A8104F,#F5C45170,#402D00,#634100CC"
 - id: tools
+  schema: UtilitiesApplication
   title: Tools
   blurb: Small tools. Sharp edges.
   color: "#8577FF"
   blobs: "#3B2DB8,#A8104F,#8577FFB3,#0F3FA8,#3B2DB8CC"
 - id: design
+  schema: DesignApplication
   title: Design system
   blurb: The thread that ties it all together.
   color: "#E4E0FF"

@@ -2,6 +2,7 @@
 order: 26
 title: Authenticator
 tagline: 2FA, stays on device.
+kind: two-factor authenticator
 category: tools
 icon: key
 accent: "#EAB308"

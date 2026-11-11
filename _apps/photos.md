@@ -2,6 +2,7 @@
 order: 2
 title: Photos
 tagline: Your memories, private.
+kind: photo gallery
 category: media
 icon: photo_library
 accent: "#B57EDC"

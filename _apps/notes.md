@@ -2,6 +2,7 @@
 order: 13
 title: Notes
 tagline: Thoughts, offline.
+kind: notes app
 category: everyday
 icon: edit_note
 accent: "#FFC24B"

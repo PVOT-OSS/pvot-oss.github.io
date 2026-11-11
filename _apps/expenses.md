@@ -2,6 +2,8 @@
 order: 18
 title: Expense Manager
 tagline: Money, minus the snooping.
+kind: expense tracker
+schema_category: FinanceApplication
 category: life
 icon: account_balance_wallet
 accent: "#10B981"

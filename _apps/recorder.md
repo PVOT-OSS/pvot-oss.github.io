@@ -2,6 +2,7 @@
 order: 5
 title: Recorder
 tagline: Voice memos, on device.
+kind: voice recorder
 category: media
 icon: mic
 accent: "#FF6B9D"

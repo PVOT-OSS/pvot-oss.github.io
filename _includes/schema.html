@@ -1,0 +1,94 @@
+{%- comment -%}
+  JSON-LD for every page: who publishes the site, the site, and this page. App pages add the app
+  and a breadcrumb; /pvotlib/ adds the library's source code.
+{%- endcomment -%}
+{%- assign org = site.url | append: '/#organization' -%}
+{%- assign web = site.url | append: '/#website' -%}
+{%- assign here = page.url | absolute_url -%}
+{%- assign is_app = false -%}{%- if page.collection == 'apps' -%}{%- assign is_app = true -%}{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ org | jsonify }},
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": {{ site.url | append: '/' | jsonify }},
+      "logo": {{ '/assets/og/icon-512.png' | absolute_url | jsonify }},
+      "description": {{ site.description | strip_newlines | normalize_whitespace | jsonify }},
+      "sameAs": [{{ site.social.github | jsonify }}, {{ site.social.telegram | jsonify }}]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ web | jsonify }},
+      "url": {{ site.url | append: '/' | jsonify }},
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": {{ org | jsonify }} }
+    },
+    {
+      "@type": "WebPage",
+      "@id": {{ here | append: '#webpage' | jsonify }},
+      "url": {{ here | jsonify }},
+      "name": {{ include.title | jsonify }},
+      "description": {{ include.desc | jsonify }},
+      "inLanguage": "en",
+      "isPartOf": { "@id": {{ web | jsonify }} },
+      "primaryImageOfPage": {{ include.og | absolute_url | jsonify }}{% if is_app %},
+      "breadcrumb": { "@id": {{ here | append: '#breadcrumb' | jsonify }} },
+      "mainEntity": { "@id": {{ here | append: '#app' | jsonify }} }{% endif %}
+    }
+    {%- if is_app %}
+    {%- assign cat = site.data.categories | where: "id", page.category | first -%}
+    {%- if page.repo -%}{%- assign repo = "https://github.com/PVOT-OSS/" | append: page.repo -%}{%- else -%}{%- assign repo = nil -%}{%- endif %},
+    {
+      "@type": "MobileApplication",
+      "@id": {{ here | append: '#app' | jsonify }},
+      "name": {{ 'Pvot ' | append: page.title | jsonify }},
+      "alternateName": {{ page.title | jsonify }},
+      "description": {{ page.summary | strip_newlines | normalize_whitespace | jsonify }},
+      "url": {{ here | jsonify }},
+      "image": {{ include.og | absolute_url | jsonify }},
+      "operatingSystem": "Android",
+      "applicationCategory": {{ page.schema_category | default: cat.schema | jsonify }},
+      "applicationSuite": "Pvot",
+      "isAccessibleForFree": true,
+      "featureList": {{ page.features | jsonify }},
+      "publisher": { "@id": {{ org | jsonify }} },
+      "author": { "@id": {{ org | jsonify }} },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD"{% if page.status == 'soon' %}, "availability": "https://schema.org/PreOrder"{% else %}, "availability": "https://schema.org/InStock"{% endif %} }
+      {%- if page.package %},
+      "downloadUrl": {{ 'https://play.google.com/store/apps/details?id=' | append: page.package | jsonify }},
+      "installUrl": {{ 'https://play.google.com/store/apps/details?id=' | append: page.package | jsonify }}
+      {%- endif %}
+      {%- if repo or page.package %},
+      "sameAs": [{% if page.package %}{{ 'https://play.google.com/store/apps/details?id=' | append: page.package | jsonify }}{% if repo %}, {% endif %}{% endif %}{% if repo %}{{ repo | jsonify }}{% endif %}]
+      {%- endif %}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": {{ here | append: '#breadcrumb' | jsonify }},
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Pvot", "item": {{ '/' | absolute_url | jsonify }} },
+        { "@type": "ListItem", "position": 2, "name": "Apps", "item": {{ '/apps/' | absolute_url | jsonify }} },
+        { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }}, "item": {{ here | jsonify }} }
+      ]
+    }
+    {%- endif %}
+    {%- if page.url == '/pvotlib/' %},
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "PvotLib",
+      "description": "The Jetpack Compose design system behind every Pvot app: liquid glass, motion and shared components.",
+      "codeRepository": {{ site.social.pvotlib | jsonify }},
+      "programmingLanguage": "Kotlin",
+      "runtimePlatform": "Android",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "author": { "@id": {{ org | jsonify }} }
+    }
+    {%- endif %}
+  ]
+}
+</script>

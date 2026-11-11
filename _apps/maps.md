@@ -2,6 +2,8 @@
 order: 15
 title: Maps
 tagline: Find your way, privately.
+kind: maps and navigation app
+schema_category: TravelApplication
 category: everyday
 icon: map
 accent: "#4ADE80"

@@ -2,6 +2,7 @@
 order: 9
 title: Mail
 tagline: Email, on your terms.
+kind: email app
 category: communication
 icon: mail
 accent: "#F43F5E"

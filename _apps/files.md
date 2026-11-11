@@ -2,6 +2,7 @@
 order: 22
 title: Files
 tagline: Your storage, unlocked.
+kind: file manager
 category: tools
 icon: folder
 accent: "#60A5FA"

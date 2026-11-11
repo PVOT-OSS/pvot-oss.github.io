@@ -2,6 +2,8 @@
 order: 17
 title: Health and Fitness
 tagline: Your body, your data.
+kind: health and fitness tracker
+schema_category: HealthApplication
 category: life
 icon: monitor_heart
 accent: "#F87171"

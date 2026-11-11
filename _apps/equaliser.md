@@ -2,6 +2,7 @@
 order: 4
 title: Equaliser
 tagline: Tune your sound.
+kind: audio equalizer
 category: media
 icon: equalizer
 accent: "#2DD4BF"

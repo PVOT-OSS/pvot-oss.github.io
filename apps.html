@@ -3,6 +3,7 @@ layout: base
 permalink: /apps/
 title: Apps
 description: "Every Pvot app: open source, offline first, free of trackers, and built on one design system."
+seo_title: "Pvot apps · Open-source Android apps with 0 trackers"
 ---
 {%- assign apps = site.apps | sort: "order" -%}
 {%- assign released = apps | where_exp: "a", "a.status != 'soon'" -%}

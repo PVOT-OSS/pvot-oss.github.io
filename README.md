@@ -68,8 +68,20 @@ features:
 ```
 
 Shipping apps (stable or beta) light up in full color and sit in the home page's dock; the rest
-are dark, themed icons. If you use a new icon, add its name to the sorted `icon_names` list in
-`_includes/head.html` so the glyph is loaded.
+are dark, themed icons. If you use a new icon, run `./scripts/fonts.sh` so the glyph is in the font subset, and
+`ruby scripts/og.rb` for the app's link preview.
+
+### SEO, previews and fonts
+
+- **Titles and descriptions** come from front matter: `seo_title` and `description` win; app pages
+  build "Pvot <title> · Open-source <kind> for Android" from each app's `kind`, and use its `summary`.
+- **JSON-LD** is in `_includes/schema.html` (Organization, WebSite, WebPage; MobileApplication and a
+  breadcrumb on app pages; SoftwareSourceCode on /pvotlib/).
+- **Link previews** (Open Graph, 1200x630) live in `assets/og/`. After adding or renaming an app run
+  `ruby scripts/og.rb` (uses your local Chrome, headless) and commit the images.
+- **Fonts are self-hosted** in `assets/fonts/`; nothing loads from Google. After using a new icon name
+  anywhere, run `./scripts/fonts.sh` to rebuild the icon subset.
+- `404.html` is served by GitHub Pages for any missing URL, and `llms.txt` is generated from the app data.
 
 ## Deploy
 

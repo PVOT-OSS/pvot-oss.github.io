@@ -2,6 +2,8 @@
 order: 14
 title: Weather
 tagline: Forecasts, no profiling.
+kind: weather app
+schema_category: UtilitiesApplication
 category: everyday
 icon: wb_sunny
 accent: "#38BDF8"

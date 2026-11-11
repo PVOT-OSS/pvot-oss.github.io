@@ -18,6 +18,8 @@
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Phones and small screens draw at a lower resolution and a calmer frame rate.
+  var LITE = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
 
   // ---------------------------------------------------------------------------------------------
   // PvotGlassStyle and PvotGlassDefaults, sizes in dp for a glass whose shorter side is 46dp.
@@ -399,6 +401,7 @@
     ready: false
   };
   var pointer = { x: -1e5, y: -1e5, active: false, at: 0 };
+  var busyUntil = 0;
   var tilt = null;
 
   window.addEventListener('pointermove', function (e) {
@@ -531,7 +534,7 @@
   Stage.prototype.collect = function () {
     this.glasses = Array.prototype.slice.call(this.el.querySelectorAll('[data-glass]')).map(function (el) {
       return el._glass || (el._glass = {
-        el: el, lift: 0, liftTarget: 0, light: [-0.7071, -0.7071], radius: null, params: null
+        el: el, lift: 0, liftTarget: 0, light: [-0.7071, -0.7071], radius: null, params: el._pendingParams || null
       });
     });
     this.paints = Array.prototype.slice.call(this.el.querySelectorAll('[data-paint]'));
@@ -542,9 +545,9 @@
     var gl = this.gl;
     var cssW = this.el.clientWidth, cssH = this.el.clientHeight;
     if (!cssW || !cssH) return;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, LITE ? 1.5 : 2);
     // Keep the scene to about four megapixels, however tall the section.
-    var budget = 4.2e6;
+    var budget = LITE ? 2.4e6 : 4.2e6;
     if (cssW * cssH * dpr * dpr > budget) dpr = Math.max(1, Math.sqrt(budget / (cssW * cssH)));
     var w = Math.round(cssW * dpr), h = Math.round(cssH * dpr);
     var max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
@@ -973,15 +976,32 @@
       document.documentElement.classList.add('no-glass');
       return;
     }
-    Array.prototype.forEach.call(els, function (el) {
+    var start = function (el) {
       try {
         var st = new Stage(el);
+        st.visible = true;
         api.stages.push(st);
         bindDrag(st);
       } catch (err) {
         if (window.console) console.warn('[pvot-glass]', err);
       }
-    });
+    };
+    var whenIdle = function (fn) {
+      var go = function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 700 });
+        else setTimeout(fn, 60);
+      };
+      if (document.readyState === 'complete') go();
+      else window.addEventListener('load', go, { once: true });
+    };
+    var near = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        near.unobserve(e.target);
+        whenIdle(function () { start(e.target); });
+      });
+    }, { rootMargin: '400px 0px' });
+    Array.prototype.forEach.call(els, function (el) { near.observe(el); });
     bindLift(document);
 
     var fontsSettled = function () { api.stages.forEach(function (s) { s.paintDirty = true; }); };
@@ -990,11 +1010,20 @@
       document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', fontsSettled);
     }
 
+    var poke = function () { busyUntil = performance.now() + 1500; };
+    ['pointerdown', 'pointermove', 'keydown', 'touchmove'].forEach(function (t) {
+      window.addEventListener(t, poke, { passive: true });
+    });
+
     function frame(now) {
       if (!document.hidden) {
+        var calm = now > busyUntil;
+        var gap = LITE ? 1000 / 24 : 1000 / 30;
         for (var i = 0; i < api.stages.length; i++) {
           var s = api.stages[i];
           if (!s.visible) continue;
+          if (calm && s.shown && !s.moving.size && now - (s.lastFrame || 0) < gap) continue;
+          s.lastFrame = now;
           idle(s, now);
           s.render(now);
           if (!s.shown) {
@@ -1020,7 +1049,10 @@
     var s = stageOf(el);
     if (!el._glass && s) s.collect();
     if (el._glass) el._glass.params = params;
+    else el._pendingParams = params; // its stage starts later; it picks these up then
   };
+  // Draw every frame for a while (an animation the engine cannot see, like the intro).
+  api.kick = function (ms) { busyUntil = Math.max(busyUntil, performance.now() + (ms || 1200)); };
   api.invalidate = function (el) { var s = stageOf(el); if (s) s.invalidate(el); };
   api.repaintFor = function (el, ms) {
     var s = stageOf(el);

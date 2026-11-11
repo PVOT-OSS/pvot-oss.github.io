@@ -2,6 +2,7 @@
 order: 20
 title: Calculator
 tagline: Numbers, nothing else.
+kind: calculator
 category: tools
 icon: calculate
 accent: "#A78BFA"

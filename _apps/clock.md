@@ -2,6 +2,7 @@
 order: 11
 title: Clock
 tagline: Alarms, timers, time zones.
+kind: clock and alarm app
 category: everyday
 icon: schedule
 accent: "#8B7CFF"

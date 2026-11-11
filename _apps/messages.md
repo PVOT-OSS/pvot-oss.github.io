@@ -2,6 +2,7 @@
 order: 6
 title: Messages
 tagline: SMS without the spyware.
+kind: SMS app
 category: communication
 icon: sms
 accent: "#4CC2FF"

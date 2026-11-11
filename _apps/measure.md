@@ -2,6 +2,7 @@
 order: 21
 title: Measure
 tagline: An AR ruler, on device.
+kind: AR measuring app
 category: tools
 icon: straighten
 accent: "#F472B6"

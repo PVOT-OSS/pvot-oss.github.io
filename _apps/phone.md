@@ -2,6 +2,7 @@
 order: 7
 title: Phone
 tagline: Calls, clean and fast.
+kind: phone and dialer app
 category: communication
 icon: call
 accent: "#34D399"

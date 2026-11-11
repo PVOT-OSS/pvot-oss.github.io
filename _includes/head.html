@@ -2,26 +2,58 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <script>document.documentElement.classList.add('js')</script>
+  {%- assign is_app = false -%}{%- if page.collection == 'apps' -%}{%- assign is_app = true -%}{%- endif -%}
+
+  {%- comment -%} Titles: seo_title wins; apps say what they are; other pages "Title · Pvot". {%- endcomment -%}
   {%- capture title -%}
-    {% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}
+    {%- if page.seo_title -%}{{ page.seo_title }}
+    {%- elsif is_app -%}Pvot {{ page.title }} · Open-source {{ page.kind }} for Android
+    {%- elsif page.title -%}{{ page.title }} · {{ site.title }}
+    {%- else -%}{{ site.title }} · {{ site.tagline }}{%- endif -%}
   {%- endcapture -%}
-  {%- assign desc = page.description | default: site.description -%}
-  <title>{{ title | strip }}</title>
-  <meta name="description" content="{{ desc | strip_newlines | strip }}" />
+  {%- assign title = title | strip -%}
+
+  {%- comment -%} Descriptions: front matter, else each app's own summary, else the site's. {%- endcomment -%}
+  {%- capture desc -%}
+    {%- if page.description -%}{{ page.description }}
+    {%- elsif is_app -%}{%- assign slen = page.summary | size -%}{{ page.summary }}{% if slen < 125 %}{% if page.status == 'soon' %} In development, built in the open.{% elsif page.package %} Free on Google Play, 0 trackers.{% endif %}{% endif %}
+    {%- else -%}{{ site.description }}{%- endif -%}
+  {%- endcapture -%}
+  {%- assign desc = desc | strip_newlines | normalize_whitespace | strip | truncate: 165, "…" -%}
+
+  {%- if page.og_image -%}{%- assign og = page.og_image -%}
+  {%- elsif is_app -%}{%- assign og = '/assets/og/' | append: page.slug | append: '.jpg' -%}
+  {%- else -%}{%- assign og = '/assets/og/default.jpg' -%}{%- endif -%}
+
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ desc | escape }}" />
   <link rel="canonical" href="{{ page.url | absolute_url }}" />
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex" />
+  {%- endif %}
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="{{ site.title }}" />
-  <meta property="og:title" content="{{ title | strip }}" />
-  <meta property="og:description" content="{{ desc | strip_newlines | strip }}" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="{{ title | escape }}" />
+  <meta property="og:description" content="{{ desc | escape }}" />
   <meta property="og:url" content="{{ page.url | absolute_url }}" />
+  <meta property="og:image" content="{{ og | absolute_url }}" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{{ title | escape }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ title | escape }}" />
+  <meta name="twitter:description" content="{{ desc | escape }}" />
+  <meta name="twitter:image" content="{{ og | absolute_url }}" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="{{ '/assets/fonts/inter-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="{{ '/assets/fonts/material-symbols-rounded.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="{{ '/assets/og/icon-180.png' | relative_url }}" />
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+  {% include schema.html title=title desc=desc og=og %}
 </head>

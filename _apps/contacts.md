@@ -2,6 +2,7 @@
 order: 8
 title: Contacts
 tagline: Your people, your device.
+kind: contacts app
 category: communication
 icon: contacts
 accent: "#F59E0B"
