@@ -744,20 +744,26 @@ html:not(.js) .rv { opacity: 1; transform: none; }
 /* ---- App page ---------------------------------------------------------------------------- */
 
 .app-hero { padding: 132px 0 80px; }
-.app-hero-inner { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 44px; align-items: end; }
+/* App Store layout: the icon sits on the name's line, actions line up under the text. */
+.app-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 36px; align-items: center; }
+.app-id { min-width: 0; }
+.app-actions { margin: 30px 0 0 calc(136px + 36px); }
 .app-hero .app-icon { width: 136px; height: 136px; border-radius: 38px; }
 .app-hero .app-icon .ms { font-size: 68px; font-variation-settings: 'FILL' 0, 'wght' 300, 'opsz' 48; }
 .app-hero .app-icon.on .ms { font-variation-settings: 'FILL' 1, 'wght' 400, 'opsz' 48; }
-.app-hero h1 { margin: 12px 0 10px; font-size: clamp(52px, 8vw, 112px); font-weight: 700; letter-spacing: -0.055em; line-height: 0.92; }
-.app-hero .tagline { margin: 0 0 26px; font-size: clamp(20px, 2vw, 26px); color: var(--ink-2); letter-spacing: -0.025em; }
+.app-hero h1 { margin: 10px 0 8px; font-size: clamp(52px, 8vw, 112px); font-weight: 700; letter-spacing: -0.055em; line-height: 0.92; }
+.app-hero .tagline { margin: 0; font-size: clamp(20px, 2vw, 26px); color: var(--ink-2); letter-spacing: -0.025em; }
 .app-hero .pill { margin-left: 4px; vertical-align: middle; }
 .crumb { display: inline-flex; align-items: center; gap: 2px; font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: 44px; }
 .crumb:hover { color: var(--ink); }
 .crumb .ms { font-size: 20px; }
 @media (max-width: 760px) {
-  .app-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .app-hero .app-icon { width: 104px; height: 104px; border-radius: 29px; }
-  .app-hero .app-icon .ms { font-size: 54px; }
+  .app-head { gap: 18px; }
+  .app-actions { margin: 26px 0 0; }
+  .app-hero h1 { font-size: clamp(40px, 11vw, 64px); }
+  .app-hero .tagline { font-size: 18px; }
+  .app-hero .app-icon { width: 88px; height: 88px; border-radius: 24px; }
+  .app-hero .app-icon .ms { font-size: 46px; }
 }
 .app-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); padding: 96px 0; }
 @media (max-width: 900px) { .app-body { grid-template-columns: minmax(0, 1fr); } }

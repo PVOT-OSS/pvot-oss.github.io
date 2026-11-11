@@ -477,6 +477,7 @@
       if (swallow) { e.preventDefault(); e.stopPropagation(); swallow = false; }
     }, true);
     window.addEventListener('resize', function () { place(current, true); });
+    window.addEventListener('pageshow', function (e) { if (e.persisted) place(current, true); });
     if (document.fonts) document.fonts.ready.then(function () { place(current, true); });
   })();
 
