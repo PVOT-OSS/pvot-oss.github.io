@@ -765,6 +765,17 @@ html:not(.js) .rv { opacity: 1; transform: none; }
   .app-hero .app-icon { width: 88px; height: 88px; border-radius: 24px; }
   .app-hero .app-icon .ms { font-size: 46px; }
 }
+/* Narrow screens (320px phones, fold cover screens, enlarged display size): a smaller icon and a
+   name that scales with the screen, so a one-word title like "Authenticator" is never cut off. */
+@media (max-width: 354px) {
+  .app-head { gap: 14px; }
+  /* The width beside the icon (screen - 2 x 18px gutter - 72px icon - 14px gap), over the
+     longest name's width in em, so it meets the 40px of wider phones at 355px. */
+  .app-hero h1 { font-size: calc((100vw - 122px) / 5.9); }
+  .app-hero .tagline { font-size: 16px; }
+  .app-hero .app-icon { width: 72px; height: 72px; border-radius: 20px; }
+  .app-hero .app-icon .ms { font-size: 38px; }
+}
 .app-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(40px, 6vw, 96px); padding: 96px 0; }
 @media (max-width: 900px) { .app-body { grid-template-columns: minmax(0, 1fr); } }
 .app-summary { margin: 0; font-size: clamp(24px, 2.6vw, 34px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.22; }
