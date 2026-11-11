@@ -114,6 +114,8 @@
     'uniform float uClear;',
     'uniform vec2 uPaintShift;',
     'uniform vec2 uSilkShift;',
+    'uniform vec4 uGlow[6];',
+    'uniform float uGlowN;',
     '',
     // Silk: a height field of slow, domain-warped waves, lit by one soft light. Its shadows take
     // the stage's first color, its sheen the third, and a touch of the second drifts through.
@@ -142,7 +144,15 @@
     // Fall to black toward the bottom and the edges, so type always sits on dark.
     '  vec2 q = p / uRes;',
     '  float vig = smoothstep(1.35, 0.15, length((q - vec2(0.55, 0.4)) * vec2(0.9, 1.15)));',
-    '  return mix(uBase, col, vig * uDim);',
+    '  col = mix(uBase, col, vig * uDim);',
+    '  vec2 sp = p - uSilkShift;',
+    '  for (int i = 0; i < 6; i++) {',
+    '    if (float(i) >= uGlowN) break;',
+    '    vec2 dd = (sp - uGlow[i].xy) / uGlow[i].zw;',
+    '    float g = exp(-dot(dd, dd) * 2.2);',
+    '    col = mix(col, uC[0].rgb * 0.9 + uC[2].rgb * 0.35, g * 0.75);',
+    '  }',
+    '  return col;',
     '}',
     '',
     'void main() {',
@@ -461,6 +471,7 @@
     this.paintCanvas = document.createElement('canvas');
     this.ctx = this.paintCanvas.getContext('2d');
     this.paintTex = texture(gl, 0, 0);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
     this.paintDirty = true;
     this.paintRegions = [];
     this.paintUntil = 0;
@@ -476,6 +487,9 @@
       e.preventDefault();
       self.lost = true;
       el.classList.remove('is-live');
+    });
+    this.canvas.addEventListener('webglcontextrestored', function () {
+      if (api.restart) api.restart(self);
     });
 
     // Painted things that are mid-animation or mid-transition get repainted every frame.
@@ -544,6 +558,7 @@
       });
     });
     this.paints = Array.prototype.slice.call(this.el.querySelectorAll('[data-paint]'));
+    this.glowEls = Array.prototype.slice.call(this.el.querySelectorAll('[data-glow]'));
     // The plane (a parallax layer) that holds the painted things, if one does.
     var planes = Array.prototype.slice.call(this.el.querySelectorAll('[data-plane]'));
     var paints = this.paints;
@@ -872,6 +887,19 @@
     var ks = this.w / this.cssW;
     var psh = this.paintPlane && this.paintPlane._shift;
     gl.uniform2f(ps.u.uPaintShift, psh ? psh.x * ks : 0, psh ? psh.y * ks : 0);
+    // Glows: up to six [data-glow] objects, each lit by an ellipse a little larger than itself.
+    var glows = [], F = this.canvas.getBoundingClientRect(), gk = this.w / (F.width || this.cssW);
+    for (var gi = 0; gi < this.glowEls.length && glows.length < 24; gi++) {
+      var ge = this.glowEls[gi];
+      if (ge.closest('[hidden]')) continue;
+      var gr = ge.getBoundingClientRect();
+      if (!gr.width) continue;
+      glows.push((gr.left - F.left + gr.width / 2) * gk, (gr.top - F.top + gr.height / 2) * gk,
+        (gr.width * 0.75 + 90) * gk, (gr.height * 1.1 + 90) * gk);
+    }
+    while (glows.length < 24) glows.push(0, 0, 1, 1);
+    gl.uniform4fv(ps.u.uGlow, glows);
+    gl.uniform1f(ps.u.uGlowN, Math.min(6, this.glowEls.length));
     var ssh = this.el._silkShift;
     gl.uniform2f(ps.u.uSilkShift, ssh ? ssh.x * ks : 0, ssh ? ssh.y * ks : 0);
     gl.uniform1f(ps.u.uPx, this.dpr);
@@ -1192,6 +1220,22 @@
     return null;
   }
 
+  api.restart = function (old) {
+    var i = api.stages.indexOf(old);
+    if (i < 0) return;
+    api.stages.splice(i, 1);
+    if (old.canvas.parentNode) old.canvas.parentNode.removeChild(old.canvas);
+    old.el.classList.remove('is-live');
+    try {
+      var st = new Stage(old.el);
+      st.visible = true;
+      api.stages.push(st);
+    } catch (err) { /* stays on the CSS frost */ }
+  };
+  // Back/forward restores a frozen page: repaint everything once it is shown again.
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) api.stages.forEach(function (s) { s.paintDirty = true; });
+  });
   api.setIntensity = function (v) { api.intensity = Math.max(0, Math.min(1, v)); };
   api.setParams = function (el, params) {
     var s = stageOf(el);

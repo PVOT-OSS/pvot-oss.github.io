@@ -9,10 +9,10 @@ layout: base
 <section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="{{ category.blobs }}" data-seed="{{ app.order | times: 0.7 }}" style="--c:{{ category.color }}" data-recede>
   <div class="wrap" data-plane>
     <a class="crumb" href="{{ '/apps/' | relative_url }}"><span class="ms">chevron_left</span> All apps</a>
-    <div class="app-hero-inner">
+    <div class="app-head">
       {% include app-icon.html app=app %}
-      <div>
-        <span class="eyebrow">{{ category.title }}
+      <div class="app-id">
+        <span class="eyebrow app-eyebrow">{{ category.title }}
           {%- case app.status -%}
           {%- when 'stable' %} <span class="pill stable">Available</span>
           {%- when 'beta' %} <span class="pill beta">Beta</span>
@@ -21,6 +21,9 @@ layout: base
         </span>
         <h1><span data-paint>{{ app.title }}</span></h1>
         <p class="tagline">{{ app.tagline }}</p>
+      </div>
+    </div>
+    <div class="app-actions">
         <div class="btn-row">
           {%- if released %}
           {%- if app.package %}
@@ -43,7 +46,6 @@ layout: base
           <span class="ms fill">verified_user</span> 0 trackers, verified by Exodus Privacy <span class="ms">arrow_outward</span>
         </a>
         {%- endif %}
-      </div>
     </div>
   </div>
 </section>

@@ -70,7 +70,7 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
 
       <div class="dock-wrap">
         <span class="dock-label">In the dock: on Google Play today</span>
-        <div class="dock" data-glass="regular">
+        <div class="dock" data-glass="regular" data-glow>
           {%- for app in shipping %}
           <a class="icon-link" data-tilt href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
             {% include app-icon.html app=app %}
