@@ -46,6 +46,8 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
   color-scheme: dark;
+  /* Android Chrome draws a blue box over anything tapped; controls give their own feedback. */
+  -webkit-tap-highlight-color: transparent;
 }
 body {
   margin: 0;
@@ -1025,4 +1027,10 @@ html:not(.js) .rv { opacity: 1; transform: none; }
 /* Small phones: let the big headlines scale with the screen so a line never outgrows it. */
 @media (max-width: 360px) {
   .display, .page-stage .display, .doc-head .display, .lab .display { font-size: 13.5vw; }
+}
+
+/* Touch: with the tap highlight off, plain links dim while pressed so a tap still registers. */
+@media (hover: none) {
+  .nav-links a:active, .footer-col a:active, .sub-nav a:active, .crumb:active,
+  .link-arrow:active, .row:active, .repo:active, .stack-row:active, .icon-link:active { opacity: 0.6; }
 }
