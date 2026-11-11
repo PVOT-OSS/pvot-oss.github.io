@@ -3,40 +3,114 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js')</script><title>Phone · Pvot</title>
-  <meta name="description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
+  <script>document.documentElement.classList.add('js')</script><title>Pvot Phone · Open-source phone and dialer app for Android</title>
+  <meta name="description" content="Place and manage calls without the bloat. A quick, focused dialer that does the one job and gets out of the way. In development, built in the open." />
   <link rel="canonical" href="https://pvot-oss.github.io/apps/phone/" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pvot" />
-  <meta property="og:title" content="Phone · Pvot" />
-  <meta property="og:description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pvot Phone · Open-source phone and dialer app for Android" />
+  <meta property="og:description" content="Place and manage calls without the bloat. A quick, focused dialer that does the one job and gets out of the way. In development, built in the open." />
   <meta property="og:url" content="https://pvot-oss.github.io/apps/phone/" />
+  <meta property="og:image" content="https://pvot-oss.github.io/assets/og/phone.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pvot Phone · Open-source phone and dialer app for Android" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pvot Phone · Open-source phone and dialer app for Android" />
+  <meta name="twitter:description" content="Place and manage calls without the bloat. A quick, focused dialer that does the one job and gets out of the way. In development, built in the open." />
+  <meta name="twitter:image" content="https://pvot-oss.github.io/assets/og/phone.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/og/icon-180.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pvot-oss.github.io/#organization",
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": "https://pvot-oss.github.io/",
+      "logo": "https://pvot-oss.github.io/assets/og/icon-512.png",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "sameAs": ["https://github.com/PVOT-OSS", "https://t.me/Pvot_OS"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pvot-oss.github.io/#website",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pvot-oss.github.io/apps/phone/#webpage",
+      "url": "https://pvot-oss.github.io/apps/phone/",
+      "name": "Pvot Phone · Open-source phone and dialer app for Android",
+      "description": "Place and manage calls without the bloat. A quick, focused dialer that does the one job and gets out of the way. In development, built in the open.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://pvot-oss.github.io/#website" },
+      "primaryImageOfPage": "https://pvot-oss.github.io/assets/og/phone.jpg",
+      "breadcrumb": { "@id": "https://pvot-oss.github.io/apps/phone/#breadcrumb" },
+      "mainEntity": { "@id": "https://pvot-oss.github.io/apps/phone/#app" }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://pvot-oss.github.io/apps/phone/#app",
+      "name": "Pvot Phone",
+      "alternateName": "Phone",
+      "description": "Place and manage calls without the bloat. A quick, focused dialer that does the one job and gets out of the way.",
+      "url": "https://pvot-oss.github.io/apps/phone/",
+      "image": "https://pvot-oss.github.io/assets/og/phone.jpg",
+      "operatingSystem": "Android",
+      "applicationCategory": "CommunicationApplication",
+      "applicationSuite": "Pvot",
+      "isAccessibleForFree": true,
+      "featureList": ["Fast T9 dialer","Call history","Contact integration","No ads or trackers"],
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" },
+      "author": { "@id": "https://pvot-oss.github.io/#organization" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pvot-oss.github.io/apps/phone/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Pvot", "item": "https://pvot-oss.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Apps", "item": "https://pvot-oss.github.io/apps/" },
+        { "@type": "ListItem", "position": 3, "name": "Phone", "item": "https://pvot-oss.github.io/apps/phone/" }
+      ]
+    }
+  ]
+}
+</script>
+
 </head>
 
   <body>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="/" aria-label="Pvot home">
       <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
       <span>Pvot</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="/apps/" aria-current="page">Apps</a>
-      <a href="/pvotlib/">PvotLib</a>
-      <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
+      <a href="/apps/" data-paint aria-current="page">Apps</a>
+      <a href="/pvotlib/" data-paint>PvotLib</a>
+      <a href="/about/" data-paint>About</a>
+      <a href="/contribute/" data-paint>Contribute</a>
     </nav>
     <div class="nav-right">
       <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
@@ -57,8 +131,8 @@
 </header>
 
     <main id="main">
-      <section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="#005A2C,#0F3FA8,#5FD48A70,#00391A,#005A2CCC" data-seed="4.9" style="--c:#5FD48A">
-  <div class="wrap">
+      <section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="#005A2C,#0F3FA8,#5FD48A70,#00391A,#005A2CCC" data-seed="4.9" style="--c:#5FD48A" data-recede>
+  <div class="wrap" data-plane>
     <a class="crumb" href="/apps/"><span class="ms">chevron_left</span> All apps</a>
     <div class="app-hero-inner">
       <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">call</span></span>
@@ -94,17 +168,17 @@
   <div class="related">
     <h2>More in Communication</h2>
     <div class="home-grid">
-      <a class="icon-link" href="/apps/messages/">
+      <a class="icon-link" data-tilt href="/apps/messages/">
         <span class="app-icon on" style="--c:#5FD48A" aria-hidden="true"><span class="ms">sms</span></span>
 
         <span class="icon-label">Messages</span>
       </a>
-      <a class="icon-link" href="/apps/contacts/">
+      <a class="icon-link" data-tilt href="/apps/contacts/">
         <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">contacts</span></span>
 
         <span class="icon-label">Contacts</span>
       </a>
-      <a class="icon-link" href="/apps/mail/">
+      <a class="icon-link" data-tilt href="/apps/mail/">
         <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">mail</span></span>
 
         <span class="icon-label">Mail</span>
@@ -123,7 +197,7 @@
         <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
       <div class="footer-col">
-        <h4>Pvot</h4>
+        <h2>Pvot</h2>
         <ul>
           <li><a href="/apps/">Apps</a></li>
           <li><a href="/pvotlib/">PvotLib</a></li>
@@ -133,7 +207,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Build</h4>
+        <h2>Build</h2>
         <ul>
           <li><a href="/contribute/">Where to contribute</a></li>
           <li><a href="/contribute/guide/">Contributing guide</a></li>
@@ -142,7 +216,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Community</h4>
+        <h2>Community</h2>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>

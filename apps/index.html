@@ -3,40 +3,86 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js')</script><title>Apps · Pvot</title>
+  <script>document.documentElement.classList.add('js')</script><title>Pvot apps · Open-source Android apps with 0 trackers</title>
   <meta name="description" content="Every Pvot app: open source, offline first, free of trackers, and built on one design system." />
   <link rel="canonical" href="https://pvot-oss.github.io/apps/" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pvot" />
-  <meta property="og:title" content="Apps · Pvot" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pvot apps · Open-source Android apps with 0 trackers" />
   <meta property="og:description" content="Every Pvot app: open source, offline first, free of trackers, and built on one design system." />
   <meta property="og:url" content="https://pvot-oss.github.io/apps/" />
+  <meta property="og:image" content="https://pvot-oss.github.io/assets/og/default.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pvot apps · Open-source Android apps with 0 trackers" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pvot apps · Open-source Android apps with 0 trackers" />
+  <meta name="twitter:description" content="Every Pvot app: open source, offline first, free of trackers, and built on one design system." />
+  <meta name="twitter:image" content="https://pvot-oss.github.io/assets/og/default.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/og/icon-180.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pvot-oss.github.io/#organization",
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": "https://pvot-oss.github.io/",
+      "logo": "https://pvot-oss.github.io/assets/og/icon-512.png",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "sameAs": ["https://github.com/PVOT-OSS", "https://t.me/Pvot_OS"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pvot-oss.github.io/#website",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pvot-oss.github.io/apps/#webpage",
+      "url": "https://pvot-oss.github.io/apps/",
+      "name": "Pvot apps · Open-source Android apps with 0 trackers",
+      "description": "Every Pvot app: open source, offline first, free of trackers, and built on one design system.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://pvot-oss.github.io/#website" },
+      "primaryImageOfPage": "https://pvot-oss.github.io/assets/og/default.jpg"
+    }
+  ]
+}
+</script>
+
 </head>
 
   <body>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="/" aria-label="Pvot home">
       <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
       <span>Pvot</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="/apps/" aria-current="page">Apps</a>
-      <a href="/pvotlib/">PvotLib</a>
-      <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
+      <a href="/apps/" data-paint aria-current="page">Apps</a>
+      <a href="/pvotlib/" data-paint>PvotLib</a>
+      <a href="/about/" data-paint>About</a>
+      <a href="/contribute/" data-paint>Contribute</a>
     </nav>
     <div class="nav-right">
       <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
@@ -57,20 +103,20 @@
 </header>
 
     <main id="main">
-      <section class="stage page-stage" id="catalog-top" data-stage data-live data-seed="1.4" data-dim="0.8">
-  <div class="wrap">
+      <section class="stage page-stage" id="catalog-top" data-stage data-live data-seed="1.4" data-dim="0.8" data-recede>
+  <div class="wrap" data-plane>
     <span class="eyebrow">27 apps, 4 shipping today</span>
     <h1 class="display" style="margin-top:18px"><span data-paint>Apps.</span></h1>
     <p class="lede">A full suite of first-party apps to replace the defaults. Every one is open source and works offline first. Shipping apps are on Google Play, and Exodus Privacy finds zero trackers in each. The rest are being built right now, in public.</p>
-    <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#catalog">
-      <span class="seg-ind" aria-hidden="true"></span>
-      <button role="tab" aria-selected="true" data-cat="all">All</button>
-      <button role="tab" aria-selected="false" data-cat="media">Media</button>
-      <button role="tab" aria-selected="false" data-cat="communication">Communication</button>
-      <button role="tab" aria-selected="false" data-cat="everyday">Everyday</button>
-      <button role="tab" aria-selected="false" data-cat="life">Life</button>
-      <button role="tab" aria-selected="false" data-cat="tools">Tools</button>
-      <button role="tab" aria-selected="false" data-cat="design">Design system</button>
+    <div class="seg seg-glass" role="tablist" aria-label="Filter apps" data-filter="#catalog" data-paint="box" data-paint-clip>
+      <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+      <button data-paint role="tab" aria-selected="true" data-cat="all">All</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="media">Media</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="communication">Communication</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="everyday">Everyday</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="life">Life</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="tools">Tools</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="design">Design system</button>
     </div>
   </div>
 </section>
@@ -82,27 +128,27 @@
       <p>See it, hear it, capture it.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/camera/">
+      <a class="row" data-tilt href="/apps/camera/">
         <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_camera</span></span>
 
         <span><b>Camera</b><span class="t">Capture it, keep it.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/photos/">
+      <a class="row" data-tilt href="/apps/photos/">
         <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_library</span></span>
 
         <span><b>Photos</b><span class="t">Your memories, private.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/music/">
+      <a class="row" data-tilt href="/apps/music/">
         <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">music_note</span></span>
 
         <span><b>Music</b><span class="t">Your library, offline.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/equaliser/">
+      <a class="row" data-tilt href="/apps/equaliser/">
         <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">equalizer</span></span>
 
         <span><b>Equaliser</b><span class="t">Tune your sound.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/recorder/">
+      <a class="row" data-tilt href="/apps/recorder/">
         <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">mic</span></span>
 
         <span><b>Recorder</b><span class="t">Voice memos, on device.</span></span><span class="pill">In development</span>
@@ -115,22 +161,22 @@
       <p>Reach anyone. Leak nothing.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/messages/">
+      <a class="row" data-tilt href="/apps/messages/">
         <span class="app-icon on" style="--c:#5FD48A" aria-hidden="true"><span class="ms">sms</span></span>
 
         <span><b>Messages</b><span class="t">SMS without the spyware.</span></span><span class="pill stable">Available</span>
       </a>
-      <a class="row" href="/apps/phone/">
+      <a class="row" data-tilt href="/apps/phone/">
         <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">call</span></span>
 
         <span><b>Phone</b><span class="t">Calls, clean and fast.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/contacts/">
+      <a class="row" data-tilt href="/apps/contacts/">
         <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">contacts</span></span>
 
         <span><b>Contacts</b><span class="t">Your people, your device.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/mail/">
+      <a class="row" data-tilt href="/apps/mail/">
         <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">mail</span></span>
 
         <span><b>Mail</b><span class="t">Email, on your terms.</span></span><span class="pill">In development</span>
@@ -143,37 +189,37 @@
       <p>The rhythm of your day.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/calendar/">
+      <a class="row" data-tilt href="/apps/calendar/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">calendar_month</span></span>
 
         <span><b>Calendar</b><span class="t">Plans that stay yours.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/clock/">
+      <a class="row" data-tilt href="/apps/clock/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">schedule</span></span>
 
         <span><b>Clock</b><span class="t">Alarms, timers, time zones.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/reminders/">
+      <a class="row" data-tilt href="/apps/reminders/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">task_alt</span></span>
 
         <span><b>Reminders</b><span class="t">Never forget, quietly.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/notes/">
+      <a class="row" data-tilt href="/apps/notes/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">edit_note</span></span>
 
         <span><b>Notes</b><span class="t">Thoughts, offline.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/weather/">
+      <a class="row" data-tilt href="/apps/weather/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">wb_sunny</span></span>
 
         <span><b>Weather</b><span class="t">Forecasts, no profiling.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/maps/">
+      <a class="row" data-tilt href="/apps/maps/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">map</span></span>
 
         <span><b>Maps</b><span class="t">Find your way, privately.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/compass/">
+      <a class="row" data-tilt href="/apps/compass/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">explore</span></span>
 
         <span><b>Compass</b><span class="t">True north, simply.</span></span><span class="pill">In development</span>
@@ -186,17 +232,17 @@
       <p>Health, money, and the little records.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/health/">
+      <a class="row" data-tilt href="/apps/health/">
         <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">monitor_heart</span></span>
 
         <span><b>Health and Fitness</b><span class="t">Your body, your data.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/expenses/">
+      <a class="row" data-tilt href="/apps/expenses/">
         <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">account_balance_wallet</span></span>
 
         <span><b>Expense Manager</b><span class="t">Money, minus the snooping.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/journal/">
+      <a class="row" data-tilt href="/apps/journal/">
         <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">menu_book</span></span>
 
         <span><b>Journal</b><span class="t">Your days, for your eyes.</span></span><span class="pill">In development</span>
@@ -209,42 +255,42 @@
       <p>Small tools. Sharp edges.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/calculator/">
+      <a class="row" data-tilt href="/apps/calculator/">
         <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">calculate</span></span>
 
         <span><b>Calculator</b><span class="t">Numbers, nothing else.</span></span><span class="pill stable">Available</span>
       </a>
-      <a class="row" href="/apps/measure/">
+      <a class="row" data-tilt href="/apps/measure/">
         <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">straighten</span></span>
 
         <span><b>Measure</b><span class="t">An AR ruler, on device.</span></span><span class="pill beta">Beta</span>
       </a>
-      <a class="row" href="/apps/files/">
+      <a class="row" data-tilt href="/apps/files/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">folder</span></span>
 
         <span><b>Files</b><span class="t">Your storage, unlocked.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/browser/">
+      <a class="row" data-tilt href="/apps/browser/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">public</span></span>
 
         <span><b>Browser</b><span class="t">The web, no watchers.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/store/">
+      <a class="row" data-tilt href="/apps/store/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">storefront</span></span>
 
         <span><b>Store</b><span class="t">Apps, the open way.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/backup/">
+      <a class="row" data-tilt href="/apps/backup/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">backup</span></span>
 
         <span><b>Backup</b><span class="t">Your data, portable.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/authenticator/">
+      <a class="row" data-tilt href="/apps/authenticator/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">key</span></span>
 
         <span><b>Authenticator</b><span class="t">2FA, stays on device.</span></span><span class="pill">In development</span>
       </a>
-      <a class="row" href="/apps/news-feed/">
+      <a class="row" data-tilt href="/apps/news-feed/">
         <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">rss_feed</span></span>
 
         <span><b>News Feed</b><span class="t">Your feeds, no algorithm.</span></span><span class="pill">In development</span>
@@ -257,7 +303,7 @@
       <p>The thread that ties it all together.</p>
     </div>
     <div class="rows">
-      <a class="row" href="/apps/whats-in-pvot/">
+      <a class="row" data-tilt href="/apps/whats-in-pvot/">
         <span class="app-icon on" style="--c:#E4E0FF" aria-hidden="true"><span class="ms">grid_view</span></span>
 
         <span><b>What's in Pvot</b><span class="t">See the system, live.</span></span><span class="pill beta">Beta</span>
@@ -276,7 +322,7 @@
         <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
       <div class="footer-col">
-        <h4>Pvot</h4>
+        <h2>Pvot</h2>
         <ul>
           <li><a href="/apps/">Apps</a></li>
           <li><a href="/pvotlib/">PvotLib</a></li>
@@ -286,7 +332,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Build</h4>
+        <h2>Build</h2>
         <ul>
           <li><a href="/contribute/">Where to contribute</a></li>
           <li><a href="/contribute/guide/">Contributing guide</a></li>
@@ -295,7 +341,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Community</h4>
+        <h2>Community</h2>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>

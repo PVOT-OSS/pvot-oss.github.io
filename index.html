@@ -3,40 +3,86 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js')</script><title>Pvot · Your phone. Your rules.</title>
+  <script>document.documentElement.classList.add('js')</script><title>Pvot · De-Googled, open-source Android and apps</title>
   <meta name="description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
   <link rel="canonical" href="https://pvot-oss.github.io/" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pvot" />
-  <meta property="og:title" content="Pvot · Your phone. Your rules." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pvot · De-Googled, open-source Android and apps" />
   <meta property="og:description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
   <meta property="og:url" content="https://pvot-oss.github.io/" />
+  <meta property="og:image" content="https://pvot-oss.github.io/assets/og/default.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pvot · De-Googled, open-source Android and apps" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pvot · De-Googled, open-source Android and apps" />
+  <meta name="twitter:description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
+  <meta name="twitter:image" content="https://pvot-oss.github.io/assets/og/default.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/og/icon-180.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pvot-oss.github.io/#organization",
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": "https://pvot-oss.github.io/",
+      "logo": "https://pvot-oss.github.io/assets/og/icon-512.png",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "sameAs": ["https://github.com/PVOT-OSS", "https://t.me/Pvot_OS"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pvot-oss.github.io/#website",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pvot-oss.github.io/#webpage",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot · De-Googled, open-source Android and apps",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://pvot-oss.github.io/#website" },
+      "primaryImageOfPage": "https://pvot-oss.github.io/assets/og/default.jpg"
+    }
+  ]
+}
+</script>
+
 </head>
 
   <body>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="/" aria-label="Pvot home">
       <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
       <span>Pvot</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="/apps/">Apps</a>
-      <a href="/pvotlib/">PvotLib</a>
-      <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
+      <a href="/apps/" data-paint>Apps</a>
+      <a href="/pvotlib/" data-paint>PvotLib</a>
+      <a href="/about/" data-paint>About</a>
+      <a href="/contribute/" data-paint>Contribute</a>
     </nav>
     <div class="nav-right">
       <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
@@ -57,9 +103,9 @@
 </header>
 
     <main id="main">
-      <section class="stage hero" data-stage data-live>
-  <div class="wrap hero-inner">
-    <div class="hero-top hero-meta">
+      <section class="stage hero" data-stage data-live data-recede>
+  <div class="wrap hero-inner" data-plane>
+    <div class="hero-top hero-meta" data-paint="rich">
       <span class="eyebrow"><span class="dot"></span> Pvot OS. Open-source Android.</span>
       <span class="lens-hint"><span class="ms">pan_tool</span> The glass is live. Drag it over the headline.</span>
     </div>
@@ -74,26 +120,26 @@
     </div>
 
     <div class="hero-foot hero-meta">
-      <p class="lede">
+      <p class="lede" data-paint="rich">
         A de-Googled Android and a full suite of apps, drawn in real liquid glass.
         <strong>No trackers. No accounts. Nothing phoning home.</strong>
       </p>
       <div class="btn-row">
-        <a class="btn btn-solid" href="/apps/">Explore the apps</a>
+        <a class="btn btn-solid" data-paint="rich" href="/apps/">Explore the apps</a>
         <a class="btn btn-glass" data-glass="clear" data-glass-press href="/pvotlib/">Meet PvotLib</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="statement" aria-label="What Pvot is">
+<section class="statement" aria-label="What Pvot is" data-recede>
   <div class="wrap">
     <p data-words>Android, minus the part that watches you. Pvot ships <em>without Google,</em> without ad IDs, without a single tracker. What is left is <em>fast, quiet, and yours.</em></p>
   </div>
 </section>
 
-<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75">
-  <div class="wrap">
+<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75" data-recede>
+  <div class="wrap" data-plane="0.7">
     <div class="section-head center">
       <span class="eyebrow rv">The apps</span>
       <h2 class="h2 rv">Everything you open.<br><span class="dim">Rebuilt in the open.</span></h2>
@@ -101,133 +147,133 @@
     </div>
 
     <div class="home">
-      <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#apps">
-        <span class="seg-ind" aria-hidden="true"></span>
-        <button role="tab" aria-selected="true" data-cat="all">All</button>
-        <button role="tab" aria-selected="false" data-cat="media">Media</button>
-        <button role="tab" aria-selected="false" data-cat="communication">Communication</button>
-        <button role="tab" aria-selected="false" data-cat="everyday">Everyday</button>
-        <button role="tab" aria-selected="false" data-cat="life">Life</button>
-        <button role="tab" aria-selected="false" data-cat="tools">Tools</button>
+      <div class="seg seg-glass" role="tablist" aria-label="Filter apps" data-filter="#apps" data-paint="box" data-paint-clip>
+        <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+        <button data-paint role="tab" aria-selected="true" data-cat="all">All</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="media">Media</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="communication">Communication</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="everyday">Everyday</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="life">Life</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="tools">Tools</button>
       </div>
 
       <div class="home-grid">
-        <a class="icon-link" href="/apps/camera/" data-cat="media" title="Camera: Capture it, keep it.">
+        <a class="icon-link" data-tilt href="/apps/camera/" data-cat="media" title="Camera: Capture it, keep it.">
           <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_camera</span></span>
 
           <span class="icon-label">Camera</span>
         </a>
-        <a class="icon-link" href="/apps/photos/" data-cat="media" title="Photos: Your memories, private.">
+        <a class="icon-link" data-tilt href="/apps/photos/" data-cat="media" title="Photos: Your memories, private.">
           <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">photo_library</span></span>
 
           <span class="icon-label">Photos</span>
         </a>
-        <a class="icon-link" href="/apps/music/" data-cat="media" title="Music: Your library, offline.">
+        <a class="icon-link" data-tilt href="/apps/music/" data-cat="media" title="Music: Your library, offline.">
           <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">music_note</span></span>
 
           <span class="icon-label">Music</span>
         </a>
-        <a class="icon-link" href="/apps/equaliser/" data-cat="media" title="Equaliser: Tune your sound.">
+        <a class="icon-link" data-tilt href="/apps/equaliser/" data-cat="media" title="Equaliser: Tune your sound.">
           <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">equalizer</span></span>
 
           <span class="icon-label">Equaliser</span>
         </a>
-        <a class="icon-link" href="/apps/recorder/" data-cat="media" title="Recorder: Voice memos, on device.">
+        <a class="icon-link" data-tilt href="/apps/recorder/" data-cat="media" title="Recorder: Voice memos, on device.">
           <span class="app-icon" style="--c:#FF6BA6" aria-hidden="true"><span class="ms">mic</span></span>
 
           <span class="icon-label">Recorder</span>
         </a>
-        <a class="icon-link" href="/apps/phone/" data-cat="communication" title="Phone: Calls, clean and fast.">
+        <a class="icon-link" data-tilt href="/apps/phone/" data-cat="communication" title="Phone: Calls, clean and fast.">
           <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">call</span></span>
 
           <span class="icon-label">Phone</span>
         </a>
-        <a class="icon-link" href="/apps/contacts/" data-cat="communication" title="Contacts: Your people, your device.">
+        <a class="icon-link" data-tilt href="/apps/contacts/" data-cat="communication" title="Contacts: Your people, your device.">
           <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">contacts</span></span>
 
           <span class="icon-label">Contacts</span>
         </a>
-        <a class="icon-link" href="/apps/mail/" data-cat="communication" title="Mail: Email, on your terms.">
+        <a class="icon-link" data-tilt href="/apps/mail/" data-cat="communication" title="Mail: Email, on your terms.">
           <span class="app-icon" style="--c:#5FD48A" aria-hidden="true"><span class="ms">mail</span></span>
 
           <span class="icon-label">Mail</span>
         </a>
-        <a class="icon-link" href="/apps/calendar/" data-cat="everyday" title="Calendar: Plans that stay yours.">
+        <a class="icon-link" data-tilt href="/apps/calendar/" data-cat="everyday" title="Calendar: Plans that stay yours.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">calendar_month</span></span>
 
           <span class="icon-label">Calendar</span>
         </a>
-        <a class="icon-link" href="/apps/clock/" data-cat="everyday" title="Clock: Alarms, timers, time zones.">
+        <a class="icon-link" data-tilt href="/apps/clock/" data-cat="everyday" title="Clock: Alarms, timers, time zones.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">schedule</span></span>
 
           <span class="icon-label">Clock</span>
         </a>
-        <a class="icon-link" href="/apps/reminders/" data-cat="everyday" title="Reminders: Never forget, quietly.">
+        <a class="icon-link" data-tilt href="/apps/reminders/" data-cat="everyday" title="Reminders: Never forget, quietly.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">task_alt</span></span>
 
           <span class="icon-label">Reminders</span>
         </a>
-        <a class="icon-link" href="/apps/notes/" data-cat="everyday" title="Notes: Thoughts, offline.">
+        <a class="icon-link" data-tilt href="/apps/notes/" data-cat="everyday" title="Notes: Thoughts, offline.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">edit_note</span></span>
 
           <span class="icon-label">Notes</span>
         </a>
-        <a class="icon-link" href="/apps/weather/" data-cat="everyday" title="Weather: Forecasts, no profiling.">
+        <a class="icon-link" data-tilt href="/apps/weather/" data-cat="everyday" title="Weather: Forecasts, no profiling.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">wb_sunny</span></span>
 
           <span class="icon-label">Weather</span>
         </a>
-        <a class="icon-link" href="/apps/maps/" data-cat="everyday" title="Maps: Find your way, privately.">
+        <a class="icon-link" data-tilt href="/apps/maps/" data-cat="everyday" title="Maps: Find your way, privately.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">map</span></span>
 
           <span class="icon-label">Maps</span>
         </a>
-        <a class="icon-link" href="/apps/compass/" data-cat="everyday" title="Compass: True north, simply.">
+        <a class="icon-link" data-tilt href="/apps/compass/" data-cat="everyday" title="Compass: True north, simply.">
           <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">explore</span></span>
 
           <span class="icon-label">Compass</span>
         </a>
-        <a class="icon-link" href="/apps/health/" data-cat="life" title="Health and Fitness: Your body, your data.">
+        <a class="icon-link" data-tilt href="/apps/health/" data-cat="life" title="Health and Fitness: Your body, your data.">
           <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">monitor_heart</span></span>
 
           <span class="icon-label">Health and Fitness</span>
         </a>
-        <a class="icon-link" href="/apps/expenses/" data-cat="life" title="Expense Manager: Money, minus the snooping.">
+        <a class="icon-link" data-tilt href="/apps/expenses/" data-cat="life" title="Expense Manager: Money, minus the snooping.">
           <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">account_balance_wallet</span></span>
 
           <span class="icon-label">Expense Manager</span>
         </a>
-        <a class="icon-link" href="/apps/journal/" data-cat="life" title="Journal: Your days, for your eyes.">
+        <a class="icon-link" data-tilt href="/apps/journal/" data-cat="life" title="Journal: Your days, for your eyes.">
           <span class="app-icon" style="--c:#F5C451" aria-hidden="true"><span class="ms">menu_book</span></span>
 
           <span class="icon-label">Journal</span>
         </a>
-        <a class="icon-link" href="/apps/files/" data-cat="tools" title="Files: Your storage, unlocked.">
+        <a class="icon-link" data-tilt href="/apps/files/" data-cat="tools" title="Files: Your storage, unlocked.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">folder</span></span>
 
           <span class="icon-label">Files</span>
         </a>
-        <a class="icon-link" href="/apps/browser/" data-cat="tools" title="Browser: The web, no watchers.">
+        <a class="icon-link" data-tilt href="/apps/browser/" data-cat="tools" title="Browser: The web, no watchers.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">public</span></span>
 
           <span class="icon-label">Browser</span>
         </a>
-        <a class="icon-link" href="/apps/store/" data-cat="tools" title="Store: Apps, the open way.">
+        <a class="icon-link" data-tilt href="/apps/store/" data-cat="tools" title="Store: Apps, the open way.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">storefront</span></span>
 
           <span class="icon-label">Store</span>
         </a>
-        <a class="icon-link" href="/apps/backup/" data-cat="tools" title="Backup: Your data, portable.">
+        <a class="icon-link" data-tilt href="/apps/backup/" data-cat="tools" title="Backup: Your data, portable.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">backup</span></span>
 
           <span class="icon-label">Backup</span>
         </a>
-        <a class="icon-link" href="/apps/authenticator/" data-cat="tools" title="Authenticator: 2FA, stays on device.">
+        <a class="icon-link" data-tilt href="/apps/authenticator/" data-cat="tools" title="Authenticator: 2FA, stays on device.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">key</span></span>
 
           <span class="icon-label">Authenticator</span>
         </a>
-        <a class="icon-link" href="/apps/news-feed/" data-cat="tools" title="News Feed: Your feeds, no algorithm.">
+        <a class="icon-link" data-tilt href="/apps/news-feed/" data-cat="tools" title="News Feed: Your feeds, no algorithm.">
           <span class="app-icon" style="--c:#8577FF" aria-hidden="true"><span class="ms">rss_feed</span></span>
 
           <span class="icon-label">News Feed</span>
@@ -237,22 +283,22 @@
       <div class="dock-wrap">
         <span class="dock-label">In the dock: on Google Play today</span>
         <div class="dock" data-glass="regular">
-          <a class="icon-link" href="/apps/messages/" data-cat="communication" title="Messages: SMS without the spyware.">
+          <a class="icon-link" data-tilt href="/apps/messages/" data-cat="communication" title="Messages: SMS without the spyware.">
             <span class="app-icon on" style="--c:#5FD48A" aria-hidden="true"><span class="ms">sms</span></span>
 
             <span class="icon-label">Messages</span>
           </a>
-          <a class="icon-link" href="/apps/calculator/" data-cat="tools" title="Calculator: Numbers, nothing else.">
+          <a class="icon-link" data-tilt href="/apps/calculator/" data-cat="tools" title="Calculator: Numbers, nothing else.">
             <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">calculate</span></span>
 
             <span class="icon-label">Calculator</span>
           </a>
-          <a class="icon-link" href="/apps/measure/" data-cat="tools" title="Measure: An AR ruler, on device.">
+          <a class="icon-link" data-tilt href="/apps/measure/" data-cat="tools" title="Measure: An AR ruler, on device.">
             <span class="app-icon on" style="--c:#8577FF" aria-hidden="true"><span class="ms">straighten</span></span>
 
             <span class="icon-label">Measure</span>
           </a>
-          <a class="icon-link" href="/apps/whats-in-pvot/" data-cat="design" title="What's in Pvot: See the system, live.">
+          <a class="icon-link" data-tilt href="/apps/whats-in-pvot/" data-cat="design" title="What's in Pvot: See the system, live.">
             <span class="app-icon on" style="--c:#E4E0FF" aria-hidden="true"><span class="ms">grid_view</span></span>
 
             <span class="icon-label">What's in Pvot</span>
@@ -269,7 +315,7 @@
   </div>
 </section>
 
-<section class="section" id="system">
+<section class="section" id="system" data-recede>
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow rv">The stack</span>
@@ -301,14 +347,14 @@
   </div>
 </section>
 
-<section class="section" id="privacy">
+<section class="section" id="privacy" data-recede>
   <div class="wrap split">
     <div>
       <span class="eyebrow rv">Privacy</span>
       <h2 class="h2 rv" style="margin-top:20px">Off by default.<br><span class="dim">And it stays off.</span></h2>
       <p class="lede rv">Privacy is not a settings page you have to go and find. It is how Pvot is built, so the switches that matter come already flipped. Every line is public, so you never have to take our word for it.</p>
     </div>
-    <div class="settings rv" role="group" aria-label="Pvot defaults">
+    <div class="settings rv" data-tilt role="group" aria-label="Pvot defaults">
       <div class="settings-title">Pvot defaults</div>
       <div class="set-row">
         <span class="set-ic" style="--c:var(--pink)"><span class="ms">block</span></span>
@@ -339,8 +385,8 @@
   </div>
 </section>
 
-<section class="stage glass-stage" data-stage data-live data-seed="4.2">
-  <div class="wrap">
+<section class="stage glass-stage" data-stage data-live data-seed="4.2" data-recede>
+  <div class="wrap" data-plane="0.8">
     <div class="section-head center">
       <span class="eyebrow">PvotLib</span>
       <h2 class="h2">The glass is real.</h2>
@@ -394,7 +440,7 @@
         <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
       <div class="footer-col">
-        <h4>Pvot</h4>
+        <h2>Pvot</h2>
         <ul>
           <li><a href="/apps/">Apps</a></li>
           <li><a href="/pvotlib/">PvotLib</a></li>
@@ -404,7 +450,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Build</h4>
+        <h2>Build</h2>
         <ul>
           <li><a href="/contribute/">Where to contribute</a></li>
           <li><a href="/contribute/guide/">Contributing guide</a></li>
@@ -413,7 +459,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Community</h4>
+        <h2>Community</h2>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>

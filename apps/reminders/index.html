@@ -3,40 +3,114 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js')</script><title>Reminders · Pvot</title>
-  <meta name="description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
+  <script>document.documentElement.classList.add('js')</script><title>Pvot Reminders · Open-source reminders app for Android</title>
+  <meta name="description" content="Simple reminders and to-dos that live on your device and nag only you. No account, no sync you did not ask for. In development, built in the open." />
   <link rel="canonical" href="https://pvot-oss.github.io/apps/reminders/" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pvot" />
-  <meta property="og:title" content="Reminders · Pvot" />
-  <meta property="og:description" content="Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home." />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Pvot Reminders · Open-source reminders app for Android" />
+  <meta property="og:description" content="Simple reminders and to-dos that live on your device and nag only you. No account, no sync you did not ask for. In development, built in the open." />
   <meta property="og:url" content="https://pvot-oss.github.io/apps/reminders/" />
+  <meta property="og:image" content="https://pvot-oss.github.io/assets/og/reminders.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Pvot Reminders · Open-source reminders app for Android" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pvot Reminders · Open-source reminders app for Android" />
+  <meta name="twitter:description" content="Simple reminders and to-dos that live on your device and nag only you. No account, no sync you did not ask for. In development, built in the open." />
+  <meta name="twitter:image" content="https://pvot-oss.github.io/assets/og/reminders.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/og/icon-180.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pvot-oss.github.io/#organization",
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": "https://pvot-oss.github.io/",
+      "logo": "https://pvot-oss.github.io/assets/og/icon-512.png",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "sameAs": ["https://github.com/PVOT-OSS", "https://t.me/Pvot_OS"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pvot-oss.github.io/#website",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pvot-oss.github.io/apps/reminders/#webpage",
+      "url": "https://pvot-oss.github.io/apps/reminders/",
+      "name": "Pvot Reminders · Open-source reminders app for Android",
+      "description": "Simple reminders and to-dos that live on your device and nag only you. No account, no sync you did not ask for. In development, built in the open.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://pvot-oss.github.io/#website" },
+      "primaryImageOfPage": "https://pvot-oss.github.io/assets/og/reminders.jpg",
+      "breadcrumb": { "@id": "https://pvot-oss.github.io/apps/reminders/#breadcrumb" },
+      "mainEntity": { "@id": "https://pvot-oss.github.io/apps/reminders/#app" }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://pvot-oss.github.io/apps/reminders/#app",
+      "name": "Pvot Reminders",
+      "alternateName": "Reminders",
+      "description": "Simple reminders and to-dos that live on your device and nag only you. No account, no sync you did not ask for.",
+      "url": "https://pvot-oss.github.io/apps/reminders/",
+      "image": "https://pvot-oss.github.io/assets/og/reminders.jpg",
+      "operatingSystem": "Android",
+      "applicationCategory": "UtilitiesApplication",
+      "applicationSuite": "Pvot",
+      "isAccessibleForFree": true,
+      "featureList": ["One-off and recurring","Due dates","Notifications","No account"],
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" },
+      "author": { "@id": "https://pvot-oss.github.io/#organization" },
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/PreOrder" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://pvot-oss.github.io/apps/reminders/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Pvot", "item": "https://pvot-oss.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Apps", "item": "https://pvot-oss.github.io/apps/" },
+        { "@type": "ListItem", "position": 3, "name": "Reminders", "item": "https://pvot-oss.github.io/apps/reminders/" }
+      ]
+    }
+  ]
+}
+</script>
+
 </head>
 
   <body>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="/" aria-label="Pvot home">
       <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
       <span>Pvot</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="/apps/" aria-current="page">Apps</a>
-      <a href="/pvotlib/">PvotLib</a>
-      <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
+      <a href="/apps/" data-paint aria-current="page">Apps</a>
+      <a href="/pvotlib/" data-paint>PvotLib</a>
+      <a href="/about/" data-paint>About</a>
+      <a href="/contribute/" data-paint>Contribute</a>
     </nav>
     <div class="nav-right">
       <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
@@ -57,8 +131,8 @@
 </header>
 
     <main id="main">
-      <section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="#0F3FA8,#3B2DB8,#6FA3FF80,#00123A,#0F3FA8CC" data-seed="8.4" style="--c:#6FA3FF">
-  <div class="wrap">
+      <section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="#0F3FA8,#3B2DB8,#6FA3FF80,#00123A,#0F3FA8CC" data-seed="8.4" style="--c:#6FA3FF" data-recede>
+  <div class="wrap" data-plane>
     <a class="crumb" href="/apps/"><span class="ms">chevron_left</span> All apps</a>
     <div class="app-hero-inner">
       <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">task_alt</span></span>
@@ -94,32 +168,32 @@
   <div class="related">
     <h2>More in Everyday</h2>
     <div class="home-grid">
-      <a class="icon-link" href="/apps/calendar/">
+      <a class="icon-link" data-tilt href="/apps/calendar/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">calendar_month</span></span>
 
         <span class="icon-label">Calendar</span>
       </a>
-      <a class="icon-link" href="/apps/clock/">
+      <a class="icon-link" data-tilt href="/apps/clock/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">schedule</span></span>
 
         <span class="icon-label">Clock</span>
       </a>
-      <a class="icon-link" href="/apps/notes/">
+      <a class="icon-link" data-tilt href="/apps/notes/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">edit_note</span></span>
 
         <span class="icon-label">Notes</span>
       </a>
-      <a class="icon-link" href="/apps/weather/">
+      <a class="icon-link" data-tilt href="/apps/weather/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">wb_sunny</span></span>
 
         <span class="icon-label">Weather</span>
       </a>
-      <a class="icon-link" href="/apps/maps/">
+      <a class="icon-link" data-tilt href="/apps/maps/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">map</span></span>
 
         <span class="icon-label">Maps</span>
       </a>
-      <a class="icon-link" href="/apps/compass/">
+      <a class="icon-link" data-tilt href="/apps/compass/">
         <span class="app-icon" style="--c:#6FA3FF" aria-hidden="true"><span class="ms">explore</span></span>
 
         <span class="icon-label">Compass</span>
@@ -138,7 +212,7 @@
         <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
       <div class="footer-col">
-        <h4>Pvot</h4>
+        <h2>Pvot</h2>
         <ul>
           <li><a href="/apps/">Apps</a></li>
           <li><a href="/pvotlib/">PvotLib</a></li>
@@ -148,7 +222,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Build</h4>
+        <h2>Build</h2>
         <ul>
           <li><a href="/contribute/">Where to contribute</a></li>
           <li><a href="/contribute/guide/">Contributing guide</a></li>
@@ -157,7 +231,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Community</h4>
+        <h2>Community</h2>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>

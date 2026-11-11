@@ -18,6 +18,8 @@
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Phones and small screens draw at a lower resolution and a calmer frame rate.
+  var LITE = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
 
   // ---------------------------------------------------------------------------------------------
   // PvotGlassStyle and PvotGlassDefaults, sizes in dp for a glass whose shorter side is 46dp.
@@ -109,6 +111,9 @@
     'uniform float uTime;',
     'uniform float uSilk;',
     'uniform float uPx;',
+    'uniform float uClear;',
+    'uniform vec2 uPaintShift;',
+    'uniform vec2 uSilkShift;',
     '',
     // Silk: a height field of slow, domain-warped waves, lit by one soft light. Its shadows take
     // the stage's first color, its sheen the third, and a touch of the second drifts through.
@@ -144,7 +149,7 @@
     '  vec2 p = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);',
     '  vec3 col = uBase;',
     '  if (uLive > 0.5 && uSilk > 0.5) {',
-    '    col = silk(p);',
+    '    col = silk(p + uSilkShift);',
     '  } else if (uLive > 0.5) {',
     '    float R = min(uRes.x, uRes.y * 1.35);',
     '    for (int i = 0; i < 5; i++) {',
@@ -158,7 +163,8 @@
     '      col = mix(col, uC[i].rgb, al);',
     '    }',
     '  }',
-    '  vec4 pt = texture2D(uPaint, p / uRes);',
+    '  vec4 pt = texture2D(uPaint, (p - uPaintShift) / uRes);',
+    '  if (uClear > 0.5) { gl_FragColor = pt; return; }',
     '  col = pt.rgb + col * (1.0 - pt.a);',
     '  float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);',
     '  gl_FragColor = vec4(col + (n - 0.5) / 255.0, 1.0);',
@@ -309,7 +315,7 @@
     '  float cover = clamp(0.5 - edge, 0.0, 1.0);',
     '  if (cover <= 0.0) discard;',
     '  vec4 c = lens(coord, p, hs);',
-    '  c.rgb = uFill.rgb * uFill.a + c.rgb * (1.0 - uFill.a);',
+    '  c = vec4(uFill.rgb * uFill.a, uFill.a) + c * (1.0 - uFill.a);',
     '  if (uRim > 0.0 && edge > -uRimWidth - 1.0) {',
     '    vec2 n = vec2(',
     '      roundRect(p + vec2(1.0, 0.0), hs, uRadius) - roundRect(p - vec2(1.0, 0.0), hs, uRadius),',
@@ -317,9 +323,9 @@
     '    n = n / max(length(n), 0.0001);',
     '    float f = clamp(dot(n, uLight) * 0.5 + 0.5, 0.0, 1.0);',
     '    float line = clamp(1.0 - abs(edge + uRimWidth * 0.5) / (uRimWidth * 0.5 + 0.5), 0.0, 1.0);',
-    '    c.rgb = mix(c.rgb, vec3(1.0), uRim * line * mix(0.14, 0.85, f * f));',
+    '    c = mix(c, vec4(1.0), uRim * line * mix(0.14, 0.85, f * f));',
     '  }',
-    '  gl_FragColor = vec4(c.rgb, cover);',
+    '  gl_FragColor = c * cover;',
     '}'
   ].join('\n');
 
@@ -399,6 +405,7 @@
     ready: false
   };
   var pointer = { x: -1e5, y: -1e5, active: false, at: 0 };
+  var busyUntil = 0;
   var tilt = null;
 
   window.addEventListener('pointermove', function (e) {
@@ -431,9 +438,10 @@
     this.canvas.setAttribute('aria-hidden', 'true');
     el.insertBefore(this.canvas, el.firstChild);
 
+    this.clear = 'transparent' in el.dataset;
     var gl = this.canvas.getContext('webgl', {
-      alpha: false, antialias: false, depth: false, stencil: false,
-      premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance'
+      alpha: this.clear, antialias: false, depth: false, stencil: false,
+      premultipliedAlpha: true, preserveDrawingBuffer: false, powerPreference: 'high-performance'
     });
     if (!gl) throw new Error('no webgl');
     this.gl = gl;
@@ -474,7 +482,8 @@
     this.moving = new Map();
     var painted = function (t) {
       if (!t || t.nodeType !== 1) return [];
-      if (t.hasAttribute('data-paint')) return [t];
+      var host = t.closest('[data-paint]');
+      if (host && el.contains(host)) return [host];
       return Array.prototype.slice.call(t.querySelectorAll('[data-paint]'));
     };
     var start = function (e) {
@@ -531,10 +540,23 @@
   Stage.prototype.collect = function () {
     this.glasses = Array.prototype.slice.call(this.el.querySelectorAll('[data-glass]')).map(function (el) {
       return el._glass || (el._glass = {
-        el: el, lift: 0, liftTarget: 0, light: [-0.7071, -0.7071], radius: null, params: null
+        el: el, lift: 0, liftTarget: 0, light: [-0.7071, -0.7071], radius: null, params: el._pendingParams || null
       });
     });
     this.paints = Array.prototype.slice.call(this.el.querySelectorAll('[data-paint]'));
+    // The plane (a parallax layer) that holds the painted things, if one does.
+    var planes = Array.prototype.slice.call(this.el.querySelectorAll('[data-plane]'));
+    var paints = this.paints;
+    this.paintPlane = planes.filter(function (pl) {
+      return paints.some(function (p) { return pl.contains(p); });
+    })[0] || null;
+    // Rich blocks: note their real backgrounds now, before the live CSS hides the DOM copies.
+    this.paints.forEach(function (p) {
+      if (p.dataset.paint !== 'rich') return;
+      [p].concat(Array.prototype.slice.call(p.querySelectorAll('*'))).forEach(function (n) {
+        if (n._pbg === undefined) n._pbg = getComputedStyle(n).backgroundColor;
+      });
+    });
     this.paintDirty = true;
   };
 
@@ -542,9 +564,9 @@
     var gl = this.gl;
     var cssW = this.el.clientWidth, cssH = this.el.clientHeight;
     if (!cssW || !cssH) return;
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var dpr = Math.min(window.devicePixelRatio || 1, LITE ? 1.5 : 2);
     // Keep the scene to about four megapixels, however tall the section.
-    var budget = 4.2e6;
+    var budget = LITE ? 2.4e6 : 4.2e6;
     if (cssW * cssH * dpr * dpr > budget) dpr = Math.max(1, Math.sqrt(budget / (cssW * cssH)));
     var w = Math.round(cssW * dpr), h = Math.round(cssH * dpr);
     var max = gl.getParameter(gl.MAX_TEXTURE_SIZE);
@@ -576,8 +598,104 @@
   };
 
   // ----- painting --------------------------------------------------------------------------------
+  //
+  // Everything is painted in the section's own coordinates: CSS pixels from its top left, before
+  // any transform on the section (it may be scaled while it recedes) and before its plane's
+  // parallax shift. So the painted layer never needs repainting when either moves; the shader
+  // shifts the layer by the plane's offset instead.
 
-  Stage.prototype.paintItem = function (el, base) {
+  // The frame for this pass: where the section sits on screen and how much it is scaled.
+  Stage.prototype.frame = function () {
+    var b = this.canvas.getBoundingClientRect();
+    return { left: b.left, top: b.top, sc: (b.width / this.cssW) || 1 };
+  };
+
+  // The plane shift an element is painted without: only for the plane that holds painted things.
+  Stage.prototype.shiftOf = function (el) {
+    var pl = this.paintPlane;
+    return pl && pl._shift && pl.contains(el) ? pl._shift : null;
+  };
+
+  // A screen rect in local paint coordinates.
+  Stage.prototype.local = function (r, F, sh) {
+    return {
+      x: (r.left - F.left) / F.sc - (sh ? sh.x : 0),
+      y: (r.top - F.top) / F.sc - (sh ? sh.y : 0),
+      w: r.width / F.sc,
+      h: r.height / F.sc
+    };
+  };
+
+  // Wraps paintOne: clips to a scrolling parent ([data-paint-clip]) so text scrolled out of a
+  // row is not drawn outside it.
+  Stage.prototype.paintItem = function (el, F) {
+    var clip = el.closest('[data-paint-clip]');
+    if (!clip) return this.paintOne(el, F);
+    var ctx = this.ctx, c = this.local(clip.getBoundingClientRect(), F, this.shiftOf(clip));
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(c.x, c.y, c.w, c.h);
+    ctx.clip();
+    var r = this.paintOne(el, F);
+    ctx.restore();
+    return r;
+  };
+
+  var TRANSPARENT = /^(transparent|rgba\(0, 0, 0, 0\))$/;
+
+  // data-paint="rich": a block of anything (a paragraph, a button, a row of labels). Its own and its
+  // children's backgrounds are drawn as rounded boxes, then every word where the browser laid it out.
+  Stage.prototype.paintRich = function (root, F, alpha) {
+    var ctx = this.ctx, self = this, sh = this.shiftOf(root);
+    var walk = function (node, a) {
+      if (node.nodeType === 3) {
+        var text = node.data;
+        if (!/\S/.test(text)) return;
+        var cs = getComputedStyle(node.parentElement);
+        ctx.globalAlpha = a;
+        ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+        if ('letterSpacing' in ctx) ctx.letterSpacing = (parseFloat(cs.letterSpacing) || 0) + 'px';
+        ctx.fillStyle = cs.color;
+        ctx.textBaseline = 'alphabetic';
+        var asc = ctx.measureText('Hg').fontBoundingBoxAscent;
+        if (asc == null) asc = parseFloat(cs.fontSize) * 0.92;
+        var upper = cs.textTransform === 'uppercase';
+        var re = /\S+/g, m, range = document.createRange();
+        while ((m = re.exec(text))) {
+          range.setStart(node, m.index);
+          range.setEnd(node, m.index + m[0].length);
+          var rects = range.getClientRects();
+          if (!rects.length) continue;
+          var r = self.local(rects[0], F, sh);
+          ctx.fillText(upper ? m[0].toUpperCase() : m[0], r.x, r.y + asc);
+        }
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+        return;
+      }
+      if (node.nodeType !== 1 || node.hasAttribute('data-glass') || node.tagName === 'svg') return;
+      if (node !== root && node.hasAttribute('data-paint')) return;
+      var st = getComputedStyle(node);
+      if (st.display === 'none' || st.visibility === 'hidden') return;
+      var na = node === root ? a : a * parseFloat(st.opacity);
+      if (na <= 0.001) return;
+      // The background is read once, before the DOM copy is hidden.
+      if (node._pbg === undefined) node._pbg = st.backgroundColor;
+      if (node._pbg && !TRANSPARENT.test(node._pbg)) {
+        var b = self.local(node.getBoundingClientRect(), F, sh);
+        ctx.globalAlpha = na;
+        ctx.fillStyle = node._pbg;
+        roundRectPath(ctx, b.x, b.y, b.w, b.h,
+          Math.min(parseFloat(st.borderTopLeftRadius) || 0, b.w / 2, b.h / 2));
+        ctx.fill();
+      }
+      for (var c = node.firstChild; c; c = c.nextSibling) walk(c, na);
+    };
+    walk(root, alpha);
+    var br = this.local(root.getBoundingClientRect(), F, sh);
+    return { x: br.x - 8, y: br.y - 8, w: br.w + 16, h: br.h + 16 };
+  };
+
+  Stage.prototype.paintOne = function (el, F) {
     var ctx = this.ctx;
     if (el.closest('[hidden]') || !el.getClientRects().length) return null;
     var cs = getComputedStyle(el);
@@ -588,22 +706,25 @@
     while (p && p !== this.el) { alpha *= parseFloat(getComputedStyle(p).opacity); p = p.parentElement; }
     if (alpha <= 0.001) return null;
     ctx.globalAlpha = alpha;
+    var sh = this.shiftOf(el);
+
+    if (kind === 'rich') return this.paintRich(el, F, alpha);
 
     if (kind === 'box') {
-      var r = el.getBoundingClientRect();
+      var r = this.local(el.getBoundingClientRect(), F, sh);
       var fill = cs.getPropertyValue('--fill').trim() || cs.backgroundColor;
-      var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, r.width / 2, r.height / 2);
+      var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, r.w / 2, r.h / 2);
       ctx.fillStyle = fill;
-      roundRectPath(ctx, r.left - base.left, r.top - base.top, r.width, r.height, rad);
+      roundRectPath(ctx, r.x, r.y, r.w, r.h, rad);
       ctx.fill();
-      return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
+      return r;
     }
 
     var text = el.textContent.replace(/\s+/g, ' ').trim();
     if (!text) return null;
     var range = document.createRange();
     range.selectNodeContents(el);
-    var rr = range.getClientRects()[0] || el.getBoundingClientRect();
+    var rr = this.local(range.getClientRects()[0] || el.getBoundingClientRect(), F, sh);
     ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
     var spacing = parseFloat(cs.letterSpacing) || 0;
     if ('letterSpacing' in ctx) ctx.letterSpacing = spacing + 'px';
@@ -611,7 +732,7 @@
     ctx.textBaseline = 'alphabetic';
     var m = ctx.measureText(text);
     var asc = m.fontBoundingBoxAscent != null ? m.fontBoundingBoxAscent : parseFloat(cs.fontSize) * 0.92;
-    var x = rr.left - base.left, y = rr.top - base.top + asc;
+    var x = rr.x, y = rr.y + asc;
     if ('letterSpacing' in ctx || !spacing) {
       ctx.fillText(text, x, y);
     } else {
@@ -621,18 +742,17 @@
       }
     }
     if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
-    var br = el.getBoundingClientRect();
-    return { x: Math.min(br.left, rr.left) - base.left - 8, y: br.top - base.top - 8, w: Math.max(br.width, rr.width) + 16, h: br.height + 16 };
+    var br = this.local(el.getBoundingClientRect(), F, sh);
+    return { x: Math.min(br.x, rr.x) - 8, y: br.y - 8, w: Math.max(br.w, rr.w) + 16, h: br.h + 16 };
   };
 
   Stage.prototype.repaint = function () {
-    var ctx = this.ctx, s = this.w / this.cssW;
-    var base = this.canvas.getBoundingClientRect();
+    var ctx = this.ctx, s = this.w / this.cssW, F = this.frame();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.w, this.h);
     ctx.setTransform(s, 0, 0, s, 0, 0);
     for (var i = 0; i < this.paints.length; i++) {
-      this.paints[i]._paintRect = this.paintItem(this.paints[i], base);
+      this.paints[i]._paintRect = this.paintItem(this.paints[i], F);
     }
     ctx.globalAlpha = 1;
     var gl = this.gl;
@@ -643,7 +763,7 @@
 
   // Repaints only where something changed, and uploads only that part.
   Stage.prototype.repaintRegion = function (rects) {
-    var s = this.w / this.cssW, base = this.canvas.getBoundingClientRect();
+    var s = this.w / this.cssW, F = this.frame();
     var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
     rects.forEach(function (r) {
       if (!r) return;
@@ -665,25 +785,30 @@
     var cx0 = px / s, cy0 = py / s, cx1 = (px + pw) / s, cy1 = (py + ph) / s;
     for (var i = 0; i < this.paints.length; i++) {
       var el = this.paints[i];
-      var r = el.getBoundingClientRect();
-      var rx = r.left - base.left, ry = r.top - base.top;
-      if (rx > cx1 + 20 || ry > cy1 + 20 || rx + r.width < cx0 - 20 || ry + r.height < cy0 - 20) continue;
-      el._paintRect = this.paintItem(el, base);
+      var r = this.local(el.getBoundingClientRect(), F, this.shiftOf(el));
+      if (r.x > cx1 + 20 || r.y > cy1 + 20 || r.x + r.w < cx0 - 20 || r.y + r.h < cy0 - 20) continue;
+      el._paintRect = this.paintItem(el, F);
     }
     ctx.restore();
     ctx.globalAlpha = 1;
-    var data = ctx.getImageData(px, py, pw, ph);
+    // Upload just this part, copied canvas to canvas: reading the pixels back (getImageData)
+    // would stall on the GPU.
+    var sc = this.scratch || (this.scratch = document.createElement('canvas'));
+    if (sc.width < pw || sc.height < ph) { sc.width = Math.max(sc.width, pw); sc.height = Math.max(sc.height, ph); }
+    var sctx = this.scratchCtx || (this.scratchCtx = sc.getContext('2d'));
+    if (sc.width !== pw || sc.height !== ph) { sc.width = pw; sc.height = ph; }
+    sctx.clearRect(0, 0, pw, ph);
+    sctx.drawImage(this.paintCanvas, px, py, pw, ph, 0, 0, pw, ph);
     var gl = this.gl;
     gl.bindTexture(gl.TEXTURE_2D, this.paintTex);
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, px, py, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, px, py, gl.RGBA, gl.UNSIGNED_BYTE, sc);
   };
 
   Stage.prototype.invalidate = function (el) {
     if (!el) { this.paintDirty = true; return; }
-    var before = el._paintRect;
-    var r = el.getBoundingClientRect(), base = this.canvas.getBoundingClientRect();
-    this.paintRegions.push(before, { x: r.left - base.left - 8, y: r.top - base.top - 8, w: r.width + 16, h: r.height + 16 });
+    var r = this.local(el.getBoundingClientRect(), this.frame(), this.shiftOf(el));
+    this.paintRegions.push(el._paintRect, { x: r.x - 8, y: r.y - 8, w: r.w + 16, h: r.h + 16 });
   };
 
   // ----- drawing ---------------------------------------------------------------------------------
@@ -743,6 +868,12 @@
     gl.uniform1f(ps.u.uLive, this.live ? 1 : 0);
     gl.uniform1f(ps.u.uDim, this.dim);
     gl.uniform1f(ps.u.uSilk, this.silk ? 1 : 0);
+    gl.uniform1f(ps.u.uClear, this.clear ? 1 : 0);
+    var ks = this.w / this.cssW;
+    var psh = this.paintPlane && this.paintPlane._shift;
+    gl.uniform2f(ps.u.uPaintShift, psh ? psh.x * ks : 0, psh ? psh.y * ks : 0);
+    var ssh = this.el._silkShift;
+    gl.uniform2f(ps.u.uSilkShift, ssh ? ssh.x * ks : 0, ssh ? ssh.y * ks : 0);
     gl.uniform1f(ps.u.uPx, this.dpr);
     gl.uniform1f(ps.u.uTime, this.seed * 7 + (reduceMotion ? 0 : now / 1000 * 0.11));
     gl.uniform3f(ps.u.uBase, this.base[0], this.base[1], this.base[2]);
@@ -778,7 +909,7 @@
     var pl = this.progLens, u = pl.u;
     gl.useProgram(pl.p);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.scene.tex); gl.uniform1i(u.uScene, 0);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.soft.tex); gl.uniform1i(u.uSoft, 1);
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.frost.tex); gl.uniform1i(u.uFrost, 2);
@@ -817,7 +948,7 @@
     var out = [];
     if (!this.glasses.length) return out;
     var base = this.canvas.getBoundingClientRect();
-    var s = this.w / this.cssW;
+    var s = this.w / (base.width || this.cssW);
     var usePointer = pointer.active && now - pointer.at < 6000;
     for (var i = 0; i < this.glasses.length; i++) {
       var g = this.glasses[i], el = g.el;
@@ -915,6 +1046,7 @@
         e.preventDefault();
         el.setPointerCapture(e.pointerId);
         el._touched = true;
+        el._release = null;
         start = { x: e.clientX - pos.x, y: e.clientY - pos.y };
         el.classList.add('is-dragging');
       });
@@ -931,7 +1063,16 @@
         el.style.setProperty('--dx', nx + 'px');
         el.style.setProperty('--dy', ny + 'px');
       });
-      var end = function () { start = null; el.classList.remove('is-dragging'); };
+      var end = function () {
+        if (!start) return;
+        start = null;
+        el.classList.remove('is-dragging');
+        // Drifting glass returns to its path; it keeps where it was put only by keyboard.
+        if (el.hasAttribute('data-idle') && !el._keyed) {
+          el._touched = false;
+          el._release = { t: performance.now(), x: pos.x, y: pos.y };
+        }
+      };
       el.addEventListener('pointerup', end);
       el.addEventListener('pointercancel', end);
       el.addEventListener('keydown', function (e) {
@@ -940,6 +1081,7 @@
         if (!k) return;
         e.preventDefault();
         el._touched = true;
+        el._keyed = true;
         pos.x += k[0]; pos.y += k[1];
         el.style.setProperty('--dx', pos.x + 'px');
         el.style.setProperty('--dy', pos.y + 'px');
@@ -956,6 +1098,15 @@
       var ax = parseFloat(el.dataset.idleX || '0.22') * stage.cssW;
       var ay = parseFloat(el.dataset.idleY || '0.06') * stage.cssH;
       var x = Math.sin(t * 0.32) * ax, y = Math.sin(t * 0.57) * ay;
+      var rel = el._release;
+      if (rel) {
+        // Ease from where it was let go onto the moving path.
+        var k = Math.min(1, (now - rel.t) / 1500);
+        var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        x = rel.x + (x - rel.x) * e;
+        y = rel.y + (y - rel.y) * e;
+        if (k >= 1) el._release = null;
+      }
       el._drag.x = x; el._drag.y = y;
       el.style.setProperty('--dx', x + 'px');
       el.style.setProperty('--dy', y + 'px');
@@ -973,15 +1124,32 @@
       document.documentElement.classList.add('no-glass');
       return;
     }
-    Array.prototype.forEach.call(els, function (el) {
+    var start = function (el) {
       try {
         var st = new Stage(el);
+        st.visible = true;
         api.stages.push(st);
         bindDrag(st);
       } catch (err) {
         if (window.console) console.warn('[pvot-glass]', err);
       }
-    });
+    };
+    var whenIdle = function (fn) {
+      var go = function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 700 });
+        else setTimeout(fn, 60);
+      };
+      if (document.readyState === 'complete') go();
+      else window.addEventListener('load', go, { once: true });
+    };
+    var near = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        near.unobserve(e.target);
+        whenIdle(function () { start(e.target); });
+      });
+    }, { rootMargin: '400px 0px' });
+    Array.prototype.forEach.call(els, function (el) { near.observe(el); });
     bindLift(document);
 
     var fontsSettled = function () { api.stages.forEach(function (s) { s.paintDirty = true; }); };
@@ -990,11 +1158,20 @@
       document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', fontsSettled);
     }
 
+    var poke = function () { busyUntil = performance.now() + 1500; };
+    ['pointerdown', 'pointermove', 'keydown', 'touchmove', 'scroll', 'wheel'].forEach(function (t) {
+      window.addEventListener(t, poke, { passive: true });
+    });
+
     function frame(now) {
       if (!document.hidden) {
+        var calm = now > busyUntil;
+        var gap = LITE ? 1000 / 24 : 1000 / 30;
         for (var i = 0; i < api.stages.length; i++) {
           var s = api.stages[i];
           if (!s.visible) continue;
+          if (calm && s.shown && !s.moving.size && now - (s.lastFrame || 0) < gap) continue;
+          s.lastFrame = now;
           idle(s, now);
           s.render(now);
           if (!s.shown) {
@@ -1020,7 +1197,10 @@
     var s = stageOf(el);
     if (!el._glass && s) s.collect();
     if (el._glass) el._glass.params = params;
+    else el._pendingParams = params; // its stage starts later; it picks these up then
   };
+  // Draw every frame for a while (an animation the engine cannot see, like the intro).
+  api.kick = function (ms) { busyUntil = Math.max(busyUntil, performance.now() + (ms || 1200)); };
   api.invalidate = function (el) { var s = stageOf(el); if (s) s.invalidate(el); };
   api.repaintFor = function (el, ms) {
     var s = stageOf(el);

@@ -1,0 +1,66 @@
+# Pvot
+
+> Pvot is open-source, de-Googled Android: an AOSP and LineageOS based OS plus a full suite of first-party apps, all built on one Jetpack Compose design system, PvotLib. No Google services, no trackers, no accounts. Built in the open by Team StormBreaker and contributors, licensed Apache-2.0 for most of the project.
+
+Key facts:
+
+- Every shipping app is free on Google Play and scanned by Exodus Privacy, which reports 0 trackers in each.
+- Apps are offline first and keep data on the device unless the user sends it somewhere.
+- PvotLib renders real liquid glass (a refracting lens shader) on Android 13+, with frosted and solid fallbacks.
+- Source code lives at https://github.com/PVOT-OSS. Bugs go to https://github.com/PVOT-OSS/public-issues.
+
+## Shipping apps
+
+- [Pvot Messages](https://pvot-oss.github.io/apps/messages/): SMS without the spyware. Open-source SMS app for Android. Google Play: https://play.google.com/store/apps/details?id=org.prauga.messages Source: https://github.com/PVOT-OSS/Messages
+- [Pvot Calculator](https://pvot-oss.github.io/apps/calculator/): Numbers, nothing else. Open-source calculator for Android. Google Play: https://play.google.com/store/apps/details?id=org.prauga.calculator Source: https://github.com/PVOT-OSS/Calculator
+- [Pvot Measure](https://pvot-oss.github.io/apps/measure/): An AR ruler, on device. Open-source AR measuring app for Android. Google Play: https://play.google.com/store/apps/details?id=org.prauga.measure Source: https://github.com/PVOT-OSS/PvotMeasure
+- [What's in Pvot](https://pvot-oss.github.io/apps/whats-in-pvot/): See the system, live. Open-source design system catalog for Android. Google Play: https://play.google.com/store/apps/details?id=com.prauga.pvot Source: https://github.com/PVOT-OSS/PvotLib
+
+## Apps in development
+
+- [Pvot Camera](https://pvot-oss.github.io/apps/camera/): Capture it, keep it. Open-source camera app, in development.
+- [Pvot Photos](https://pvot-oss.github.io/apps/photos/): Your memories, private. Open-source photo gallery, in development.
+- [Pvot Music](https://pvot-oss.github.io/apps/music/): Your library, offline. Open-source music player, in development.
+- [Pvot Equaliser](https://pvot-oss.github.io/apps/equaliser/): Tune your sound. Open-source audio equalizer, in development.
+- [Pvot Recorder](https://pvot-oss.github.io/apps/recorder/): Voice memos, on device. Open-source voice recorder, in development.
+- [Pvot Phone](https://pvot-oss.github.io/apps/phone/): Calls, clean and fast. Open-source phone and dialer app, in development.
+- [Pvot Contacts](https://pvot-oss.github.io/apps/contacts/): Your people, your device. Open-source contacts app, in development.
+- [Pvot Mail](https://pvot-oss.github.io/apps/mail/): Email, on your terms. Open-source email app, in development.
+- [Pvot Calendar](https://pvot-oss.github.io/apps/calendar/): Plans that stay yours. Open-source calendar app, in development.
+- [Pvot Clock](https://pvot-oss.github.io/apps/clock/): Alarms, timers, time zones. Open-source clock and alarm app, in development.
+- [Pvot Reminders](https://pvot-oss.github.io/apps/reminders/): Never forget, quietly. Open-source reminders app, in development.
+- [Pvot Notes](https://pvot-oss.github.io/apps/notes/): Thoughts, offline. Open-source notes app, in development.
+- [Pvot Weather](https://pvot-oss.github.io/apps/weather/): Forecasts, no profiling. Open-source weather app, in development.
+- [Pvot Maps](https://pvot-oss.github.io/apps/maps/): Find your way, privately. Open-source maps and navigation app, in development.
+- [Pvot Compass](https://pvot-oss.github.io/apps/compass/): True north, simply. Open-source compass app, in development.
+- [Pvot Health and Fitness](https://pvot-oss.github.io/apps/health/): Your body, your data. Open-source health and fitness tracker, in development.
+- [Pvot Expense Manager](https://pvot-oss.github.io/apps/expenses/): Money, minus the snooping. Open-source expense tracker, in development.
+- [Pvot Journal](https://pvot-oss.github.io/apps/journal/): Your days, for your eyes. Open-source journal app, in development.
+- [Pvot Files](https://pvot-oss.github.io/apps/files/): Your storage, unlocked. Open-source file manager, in development.
+- [Pvot Browser](https://pvot-oss.github.io/apps/browser/): The web, no watchers. Open-source web browser, in development.
+- [Pvot Store](https://pvot-oss.github.io/apps/store/): Apps, the open way. Open-source app store, in development.
+- [Pvot Backup](https://pvot-oss.github.io/apps/backup/): Your data, portable. Open-source backup app, in development.
+- [Pvot Authenticator](https://pvot-oss.github.io/apps/authenticator/): 2FA, stays on device. Open-source two-factor authenticator, in development.
+- [Pvot News Feed](https://pvot-oss.github.io/apps/news-feed/): Your feeds, no algorithm. Open-source RSS reader, in development.
+
+## Design system
+
+- [PvotLib](https://pvot-oss.github.io/pvotlib/): Jetpack Compose design system with liquid glass, motion and shared components. Maven repo https://pvot-oss.github.io/PvotLib/maven, group com.prauga.pvot.
+- [PvotLib guide](https://github.com/PVOT-OSS/PvotLib/blob/main/docs/GUIDE.md): tokens, motion, components and glass.
+
+## Project
+
+- [About](https://pvot-oss.github.io/about/): what Pvot is and who builds it.
+- [Privacy](https://pvot-oss.github.io/privacy/): what the apps, the OS and this website collect (nothing).
+- [All apps](https://pvot-oss.github.io/apps/): the full catalog by category.
+
+## Contribute
+
+- [Where to contribute](https://pvot-oss.github.io/contribute/): every public repo, grouped.
+- [Contributing guide](https://pvot-oss.github.io/contribute/guide/): DCO sign-off, SPDX headers, pull requests.
+- [Donate](https://pvot-oss.github.io/contribute/donate/) and [Sponsors](https://pvot-oss.github.io/contribute/sponsors/)
+
+## Optional
+
+- [Telegram](https://t.me/Pvot_OS): community chat.
+- [StormBreaker](https://stormbreaker.squadri.me): the kernel project from the same team.

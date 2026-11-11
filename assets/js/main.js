@@ -67,6 +67,117 @@
     if ('ResizeObserver' in window) new ResizeObserver(build).observe(nav);
   })();
 
+  // ---- Depth ------------------------------------------------------------------------------
+  // The site is built in layers, like the OS: the silk at the back, each section's content on a
+  // plane in front of it, glass and the bar floating above. Planes slide against each other with
+  // the pointer (or the phone's tilt) and with scroll; a section that scrolls away sinks back
+  // instead of just leaving. Everything below writes only `translate`, `scale` and `opacity`.
+  (function depth() {
+    var planes = $$('[data-plane]');
+    var receders = $$('[data-recede]');
+    if (reduceMotion || (!planes.length && !receders.length)) return;
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var gx = 0, gy = 0, tx = 0, ty = 0, vh = window.innerHeight;
+    var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
+    if (fine) {
+      window.addEventListener('pointermove', function (e) {
+        gx = e.clientX / window.innerWidth * 2 - 1;
+        gy = e.clientY / window.innerHeight * 2 - 1;
+      }, { passive: true });
+    } else if ('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma == null) return;
+        gx = clamp(e.gamma / 25);
+        gy = clamp((e.beta - 45) / 25);
+      }, { passive: true });
+    }
+    // Layout positions, untouched by our own transforms.
+    var docTop = function (el) { var t = 0; while (el) { t += el.offsetTop; el = el.offsetParent; } return t; };
+    var measure = function () {
+      vh = window.innerHeight;
+      planes.forEach(function (pl) {
+        var host = pl.closest('[data-stage]') || pl.parentElement;
+        pl._host = host; pl._top = docTop(host); pl._h = host.offsetHeight;
+      });
+      receders.forEach(function (el) { el._top = docTop(el); el._h = el.offsetHeight; });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+    if (document.fonts) document.fonts.ready.then(measure);
+
+    (function tick() {
+      tx += (gx - tx) * 0.06;
+      ty += (gy - ty) * 0.06;
+      var y0 = window.scrollY;
+      planes.forEach(function (pl) {
+        var top = pl._top - y0;
+        if (top > vh + 80 || top + pl._h < -80) return;
+        var prog = Math.max(0, Math.min(1, -top / pl._h));
+        var k = parseFloat(pl.dataset.plane) || 1;
+        // The content plane drifts against the pointer and lags the scroll a little; the silk
+        // behind it moves the other way, further.
+        var x = Math.round(-tx * 10 * k * 10) / 10;
+        var y = Math.round((-ty * 7 * k + prog * pl._h * 0.1) * 10) / 10;
+        if (!pl._shift || pl._shift.x !== x || pl._shift.y !== y) {
+          pl._shift = { x: x, y: y };
+          pl.style.translate = x + 'px ' + y + 'px';
+        }
+        pl._host._silkShift = { x: tx * 28, y: ty * 18 - prog * pl._h * 0.1 };
+      });
+      receders.forEach(function (el) {
+        var top = el._top - y0;
+        var p = top < 0 ? Math.min(1, -top / Math.max(el._h * 0.9, vh * 0.7)) : 0;
+        if (top > vh || Math.abs(p - (el._rp || 0)) < 0.002) return;
+        el._rp = p;
+        el.style.scale = String(1 - 0.06 * p);
+        el.style.opacity = String(1 - 0.5 * p);
+        // A glass section rounds off like a card being set down.
+        if (el.hasAttribute('data-stage')) el.style.borderRadius = (p * 36).toFixed(1) + 'px';
+      });
+      requestAnimationFrame(tick);
+    })();
+  })();
+
+  // Touchable things are physical: icons and cards tilt toward the pointer and catch a sheen.
+  (function tilt() {
+    if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var cur = null;
+    var reset = function (el) {
+      el.classList.remove('tilting');
+      ['--rx', '--ry', '--so'].forEach(function (v) { el.style.removeProperty(v); });
+    };
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest ? e.target.closest('[data-tilt]') : null;
+      if (el !== cur) { if (cur) reset(cur); cur = el; if (el) el.classList.add('tilting'); }
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      var max = el.matches('.icon-link, .row') ? 16 : 5;
+      el.style.setProperty('--ry', ((x - 0.5) * max).toFixed(2) + 'deg');
+      el.style.setProperty('--rx', (-(y - 0.5) * max).toFixed(2) + 'deg');
+      el.style.setProperty('--sx', (x * 100).toFixed(1) + '%');
+      el.style.setProperty('--sy', (y * 100).toFixed(1) + '%');
+      el.style.setProperty('--so', '1');
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { if (cur) { reset(cur); cur = null; } });
+  })();
+
+  // The bar lifts further off the page once there is page under it.
+  if (header) {
+    var lifted = false;
+    window.addEventListener('scroll', function () {
+      var on = window.scrollY > 8;
+      if (on !== lifted) { lifted = on; header.classList.toggle('scrolled', on); }
+    }, { passive: true });
+  }
+
+  // Everything outside the glass sections arrives from depth too, not only what is marked.
+  $$('.doc-body > *, .repo-group, .cat, .feature-list li, .note, .app-summary, .related, .install-step, .sponsor-grid, .donate-card, .split > div')
+    .forEach(function (el) {
+      if (!el.classList.contains('rv') && !el.closest('[data-stage]') && !el.closest('.rv')) el.classList.add('rv');
+    });
+
   // ---- Reveal -----------------------------------------------------------------------------
   var rv = $$('.rv');
   if ('IntersectionObserver' in window && !reduceMotion) {
@@ -129,16 +240,131 @@
     if (instant) { void ind.offsetWidth; ind.style.transition = ''; }
   }
 
-  function applyFilter(seg, cat) {
-    var scope = $(seg.dataset.filter);
-    if (!scope) return;
-    $$('[data-cat]', scope).forEach(function (el) {
-      if (seg.contains(el)) return;
-      el.hidden = !(cat === 'all' || el.dataset.cat === cat);
-    });
+  // Filtering animates instead of popping: leaving icons shrink away, the ones that stay glide
+  // to their new places, and new ones grow in once there is room for them.
+  var filterRun = 0;
+  function syncDocks(scope) {
     $$('.dock-wrap', scope).forEach(function (w) {
       w.hidden = !$$('.icon-link:not([hidden])', w).length;
     });
+  }
+  function applyFilter(seg, cat) {
+    var scope = $(seg.dataset.filter);
+    if (!scope) return;
+    var run = ++filterRun;
+    var items = $$('[data-cat]', scope).filter(function (el) { return !seg.contains(el); });
+    items.forEach(function (el) {
+      if (el.getAnimations) el.getAnimations().forEach(function (a) { a.cancel(); });
+      el.style.opacity = '';
+    });
+    var want = function (el) { return cat === 'all' || el.dataset.cat === cat; };
+    if (reduceMotion || !document.body.animate) {
+      items.forEach(function (el) { el.hidden = !want(el); });
+      syncDocks(scope);
+      return;
+    }
+    var leaving = items.filter(function (el) { return !el.hidden && !want(el); });
+    var entering = items.filter(function (el) { return el.hidden && want(el); });
+    var staying = items.filter(function (el) { return !el.hidden && want(el); });
+    var first = new Map();
+    staying.forEach(function (el) { first.set(el, el.getBoundingClientRect()); });
+    // Big blocks (the /apps/ sections) slide; icons shrink.
+    var away = function (el) {
+      return el.offsetHeight > 160 ? 'translateY(16px)' : 'scale(0.6)';
+    };
+    var OUT = leaving.length ? 170 : 0;
+    leaving.forEach(function (el) {
+      el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: away(el) }],
+        { duration: OUT, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' });
+    });
+    setTimeout(function () {
+      if (run !== filterRun) return;
+      leaving.forEach(function (el) {
+        el.getAnimations().forEach(function (a) { a.cancel(); });
+        el.hidden = true;
+      });
+      entering.forEach(function (el) { el.hidden = false; });
+      syncDocks(scope);
+      var moved = false;
+      staying.forEach(function (el) {
+        var a = first.get(el), b = el.getBoundingClientRect();
+        var dx = a.left - b.left, dy = a.top - b.top;
+        if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) return;
+        moved = true;
+        el.animate([{ transform: 'translate(' + dx + 'px, ' + dy + 'px)' }, { transform: 'none' }],
+          { duration: 520, easing: 'cubic-bezier(0.3, 1.2, 0.5, 1)' });
+      });
+      var delay = moved ? 240 : 0;
+      entering.forEach(function (el, i) {
+        el.animate([{ opacity: 0, transform: away(el) }, { opacity: 1, transform: 'none' }],
+          { duration: 380, delay: delay + Math.min(i, 14) * 18, easing: 'cubic-bezier(0.3, 1.3, 0.5, 1)', fill: 'backwards' });
+      });
+    }, OUT);
+  }
+
+  // A glass bar's indicator can be dragged, like iOS: it lifts into a lens and snaps to the
+  // nearest option when let go. Start the drag on the chosen option (or anywhere with a mouse).
+  function bindSegDrag(seg) {
+    var ind = $('.seg-ind', seg), buttons = $$('button', seg);
+    if (!ind || !buttons.length) return;
+    var down = null, dragging = false, swallow = false;
+    var nearest = function (x) {
+      var best = buttons[0], d = Infinity;
+      buttons.forEach(function (b) {
+        var c = b.offsetLeft + b.offsetWidth / 2, dd = Math.abs(c - x);
+        if (dd < d) { d = dd; best = b; }
+      });
+      return best;
+    };
+    var lift = function (on) {
+      ind.classList.toggle('is-held', on);
+      seg.classList.toggle('dragging', on);
+      if (ind._glass) ind._glass.liftTarget = on ? 1 : 0;
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(1500);
+    };
+    seg.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      var onChosen = e.target.closest('[aria-selected="true"]');
+      if (e.pointerType !== 'mouse' && !onChosen) return;
+      down = { x: e.clientX, left: ind.offsetLeft, w: ind.offsetWidth, id: e.pointerId };
+      dragging = false;
+    });
+    seg.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - down.x;
+      if (!dragging) {
+        if (Math.abs(dx) < 6) return;
+        dragging = true;
+        try { seg.setPointerCapture(down.id); } catch (err) { /* already released */ }
+        lift(true);
+      }
+      var centre = down.left + down.w / 2 + dx;
+      var b = nearest(centre), w = b.offsetWidth;
+      var lo = buttons[0].offsetLeft, hi = buttons[buttons.length - 1].offsetLeft + buttons[buttons.length - 1].offsetWidth;
+      ind.style.width = w + 'px';
+      ind.style.left = Math.max(lo - 6, Math.min(hi - w + 6, centre - w / 2)) + 'px';
+    });
+    var up = function () {
+      if (!down) return;
+      if (dragging) {
+        var pick = nearest(ind.offsetLeft + ind.offsetWidth / 2);
+        lift(false);
+        pick.click();
+        swallow = true;
+        setTimeout(function () { swallow = false; }, 60);
+      }
+      down = null;
+      dragging = false;
+    };
+    seg.addEventListener('pointerup', up);
+    seg.addEventListener('pointercancel', up);
+    seg.addEventListener('click', function (e) {
+      if (swallow && e.isTrusted) { e.stopPropagation(); e.preventDefault(); swallow = false; }
+    }, true);
+    // Labels scrolled out of a narrow bar are clipped in the backdrop; repaint as it scrolls.
+    seg.addEventListener('scroll', function () {
+      if (window.PvotGlass && PvotGlass.invalidate) PvotGlass.invalidate(seg);
+    }, { passive: true });
   }
 
   $$('.seg').forEach(function (seg) {
@@ -160,10 +386,99 @@
       });
     });
     placeIndicator(seg, true);
+    if (seg.classList.contains('seg-glass')) bindSegDrag(seg);
   });
   var relayout = function () { $$('.seg').forEach(function (s) { placeIndicator(s, true); }); };
   window.addEventListener('resize', relayout);
   if (document.fonts) document.fonts.ready.then(relayout);
+
+  // ---- Nav: the glass bubble sits on the current page, follows the mouse, and can be dragged --
+  (function navBubble() {
+    var nav = $('.nav-links'), bubble = $('.nav-bubble');
+    if (!nav || !bubble) return;
+    var links = $$('a', nav), current = $('a[aria-current="page"]', nav);
+    var down = null, dragging = false, swallow = false;
+    var place = function (a, instant) {
+      if (!a) { bubble.hidden = true; return; }
+      var wasHidden = bubble.hidden;
+      bubble.hidden = false;
+      if (instant || wasHidden) bubble.style.transition = 'none';
+      bubble.style.left = a.offsetLeft + 'px';
+      bubble.style.top = a.offsetTop + 'px';
+      bubble.style.width = a.offsetWidth + 'px';
+      bubble.style.height = a.offsetHeight + 'px';
+      if (instant || wasHidden) { void bubble.offsetWidth; bubble.style.transition = ''; }
+    };
+    var nearest = function (x) {
+      var best = links[0], d = Infinity;
+      links.forEach(function (a) {
+        var c = a.offsetLeft + a.offsetWidth / 2, dd = Math.abs(c - x);
+        if (dd < d) { d = dd; best = a; }
+      });
+      return best;
+    };
+    var lift = function (on) {
+      bubble.classList.toggle('is-held', on);
+      bubble.classList.toggle('dragging', on);
+      if (bubble._glass) bubble._glass.liftTarget = on ? 1 : 0;
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(1500);
+    };
+    place(current, true);
+    links.forEach(function (a) {
+      a.addEventListener('pointerenter', function (e) {
+        if (e.pointerType === 'mouse' && !dragging) place(a);
+      });
+      a.addEventListener('focus', function () { if (!dragging) place(a); });
+    });
+    nav.addEventListener('pointerleave', function () { if (!dragging) place(current); });
+    nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) place(current); });
+    // Links are natively draggable, which would cancel our pointer stream: switch that off.
+    links.forEach(function (a) { a.setAttribute('draggable', 'false'); });
+    nav.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    nav.addEventListener('pointerdown', function (e) {
+      var a = e.target.closest('a');
+      if (!a || e.button !== 0 || window.matchMedia('(max-width: 760px)').matches) return;
+      down = { x: e.clientX, id: e.pointerId };
+      dragging = false;
+    });
+    nav.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      if (!dragging) {
+        if (Math.abs(e.clientX - down.x) < 8) return;
+        dragging = true;
+        try { nav.setPointerCapture(down.id); } catch (err) { /* released */ }
+        lift(true);
+      }
+      var x = e.clientX - nav.getBoundingClientRect().left;
+      var a = nearest(x), w = a.offsetWidth;
+      var last = links[links.length - 1];
+      bubble.hidden = false;
+      bubble.style.width = w + 'px';
+      bubble.style.top = a.offsetTop + 'px';
+      bubble.style.left = Math.max(links[0].offsetLeft - 8, Math.min(last.offsetLeft + last.offsetWidth - w + 8, x - w / 2)) + 'px';
+    });
+    var up = function () {
+      if (!down) return;
+      if (dragging) {
+        var a = nearest(bubble.offsetLeft + bubble.offsetWidth / 2);
+        lift(false);
+        swallow = true;
+        setTimeout(function () { swallow = false; }, 60);
+        place(a);
+        // Let it land, then go there.
+        if (a !== current) setTimeout(function () { window.location.href = a.href; }, 220);
+      }
+      down = null;
+      dragging = false;
+    };
+    nav.addEventListener('pointerup', up);
+    nav.addEventListener('pointercancel', up);
+    nav.addEventListener('click', function (e) {
+      if (swallow) { e.preventDefault(); e.stopPropagation(); swallow = false; }
+    }, true);
+    window.addEventListener('resize', function () { place(current, true); });
+    if (document.fonts) document.fonts.ready.then(function () { place(current, true); });
+  })();
 
   // ---- Navbar demo ------------------------------------------------------------------------
   $$('[data-navbar]').forEach(function (bar) {
@@ -275,6 +590,7 @@
       if (lens._glass) lens._glass.liftTarget = 1;
       // Keep the big lens clear: the frost grows with the glass, which would fog it mid-sweep.
       if (window.PvotGlass && PvotGlass.setParams) PvotGlass.setParams(lens, { blur: 0.12 });
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(2400);
       anim = lens.animate([
         { transform: start },
         { transform: mid, offset: 0.58 },
@@ -291,7 +607,7 @@
     (function wait() {
       var ready = stage && stage.classList.contains('is-live') && (!document.fonts || document.fonts.status === 'loaded');
       if (ready) return setTimeout(go, 250);
-      if (performance.now() - t0 > 3500) { finish(); return; }
+      if (performance.now() - t0 > 6000) { finish(); return; }
       requestAnimationFrame(wait);
     })();
   })();

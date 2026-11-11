@@ -3,40 +3,96 @@
   <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <script>document.documentElement.classList.add('js')</script><title>PvotLib · Pvot</title>
+  <script>document.documentElement.classList.add('js')</script><title>PvotLib · Liquid glass design system for Jetpack Compose</title>
   <meta name="description" content="PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser." />
   <link rel="canonical" href="https://pvot-oss.github.io/pvotlib/" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#000000" />
+
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Pvot" />
-  <meta property="og:title" content="PvotLib · Pvot" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="PvotLib · Liquid glass design system for Jetpack Compose" />
   <meta property="og:description" content="PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser." />
   <meta property="og:url" content="https://pvot-oss.github.io/pvotlib/" />
+  <meta property="og:image" content="https://pvot-oss.github.io/assets/og/pvotlib.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="PvotLib · Liquid glass design system for Jetpack Compose" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PvotLib · Liquid glass design system for Jetpack Compose" />
+  <meta name="twitter:description" content="PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser." />
+  <meta name="twitter:image" content="https://pvot-oss.github.io/assets/og/pvotlib.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&icon_names=account_balance_wallet,arrow_forward,arrow_outward,backup,block,bug_report,calculate,calendar_month,call,cameraswitch,check,check_circle,chevron_left,close,code,construction,contacts,content_copy,download,edit_note,equalizer,explore,favorite,flash_on,folder,grid_view,home,key,mail,map,menu,menu_book,mic,monitor_heart,monitoring,music_note,notifications,palette,pan_tool,pause,person_off,photo_camera,photo_library,play_arrow,public,rss_feed,schedule,search,settings,shield,skip_next,skip_previous,sms,storefront,straighten,task_alt,timer,verified_user,wb_sunny&display=block" rel="stylesheet" />
-
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/og/icon-180.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://pvot-oss.github.io/#organization",
+      "name": "Pvot",
+      "alternateName": "PVOT-OSS",
+      "url": "https://pvot-oss.github.io/",
+      "logo": "https://pvot-oss.github.io/assets/og/icon-512.png",
+      "description": "Pvot is open-source, de-Googled Android: an OS and a full suite of apps, drawn in real liquid glass. No trackers, no accounts, nothing phoning home.",
+      "sameAs": ["https://github.com/PVOT-OSS", "https://t.me/Pvot_OS"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pvot-oss.github.io/#website",
+      "url": "https://pvot-oss.github.io/",
+      "name": "Pvot",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://pvot-oss.github.io/#organization" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://pvot-oss.github.io/pvotlib/#webpage",
+      "url": "https://pvot-oss.github.io/pvotlib/",
+      "name": "PvotLib · Liquid glass design system for Jetpack Compose",
+      "description": "PvotLib is the Jetpack Compose design system behind every Pvot app. Its liquid glass is a real lens, and this page runs the same shader in your browser.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://pvot-oss.github.io/#website" },
+      "primaryImageOfPage": "https://pvot-oss.github.io/assets/og/pvotlib.jpg"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "PvotLib",
+      "description": "The Jetpack Compose design system behind every Pvot app: liquid glass, motion and shared components.",
+      "codeRepository": "https://github.com/PVOT-OSS/PvotLib",
+      "programmingLanguage": "Kotlin",
+      "runtimePlatform": "Android",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "author": { "@id": "https://pvot-oss.github.io/#organization" }
+    }
+  ]
+}
+</script>
+
 </head>
 
   <body>
     <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="/" aria-label="Pvot home">
       <svg class="brand-mark" viewBox="22 23 64 64" aria-hidden="true"><rect x="0" y="0" width="108" height="108" fill="#6B66FF"/><path fill="#fff" d="M36 34h10v40H36zM46 34h18v10H46zM64 34h8v22h-8zM46 46h18v10H46z"/><path fill="#E5DEFF" d="M56 62h14v14H56z"/></svg>
 
       <span>Pvot</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-      <a href="/apps/">Apps</a>
-      <a href="/pvotlib/" aria-current="page">PvotLib</a>
-      <a href="/about/">About</a>
-      <a href="/contribute/">Contribute</a>
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
+      <a href="/apps/" data-paint>Apps</a>
+      <a href="/pvotlib/" data-paint aria-current="page">PvotLib</a>
+      <a href="/about/" data-paint>About</a>
+      <a href="/contribute/" data-paint>Contribute</a>
     </nav>
     <div class="nav-right">
       <a class="nav-icon nav-gh" href="https://github.com/PVOT-OSS" target="_blank" rel="noopener" aria-label="Pvot on GitHub">
@@ -57,11 +113,11 @@
 </header>
 
     <main id="main">
-      <section class="stage lab" data-stage data-live data-seed="0.6">
-  <div class="wrap">
+      <section class="stage lab" data-stage data-live data-seed="0.6" data-recede>
+  <div class="wrap" data-plane>
     <div class="lab-grid">
       <div class="lab-copy">
-        <div class="hero-top"><span class="eyebrow">PvotLib 1.0. Jetpack Compose.</span><span class="lens-hint"><span class="ms">pan_tool</span> Drag the glass. Tune it in the panel.</span></div>
+        <div class="hero-top" data-paint="rich"><span class="eyebrow">PvotLib 1.0. Jetpack Compose.</span><span class="lens-hint"><span class="ms">pan_tool</span> Drag the glass. Tune it in the panel.</span></div>
         <div class="hero-title" style="margin-top:20px">
           <h1 class="display">
             <span class="hero-line" data-paint>Liquid glass,</span>
@@ -70,7 +126,7 @@
           <div class="lens" id="lab-lens" data-glass="clear" data-glass-lift data-drag data-idle data-idle-x="0.16" tabindex="0" role="img"
             aria-label="A piece of PvotLib glass. Drag it, or move it with the arrow keys, and tune it with the panel."></div>
         </div>
-        <p class="lede hero-meta">The design system every Pvot app is built on. Its glass is a real lens, and this is it: the shader from <code class="mono">PvotGlass.kt</code>, running in your browser.</p>
+        <p class="lede hero-meta" data-paint="rich">The design system every Pvot app is built on. Its glass is a real lens, and this is it: the shader from <code class="mono">PvotGlass.kt</code>, running in your browser.</p>
         <div class="btn-row hero-meta">
           <span class="install-chip"><code id="dep">implementation("com.prauga.pvot:design-system:1.0.0")</code><button class="copy" data-copy="#dep" aria-label="Copy dependency"><span class="ms">content_copy</span></button></span>
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="https://github.com/PVOT-OSS/PvotLib" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
@@ -113,7 +169,7 @@
 </section>
 
 <section class="stage section" id="components" data-stage data-live data-seed="3.3" data-dim="0.85">
-  <div class="wrap">
+  <div class="wrap" data-plane="0.6">
     <div class="section-head">
       <span class="eyebrow">Components</span>
       <h2 class="h2">Hold them.<br><span class="dim">They turn to glass.</span></h2>
@@ -143,11 +199,11 @@
 
       <div class="comp">
         <div class="comp-demo">
-          <div class="seg" role="tablist" aria-label="Range" data-glass="regular">
-            <span class="seg-ind" aria-hidden="true"></span>
-            <button role="tab" aria-selected="false">Day</button>
-            <button role="tab" aria-selected="true">Week</button>
-            <button role="tab" aria-selected="false">Month</button>
+          <div class="seg seg-glass" role="tablist" aria-label="Range" data-paint="box" data-paint-clip>
+            <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+            <button data-paint role="tab" aria-selected="false">Day</button>
+            <button data-paint role="tab" aria-selected="true">Week</button>
+            <button data-paint role="tab" aria-selected="false">Month</button>
           </div>
         </div>
         <div class="comp-info">
@@ -254,7 +310,7 @@
     <span data-paint>Compass Reminders</span>
     <span data-paint>Recorder Equaliser</span>
   </div>
-  <div class="wrap">
+  <div class="wrap" data-plane="1.8">
     <div class="mats">
       <div class="mat" data-glass="clear" data-glass-ref="90" data-glass-blur="0.6">
         <div><h3>Clear</h3><p>A faint haze. For icon-only controls, where nothing needs reading.</p></div>
@@ -325,7 +381,7 @@
         <p>Open-source Android with nothing watching. Built in the open by Team StormBreaker and friends.</p>
       </div>
       <div class="footer-col">
-        <h4>Pvot</h4>
+        <h2>Pvot</h2>
         <ul>
           <li><a href="/apps/">Apps</a></li>
           <li><a href="/pvotlib/">PvotLib</a></li>
@@ -335,7 +391,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Build</h4>
+        <h2>Build</h2>
         <ul>
           <li><a href="/contribute/">Where to contribute</a></li>
           <li><a href="/contribute/guide/">Contributing guide</a></li>
@@ -344,7 +400,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Community</h4>
+        <h2>Community</h2>
         <ul>
           <li><a href="https://github.com/PVOT-OSS" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://t.me/Pvot_OS" target="_blank" rel="noopener">Telegram</a></li>
