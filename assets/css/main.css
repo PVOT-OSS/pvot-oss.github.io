@@ -108,6 +108,23 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* The skip link shows itself once a keyboard reaches it. */
+a.sr-only:focus {
+  position: fixed;
+  top: 14px;
+  left: 16px;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #000;
+  font-size: 15px;
+  font-weight: 600;
+}
 
 .ms {
   font-family: 'Material Symbols Rounded';
@@ -328,10 +345,13 @@ html.refract .nav-glass {
     transform: translateY(-8px) scale(0.98);
     transform-origin: top center;
     pointer-events: none;
-    transition: opacity 0.25s, transform 0.35s var(--spring);
+    /* Hidden, not just see-through, while closed so the keyboard skips its links. Visibility
+       flips after the fade out, and at once when opening. */
+    visibility: hidden;
+    transition: opacity 0.25s, transform 0.35s var(--spring), visibility 0s linear 0.35s;
   }
   .nav-links a { height: 48px; padding: 0 16px; font-size: 17px; color: var(--ink); }
-  .site-header.open .nav-links { opacity: 1; transform: none; pointer-events: auto; }
+  .site-header.open .nav-links { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
   .nav-menu { display: inline-grid; }
   .nav-right { display: flex; }
 }
@@ -817,7 +837,9 @@ html:not(.js) .rv { opacity: 1; transform: none; }
 
 .panel { border-radius: 30px; padding: 20px 20px 18px; display: grid; gap: 14px; }
 .panel h2 { margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -0.01em; display: flex; justify-content: space-between; align-items: center; }
-.panel h2 button { font-size: 13px; font-weight: 600; color: var(--primary); }
+/* Padding gives Reset a comfortable tap target; the negative margin keeps the heading's layout. */
+.panel h2 button { font-size: 13px; font-weight: 600; color: var(--primary); min-height: 32px; padding: 0 12px; margin: -6px -12px -6px 0; border-radius: 999px; }
+.panel h2 button:hover { background: rgba(133, 119, 255, 0.12); }
 .panel .seg { display: flex; width: 100%; height: 40px; padding: 3px; background: rgba(0, 0, 0, 0.3); }
 .panel .seg .seg-ind { top: 3px; bottom: 3px; }
 .panel .seg button { flex: 1; height: 34px; font-size: 13px; padding: 0 10px; }
