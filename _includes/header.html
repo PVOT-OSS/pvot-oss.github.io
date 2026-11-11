@@ -1,14 +1,15 @@
 <header class="site-header" id="site-header">
-  <div class="nav-glass">
+  <div class="nav-glass" data-stage data-transparent>
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
       {% include logo.html %}
       <span>{{ site.title }}</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
+      <span class="nav-bubble" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff1c" data-glass-ref="30" data-glass-blur="0.2" hidden></span>
       {%- for item in site.nav %}
       {%- assign here = false -%}
       {%- if item.href != '/' and page.url contains item.href -%}{%- assign here = true -%}{%- endif %}
-      <a href="{{ item.href | relative_url }}"{% if here %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      <a href="{{ item.href | relative_url }}" data-paint{% if here %} aria-current="page"{% endif %}>{{ item.label }}</a>
       {%- endfor %}
     </nav>
     <div class="nav-right">

@@ -10,7 +10,7 @@ og_image: /assets/og/pvotlib.jpg
   <div class="wrap">
     <div class="lab-grid">
       <div class="lab-copy">
-        <div class="hero-top"><span class="eyebrow">PvotLib 1.0. Jetpack Compose.</span><span class="lens-hint"><span class="ms">pan_tool</span> Drag the glass. Tune it in the panel.</span></div>
+        <div class="hero-top" data-paint="rich"><span class="eyebrow">PvotLib 1.0. Jetpack Compose.</span><span class="lens-hint"><span class="ms">pan_tool</span> Drag the glass. Tune it in the panel.</span></div>
         <div class="hero-title" style="margin-top:20px">
           <h1 class="display">
             <span class="hero-line" data-paint>Liquid glass,</span>
@@ -19,7 +19,7 @@ og_image: /assets/og/pvotlib.jpg
           <div class="lens" id="lab-lens" data-glass="clear" data-glass-lift data-drag data-idle data-idle-x="0.16" tabindex="0" role="img"
             aria-label="A piece of PvotLib glass. Drag it, or move it with the arrow keys, and tune it with the panel."></div>
         </div>
-        <p class="lede hero-meta">The design system every Pvot app is built on. Its glass is a real lens, and this is it: the shader from <code class="mono">PvotGlass.kt</code>, running in your browser.</p>
+        <p class="lede hero-meta" data-paint="rich">The design system every Pvot app is built on. Its glass is a real lens, and this is it: the shader from <code class="mono">PvotGlass.kt</code>, running in your browser.</p>
         <div class="btn-row hero-meta">
           <span class="install-chip"><code id="dep">implementation("com.prauga.pvot:design-system:1.0.0")</code><button class="copy" data-copy="#dep" aria-label="Copy dependency"><span class="ms">content_copy</span></button></span>
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ site.social.pvotlib }}" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
@@ -92,11 +92,11 @@ og_image: /assets/og/pvotlib.jpg
 
       <div class="comp">
         <div class="comp-demo">
-          <div class="seg" role="tablist" aria-label="Range" data-glass="regular">
-            <span class="seg-ind" aria-hidden="true"></span>
-            <button role="tab" aria-selected="false">Day</button>
-            <button role="tab" aria-selected="true">Week</button>
-            <button role="tab" aria-selected="false">Month</button>
+          <div class="seg seg-glass" role="tablist" aria-label="Range" data-paint="box" data-paint-clip>
+            <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+            <button data-paint role="tab" aria-selected="false">Day</button>
+            <button data-paint role="tab" aria-selected="true">Week</button>
+            <button data-paint role="tab" aria-selected="false">Month</button>
           </div>
         </div>
         <div class="comp-info">

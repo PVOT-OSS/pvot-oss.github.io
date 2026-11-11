@@ -129,16 +129,131 @@
     if (instant) { void ind.offsetWidth; ind.style.transition = ''; }
   }
 
-  function applyFilter(seg, cat) {
-    var scope = $(seg.dataset.filter);
-    if (!scope) return;
-    $$('[data-cat]', scope).forEach(function (el) {
-      if (seg.contains(el)) return;
-      el.hidden = !(cat === 'all' || el.dataset.cat === cat);
-    });
+  // Filtering animates instead of popping: leaving icons shrink away, the ones that stay glide
+  // to their new places, and new ones grow in once there is room for them.
+  var filterRun = 0;
+  function syncDocks(scope) {
     $$('.dock-wrap', scope).forEach(function (w) {
       w.hidden = !$$('.icon-link:not([hidden])', w).length;
     });
+  }
+  function applyFilter(seg, cat) {
+    var scope = $(seg.dataset.filter);
+    if (!scope) return;
+    var run = ++filterRun;
+    var items = $$('[data-cat]', scope).filter(function (el) { return !seg.contains(el); });
+    items.forEach(function (el) {
+      if (el.getAnimations) el.getAnimations().forEach(function (a) { a.cancel(); });
+      el.style.opacity = '';
+    });
+    var want = function (el) { return cat === 'all' || el.dataset.cat === cat; };
+    if (reduceMotion || !document.body.animate) {
+      items.forEach(function (el) { el.hidden = !want(el); });
+      syncDocks(scope);
+      return;
+    }
+    var leaving = items.filter(function (el) { return !el.hidden && !want(el); });
+    var entering = items.filter(function (el) { return el.hidden && want(el); });
+    var staying = items.filter(function (el) { return !el.hidden && want(el); });
+    var first = new Map();
+    staying.forEach(function (el) { first.set(el, el.getBoundingClientRect()); });
+    // Big blocks (the /apps/ sections) slide; icons shrink.
+    var away = function (el) {
+      return el.offsetHeight > 160 ? 'translateY(16px)' : 'scale(0.6)';
+    };
+    var OUT = leaving.length ? 170 : 0;
+    leaving.forEach(function (el) {
+      el.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: away(el) }],
+        { duration: OUT, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' });
+    });
+    setTimeout(function () {
+      if (run !== filterRun) return;
+      leaving.forEach(function (el) {
+        el.getAnimations().forEach(function (a) { a.cancel(); });
+        el.hidden = true;
+      });
+      entering.forEach(function (el) { el.hidden = false; });
+      syncDocks(scope);
+      var moved = false;
+      staying.forEach(function (el) {
+        var a = first.get(el), b = el.getBoundingClientRect();
+        var dx = a.left - b.left, dy = a.top - b.top;
+        if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) return;
+        moved = true;
+        el.animate([{ transform: 'translate(' + dx + 'px, ' + dy + 'px)' }, { transform: 'none' }],
+          { duration: 520, easing: 'cubic-bezier(0.3, 1.2, 0.5, 1)' });
+      });
+      var delay = moved ? 240 : 0;
+      entering.forEach(function (el, i) {
+        el.animate([{ opacity: 0, transform: away(el) }, { opacity: 1, transform: 'none' }],
+          { duration: 380, delay: delay + Math.min(i, 14) * 18, easing: 'cubic-bezier(0.3, 1.3, 0.5, 1)', fill: 'backwards' });
+      });
+    }, OUT);
+  }
+
+  // A glass bar's indicator can be dragged, like iOS: it lifts into a lens and snaps to the
+  // nearest option when let go. Start the drag on the chosen option (or anywhere with a mouse).
+  function bindSegDrag(seg) {
+    var ind = $('.seg-ind', seg), buttons = $$('button', seg);
+    if (!ind || !buttons.length) return;
+    var down = null, dragging = false, swallow = false;
+    var nearest = function (x) {
+      var best = buttons[0], d = Infinity;
+      buttons.forEach(function (b) {
+        var c = b.offsetLeft + b.offsetWidth / 2, dd = Math.abs(c - x);
+        if (dd < d) { d = dd; best = b; }
+      });
+      return best;
+    };
+    var lift = function (on) {
+      ind.classList.toggle('is-held', on);
+      seg.classList.toggle('dragging', on);
+      if (ind._glass) ind._glass.liftTarget = on ? 1 : 0;
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(1500);
+    };
+    seg.addEventListener('pointerdown', function (e) {
+      if (e.button !== 0) return;
+      var onChosen = e.target.closest('[aria-selected="true"]');
+      if (e.pointerType !== 'mouse' && !onChosen) return;
+      down = { x: e.clientX, left: ind.offsetLeft, w: ind.offsetWidth, id: e.pointerId };
+      dragging = false;
+    });
+    seg.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      var dx = e.clientX - down.x;
+      if (!dragging) {
+        if (Math.abs(dx) < 6) return;
+        dragging = true;
+        try { seg.setPointerCapture(down.id); } catch (err) { /* already released */ }
+        lift(true);
+      }
+      var centre = down.left + down.w / 2 + dx;
+      var b = nearest(centre), w = b.offsetWidth;
+      var lo = buttons[0].offsetLeft, hi = buttons[buttons.length - 1].offsetLeft + buttons[buttons.length - 1].offsetWidth;
+      ind.style.width = w + 'px';
+      ind.style.left = Math.max(lo - 6, Math.min(hi - w + 6, centre - w / 2)) + 'px';
+    });
+    var up = function () {
+      if (!down) return;
+      if (dragging) {
+        var pick = nearest(ind.offsetLeft + ind.offsetWidth / 2);
+        lift(false);
+        pick.click();
+        swallow = true;
+        setTimeout(function () { swallow = false; }, 60);
+      }
+      down = null;
+      dragging = false;
+    };
+    seg.addEventListener('pointerup', up);
+    seg.addEventListener('pointercancel', up);
+    seg.addEventListener('click', function (e) {
+      if (swallow && e.isTrusted) { e.stopPropagation(); e.preventDefault(); swallow = false; }
+    }, true);
+    // Labels scrolled out of a narrow bar are clipped in the backdrop; repaint as it scrolls.
+    seg.addEventListener('scroll', function () {
+      if (window.PvotGlass && PvotGlass.invalidate) PvotGlass.invalidate(seg);
+    }, { passive: true });
   }
 
   $$('.seg').forEach(function (seg) {
@@ -160,10 +275,99 @@
       });
     });
     placeIndicator(seg, true);
+    if (seg.classList.contains('seg-glass')) bindSegDrag(seg);
   });
   var relayout = function () { $$('.seg').forEach(function (s) { placeIndicator(s, true); }); };
   window.addEventListener('resize', relayout);
   if (document.fonts) document.fonts.ready.then(relayout);
+
+  // ---- Nav: the glass bubble sits on the current page, follows the mouse, and can be dragged --
+  (function navBubble() {
+    var nav = $('.nav-links'), bubble = $('.nav-bubble');
+    if (!nav || !bubble) return;
+    var links = $$('a', nav), current = $('a[aria-current="page"]', nav);
+    var down = null, dragging = false, swallow = false;
+    var place = function (a, instant) {
+      if (!a) { bubble.hidden = true; return; }
+      var wasHidden = bubble.hidden;
+      bubble.hidden = false;
+      if (instant || wasHidden) bubble.style.transition = 'none';
+      bubble.style.left = a.offsetLeft + 'px';
+      bubble.style.top = a.offsetTop + 'px';
+      bubble.style.width = a.offsetWidth + 'px';
+      bubble.style.height = a.offsetHeight + 'px';
+      if (instant || wasHidden) { void bubble.offsetWidth; bubble.style.transition = ''; }
+    };
+    var nearest = function (x) {
+      var best = links[0], d = Infinity;
+      links.forEach(function (a) {
+        var c = a.offsetLeft + a.offsetWidth / 2, dd = Math.abs(c - x);
+        if (dd < d) { d = dd; best = a; }
+      });
+      return best;
+    };
+    var lift = function (on) {
+      bubble.classList.toggle('is-held', on);
+      bubble.classList.toggle('dragging', on);
+      if (bubble._glass) bubble._glass.liftTarget = on ? 1 : 0;
+      if (window.PvotGlass && PvotGlass.kick) PvotGlass.kick(1500);
+    };
+    place(current, true);
+    links.forEach(function (a) {
+      a.addEventListener('pointerenter', function (e) {
+        if (e.pointerType === 'mouse' && !dragging) place(a);
+      });
+      a.addEventListener('focus', function () { if (!dragging) place(a); });
+    });
+    nav.addEventListener('pointerleave', function () { if (!dragging) place(current); });
+    nav.addEventListener('focusout', function (e) { if (!nav.contains(e.relatedTarget)) place(current); });
+    // Links are natively draggable, which would cancel our pointer stream: switch that off.
+    links.forEach(function (a) { a.setAttribute('draggable', 'false'); });
+    nav.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    nav.addEventListener('pointerdown', function (e) {
+      var a = e.target.closest('a');
+      if (!a || e.button !== 0 || window.matchMedia('(max-width: 760px)').matches) return;
+      down = { x: e.clientX, id: e.pointerId };
+      dragging = false;
+    });
+    nav.addEventListener('pointermove', function (e) {
+      if (!down) return;
+      if (!dragging) {
+        if (Math.abs(e.clientX - down.x) < 8) return;
+        dragging = true;
+        try { nav.setPointerCapture(down.id); } catch (err) { /* released */ }
+        lift(true);
+      }
+      var x = e.clientX - nav.getBoundingClientRect().left;
+      var a = nearest(x), w = a.offsetWidth;
+      var last = links[links.length - 1];
+      bubble.hidden = false;
+      bubble.style.width = w + 'px';
+      bubble.style.top = a.offsetTop + 'px';
+      bubble.style.left = Math.max(links[0].offsetLeft - 8, Math.min(last.offsetLeft + last.offsetWidth - w + 8, x - w / 2)) + 'px';
+    });
+    var up = function () {
+      if (!down) return;
+      if (dragging) {
+        var a = nearest(bubble.offsetLeft + bubble.offsetWidth / 2);
+        lift(false);
+        swallow = true;
+        setTimeout(function () { swallow = false; }, 60);
+        place(a);
+        // Let it land, then go there.
+        if (a !== current) setTimeout(function () { window.location.href = a.href; }, 220);
+      }
+      down = null;
+      dragging = false;
+    };
+    nav.addEventListener('pointerup', up);
+    nav.addEventListener('pointercancel', up);
+    nav.addEventListener('click', function (e) {
+      if (swallow) { e.preventDefault(); e.stopPropagation(); swallow = false; }
+    }, true);
+    window.addEventListener('resize', function () { place(current, true); });
+    if (document.fonts) document.fonts.ready.then(function () { place(current, true); });
+  })();
 
   // ---- Navbar demo ------------------------------------------------------------------------
   $$('[data-navbar]').forEach(function (bar) {

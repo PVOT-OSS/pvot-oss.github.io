@@ -9,7 +9,7 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
 
 <section class="stage hero" data-stage data-live>
   <div class="wrap hero-inner">
-    <div class="hero-top hero-meta">
+    <div class="hero-top hero-meta" data-paint="rich">
       <span class="eyebrow"><span class="dot"></span> Pvot OS. Open-source Android.</span>
       <span class="lens-hint"><span class="ms">pan_tool</span> The glass is live. Drag it over the headline.</span>
     </div>
@@ -24,12 +24,12 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
     </div>
 
     <div class="hero-foot hero-meta">
-      <p class="lede">
+      <p class="lede" data-paint="rich">
         A de-Googled Android and a full suite of apps, drawn in real liquid glass.
         <strong>No trackers. No accounts. Nothing phoning home.</strong>
       </p>
       <div class="btn-row">
-        <a class="btn btn-solid" href="{{ '/apps/' | relative_url }}">Explore the apps</a>
+        <a class="btn btn-solid" data-paint="rich" href="{{ '/apps/' | relative_url }}">Explore the apps</a>
         <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ '/pvotlib/' | relative_url }}">Meet PvotLib</a>
       </div>
     </div>
@@ -51,11 +51,11 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
     </div>
 
     <div class="home">
-      <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#apps">
-        <span class="seg-ind" aria-hidden="true"></span>
-        <button role="tab" aria-selected="true" data-cat="all">All</button>
+      <div class="seg seg-glass" role="tablist" aria-label="Filter apps" data-filter="#apps" data-paint="box" data-paint-clip>
+        <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+        <button data-paint role="tab" aria-selected="true" data-cat="all">All</button>
         {%- for c in site.data.categories %}{% unless c.id == 'design' %}
-        <button role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
+        <button data-paint role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
         {%- endunless %}{% endfor %}
       </div>
 

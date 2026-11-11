@@ -111,6 +111,7 @@
     'uniform float uTime;',
     'uniform float uSilk;',
     'uniform float uPx;',
+    'uniform float uClear;',
     '',
     // Silk: a height field of slow, domain-warped waves, lit by one soft light. Its shadows take
     // the stage's first color, its sheen the third, and a touch of the second drifts through.
@@ -161,6 +162,7 @@
     '    }',
     '  }',
     '  vec4 pt = texture2D(uPaint, p / uRes);',
+    '  if (uClear > 0.5) { gl_FragColor = pt; return; }',
     '  col = pt.rgb + col * (1.0 - pt.a);',
     '  float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);',
     '  gl_FragColor = vec4(col + (n - 0.5) / 255.0, 1.0);',
@@ -311,7 +313,7 @@
     '  float cover = clamp(0.5 - edge, 0.0, 1.0);',
     '  if (cover <= 0.0) discard;',
     '  vec4 c = lens(coord, p, hs);',
-    '  c.rgb = uFill.rgb * uFill.a + c.rgb * (1.0 - uFill.a);',
+    '  c = vec4(uFill.rgb * uFill.a, uFill.a) + c * (1.0 - uFill.a);',
     '  if (uRim > 0.0 && edge > -uRimWidth - 1.0) {',
     '    vec2 n = vec2(',
     '      roundRect(p + vec2(1.0, 0.0), hs, uRadius) - roundRect(p - vec2(1.0, 0.0), hs, uRadius),',
@@ -319,9 +321,9 @@
     '    n = n / max(length(n), 0.0001);',
     '    float f = clamp(dot(n, uLight) * 0.5 + 0.5, 0.0, 1.0);',
     '    float line = clamp(1.0 - abs(edge + uRimWidth * 0.5) / (uRimWidth * 0.5 + 0.5), 0.0, 1.0);',
-    '    c.rgb = mix(c.rgb, vec3(1.0), uRim * line * mix(0.14, 0.85, f * f));',
+    '    c = mix(c, vec4(1.0), uRim * line * mix(0.14, 0.85, f * f));',
     '  }',
-    '  gl_FragColor = vec4(c.rgb, cover);',
+    '  gl_FragColor = c * cover;',
     '}'
   ].join('\n');
 
@@ -434,9 +436,10 @@
     this.canvas.setAttribute('aria-hidden', 'true');
     el.insertBefore(this.canvas, el.firstChild);
 
+    this.clear = 'transparent' in el.dataset;
     var gl = this.canvas.getContext('webgl', {
-      alpha: false, antialias: false, depth: false, stencil: false,
-      premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance'
+      alpha: this.clear, antialias: false, depth: false, stencil: false,
+      premultipliedAlpha: true, preserveDrawingBuffer: false, powerPreference: 'high-performance'
     });
     if (!gl) throw new Error('no webgl');
     this.gl = gl;
@@ -477,7 +480,8 @@
     this.moving = new Map();
     var painted = function (t) {
       if (!t || t.nodeType !== 1) return [];
-      if (t.hasAttribute('data-paint')) return [t];
+      var host = t.closest('[data-paint]');
+      if (host && el.contains(host)) return [host];
       return Array.prototype.slice.call(t.querySelectorAll('[data-paint]'));
     };
     var start = function (e) {
@@ -538,6 +542,13 @@
       });
     });
     this.paints = Array.prototype.slice.call(this.el.querySelectorAll('[data-paint]'));
+    // Rich blocks: note their real backgrounds now, before the live CSS hides the DOM copies.
+    this.paints.forEach(function (p) {
+      if (p.dataset.paint !== 'rich') return;
+      [p].concat(Array.prototype.slice.call(p.querySelectorAll('*'))).forEach(function (n) {
+        if (n._pbg === undefined) n._pbg = getComputedStyle(n).backgroundColor;
+      });
+    });
     this.paintDirty = true;
   };
 
@@ -580,7 +591,76 @@
 
   // ----- painting --------------------------------------------------------------------------------
 
+  // Wraps paintItem: clips to a scrolling parent ([data-paint-clip]) so text scrolled out of a
+  // row is not drawn outside it.
   Stage.prototype.paintItem = function (el, base) {
+    var clip = el.closest('[data-paint-clip]');
+    if (!clip) return this.paintOne(el, base);
+    var ctx = this.ctx, c = clip.getBoundingClientRect();
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(c.left - base.left, c.top - base.top, c.width, c.height);
+    ctx.clip();
+    var r = this.paintOne(el, base);
+    ctx.restore();
+    return r;
+  };
+
+  var TRANSPARENT = /^(transparent|rgba\(0, 0, 0, 0\))$/;
+
+  // data-paint="rich": a block of anything (a paragraph, a button, a row of labels). Its own and its
+  // children's backgrounds are drawn as rounded boxes, then every word where the browser laid it out.
+  Stage.prototype.paintRich = function (root, base, alpha) {
+    var ctx = this.ctx;
+    var walk = function (node, a) {
+      if (node.nodeType === 3) {
+        var text = node.data;
+        if (!/\S/.test(text)) return;
+        var cs = getComputedStyle(node.parentElement);
+        ctx.globalAlpha = a;
+        ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+        if ('letterSpacing' in ctx) ctx.letterSpacing = (parseFloat(cs.letterSpacing) || 0) + 'px';
+        ctx.fillStyle = cs.color;
+        ctx.textBaseline = 'alphabetic';
+        var asc = ctx.measureText('Hg').fontBoundingBoxAscent;
+        if (asc == null) asc = parseFloat(cs.fontSize) * 0.92;
+        var upper = cs.textTransform === 'uppercase';
+        var re = /\S+/g, m, range = document.createRange();
+        while ((m = re.exec(text))) {
+          range.setStart(node, m.index);
+          range.setEnd(node, m.index + m[0].length);
+          var rects = range.getClientRects();
+          if (!rects.length) continue;
+          var r = rects[0];
+          ctx.fillText(upper ? m[0].toUpperCase() : m[0], r.left - base.left, r.top - base.top + asc);
+        }
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+        return;
+      }
+      if (node.nodeType !== 1 || node.hasAttribute('data-glass') || node.tagName === 'svg') return;
+      if (node !== root && node.hasAttribute('data-paint')) return;
+      var st = getComputedStyle(node);
+      if (st.display === 'none' || st.visibility === 'hidden') return;
+      var na = node === root ? a : a * parseFloat(st.opacity);
+      if (na <= 0.001) return;
+      // The background is read once, before the DOM copy is hidden.
+      if (node._pbg === undefined) node._pbg = st.backgroundColor;
+      if (node._pbg && !TRANSPARENT.test(node._pbg)) {
+        var b = node.getBoundingClientRect();
+        ctx.globalAlpha = na;
+        ctx.fillStyle = node._pbg;
+        roundRectPath(ctx, b.left - base.left, b.top - base.top, b.width, b.height,
+          Math.min(parseFloat(st.borderTopLeftRadius) || 0, b.width / 2, b.height / 2));
+        ctx.fill();
+      }
+      for (var c = node.firstChild; c; c = c.nextSibling) walk(c, na);
+    };
+    walk(root, alpha);
+    var br = root.getBoundingClientRect();
+    return { x: br.left - base.left - 8, y: br.top - base.top - 8, w: br.width + 16, h: br.height + 16 };
+  };
+
+  Stage.prototype.paintOne = function (el, base) {
     var ctx = this.ctx;
     if (el.closest('[hidden]') || !el.getClientRects().length) return null;
     var cs = getComputedStyle(el);
@@ -591,6 +671,8 @@
     while (p && p !== this.el) { alpha *= parseFloat(getComputedStyle(p).opacity); p = p.parentElement; }
     if (alpha <= 0.001) return null;
     ctx.globalAlpha = alpha;
+
+    if (kind === 'rich') return this.paintRich(el, base, alpha);
 
     if (kind === 'box') {
       var r = el.getBoundingClientRect();
@@ -746,6 +828,7 @@
     gl.uniform1f(ps.u.uLive, this.live ? 1 : 0);
     gl.uniform1f(ps.u.uDim, this.dim);
     gl.uniform1f(ps.u.uSilk, this.silk ? 1 : 0);
+    gl.uniform1f(ps.u.uClear, this.clear ? 1 : 0);
     gl.uniform1f(ps.u.uPx, this.dpr);
     gl.uniform1f(ps.u.uTime, this.seed * 7 + (reduceMotion ? 0 : now / 1000 * 0.11));
     gl.uniform3f(ps.u.uBase, this.base[0], this.base[1], this.base[2]);
@@ -781,7 +864,7 @@
     var pl = this.progLens, u = pl.u;
     gl.useProgram(pl.p);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.scene.tex); gl.uniform1i(u.uScene, 0);
     gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.soft.tex); gl.uniform1i(u.uSoft, 1);
     gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, this.frost.tex); gl.uniform1i(u.uFrost, 2);
@@ -918,6 +1001,7 @@
         e.preventDefault();
         el.setPointerCapture(e.pointerId);
         el._touched = true;
+        el._release = null;
         start = { x: e.clientX - pos.x, y: e.clientY - pos.y };
         el.classList.add('is-dragging');
       });
@@ -934,7 +1018,16 @@
         el.style.setProperty('--dx', nx + 'px');
         el.style.setProperty('--dy', ny + 'px');
       });
-      var end = function () { start = null; el.classList.remove('is-dragging'); };
+      var end = function () {
+        if (!start) return;
+        start = null;
+        el.classList.remove('is-dragging');
+        // Drifting glass returns to its path; it keeps where it was put only by keyboard.
+        if (el.hasAttribute('data-idle') && !el._keyed) {
+          el._touched = false;
+          el._release = { t: performance.now(), x: pos.x, y: pos.y };
+        }
+      };
       el.addEventListener('pointerup', end);
       el.addEventListener('pointercancel', end);
       el.addEventListener('keydown', function (e) {
@@ -943,6 +1036,7 @@
         if (!k) return;
         e.preventDefault();
         el._touched = true;
+        el._keyed = true;
         pos.x += k[0]; pos.y += k[1];
         el.style.setProperty('--dx', pos.x + 'px');
         el.style.setProperty('--dy', pos.y + 'px');
@@ -959,6 +1053,15 @@
       var ax = parseFloat(el.dataset.idleX || '0.22') * stage.cssW;
       var ay = parseFloat(el.dataset.idleY || '0.06') * stage.cssH;
       var x = Math.sin(t * 0.32) * ax, y = Math.sin(t * 0.57) * ay;
+      var rel = el._release;
+      if (rel) {
+        // Ease from where it was let go onto the moving path.
+        var k = Math.min(1, (now - rel.t) / 1500);
+        var e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        x = rel.x + (x - rel.x) * e;
+        y = rel.y + (y - rel.y) * e;
+        if (k >= 1) el._release = null;
+      }
       el._drag.x = x; el._drag.y = y;
       el.style.setProperty('--dx', x + 'px');
       el.style.setProperty('--dy', y + 'px');

@@ -14,11 +14,11 @@ seo_title: "Pvot apps · Open-source Android apps with 0 trackers"
     <span class="eyebrow">{{ appcount }} apps, {{ released.size }} shipping today</span>
     <h1 class="display" style="margin-top:18px"><span data-paint>Apps.</span></h1>
     <p class="lede">A full suite of first-party apps to replace the defaults. Every one is open source and works offline first. Shipping apps are on Google Play, and Exodus Privacy finds zero trackers in each. The rest are being built right now, in public.</p>
-    <div class="seg" role="tablist" aria-label="Filter apps" data-glass="regular" data-filter="#catalog">
-      <span class="seg-ind" aria-hidden="true"></span>
-      <button role="tab" aria-selected="true" data-cat="all">All</button>
+    <div class="seg seg-glass" role="tablist" aria-label="Filter apps" data-filter="#catalog" data-paint="box" data-paint-clip>
+      <span class="seg-ind" aria-hidden="true" data-glass="clear" data-glass-rest="#ffffff2e" data-glass-ref="30" data-glass-blur="0.3"></span>
+      <button data-paint role="tab" aria-selected="true" data-cat="all">All</button>
       {%- for c in site.data.categories %}
-      <button role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
+      <button data-paint role="tab" aria-selected="false" data-cat="{{ c.id }}">{{ c.title }}</button>
       {%- endfor %}
     </div>
   </div>

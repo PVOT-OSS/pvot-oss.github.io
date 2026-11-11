@@ -212,8 +212,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* Painted elements are drawn into the backdrop; their DOM copy stays for selection and readers. */
 [data-paint='box'] { background: var(--fill); }
-.stage.is-live [data-paint]:not([data-paint='box']) { -webkit-text-fill-color: transparent; }
-.stage.is-live [data-paint='box'] { background: transparent; }
+[data-stage].is-live [data-paint]:not([data-paint='box']),
+[data-stage].is-live [data-paint='rich'] * { -webkit-text-fill-color: transparent; }
+/* A rich block's boxes are painted too; its DOM copy keeps only its layout. */
+[data-stage].is-live [data-paint='rich'],
+[data-stage].is-live [data-paint='rich'] *:not([data-glass]) { background-color: transparent !important; box-shadow: none !important; }
+[data-stage].is-live [data-paint='box'] { background: transparent; }
 
 /* Glass, as plain CSS frost until the shader takes over. */
 [data-glass] {
@@ -225,13 +229,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 [data-glass='regular'] { background: rgba(35, 31, 54, 0.5); }
 [data-glass='thick'] { background: rgba(35, 31, 54, 0.82); }
 [data-glass][data-glass-rest] { background: #fff; }
-.stage.is-live [data-glass] {
+[data-stage].is-live [data-glass] {
   background: transparent;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
-.stage.is-live [data-glass][data-glass-rest] { box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22); }
+[data-stage].is-live [data-glass][data-glass-rest] { box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22); }
 
 /* ---- Header ------------------------------------------------------------------------------ */
 
@@ -1074,3 +1078,57 @@ html:not(.js) .rv { opacity: 1; transform: none; }
 .nf .lens { left: 18%; top: 50%; margin-top: -86px; }
 .nf .lede { margin-bottom: 32px; }
 @media (max-width: 760px) { .nf .lens { left: 10%; margin-top: -56px; } }
+
+/* ---- Nav: a see-through stage, its links painted, a glass bubble over the current one ---- */
+.nav-glass > .stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.nav-glass.is-live > .stage-canvas { opacity: 1; }
+.nav-glass > .brand, .nav-glass > .nav-right { position: relative; z-index: 1; }
+.nav-links { z-index: 1; }
+@media (min-width: 761px) { .nav-links { position: relative; } }
+.nav-bubble {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 0;
+  height: 40px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: -1;
+  background: rgba(255, 255, 255, 0.08);
+  transition: left 0.5s var(--spring), top 0.5s var(--spring), width 0.5s var(--spring), transform 0.35s var(--spring);
+}
+.nav-bubble.is-held { transform: scale(1.12, 1.22); }
+.nav-bubble.dragging { transition: width 0.3s var(--spring), transform 0.35s var(--spring); }
+.nav-glass:not(.is-live) .nav-bubble { display: none; }
+.nav-glass.is-live .nav-links a:hover,
+.nav-glass.is-live .nav-links a[aria-current='page'] { background: transparent; }
+.nav-glass.is-live [data-glass].nav-bubble { box-shadow: none; }
+@media (max-width: 760px) {
+  .nav-bubble { display: none !important; }
+  /* The menu drops below the bar, outside its canvas: show its links as plain text. */
+  .nav-glass.is-live .nav-links a[data-paint] { -webkit-text-fill-color: currentColor; }
+  .nav-glass.is-live .nav-links a:hover, .nav-glass.is-live .nav-links a[aria-current='page'] { background: rgba(255, 255, 255, 0.08); }
+}
+
+/* ---- Glass category bars: painted track and labels, a glass indicator you can drag ---- */
+.seg-glass { --fill: rgba(22, 20, 34, 0.82); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+.seg-glass .seg-ind { background: rgba(255, 255, 255, 0.15); }
+[data-stage].is-live .seg-glass .seg-ind { background: transparent; box-shadow: none; }
+.seg-glass .seg-ind.is-held { transform: scale(1.1, 1.22); }
+.seg-glass.dragging .seg-ind { transition: width 0.3s var(--spring), transform 0.35s var(--spring); }
+.seg-glass .seg-ind { transition: left 0.45s var(--spring), width 0.45s var(--spring), transform 0.35s var(--spring); }
+/* Touching the chosen label grabs the indicator instead of scrolling the row. */
+.seg-glass button[aria-selected='true'] { touch-action: none; cursor: grab; }
+.seg-glass.dragging, .seg-glass.dragging button { cursor: grabbing; }
+
+.nav-links a { -webkit-user-drag: none; user-select: none; }
