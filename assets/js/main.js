@@ -16,7 +16,13 @@
     };
     toggle.addEventListener('click', function () { setOpen(!header.classList.contains('open')); });
     $$('.nav-links a').forEach(function (a) { a.addEventListener('click', function () { setOpen(false); }); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !header.classList.contains('open')) return;
+      var inMenu = header.contains(document.activeElement);
+      setOpen(false);
+      // The closed menu is hidden, so focus inside it would be lost: hand it back to the toggle.
+      if (inMenu) toggle.focus();
+    });
   }
 
   // ---- The nav bends the page under it (Chromium reads SVG filters in backdrop-filter) -----
