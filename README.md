@@ -48,6 +48,18 @@ Options: `data-blobs`, `data-seed`, `data-dim` on the stage; `data-glass-ref` (r
 on glass. `data-paint` text must be a single line. Without WebGL everything falls back to CSS frost.
 In Chromium the nav bar also bends the page under it through an SVG displacement filter.
 
+### Depth
+
+The site is built in layers. Mark them in markup and `main.js` does the motion:
+
+- `data-plane` (optionally a number, the depth multiplier) on a section's content: it slides against
+  the silk with the pointer, phone tilt and scroll. In a glass section, put painted things inside it;
+  the shader moves the painted layer with it, so nothing repaints.
+- `data-recede` on a section: it sinks back (scale, fade, rounded corners) as it scrolls away.
+- `data-tilt` on a card, `.icon-link` or `.row`: it leans toward the pointer and catches a sheen.
+- Text and cards outside glass sections arrive from depth automatically (`.rv`); elevation comes
+  from the `--rim` and `--e1`..`--e3` tokens in `main.css`.
+
 ### Adding or updating an app
 
 Create `_apps/<slug>.md`:

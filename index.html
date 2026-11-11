@@ -7,8 +7,8 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
 {%- assign building = apps | where: "status", "soon" -%}
 {%- assign appcount = apps | where_exp: "a", "a.category != 'design'" | size -%}
 
-<section class="stage hero" data-stage data-live>
-  <div class="wrap hero-inner">
+<section class="stage hero" data-stage data-live data-recede>
+  <div class="wrap hero-inner" data-plane>
     <div class="hero-top hero-meta" data-paint="rich">
       <span class="eyebrow"><span class="dot"></span> Pvot OS. Open-source Android.</span>
       <span class="lens-hint"><span class="ms">pan_tool</span> The glass is live. Drag it over the headline.</span>
@@ -36,14 +36,14 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
   </div>
 </section>
 
-<section class="statement" aria-label="What Pvot is">
+<section class="statement" aria-label="What Pvot is" data-recede>
   <div class="wrap">
     <p data-words>Android, minus the part that watches you. Pvot ships <em>without Google,</em> without ad IDs, without a single tracker. What is left is <em>fast, quiet, and yours.</em></p>
   </div>
 </section>
 
-<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75">
-  <div class="wrap">
+<section class="stage apps-stage" id="apps" data-stage data-live data-seed="2.1" data-dim="0.75" data-recede>
+  <div class="wrap" data-plane="0.7">
     <div class="section-head center">
       <span class="eyebrow rv">The apps</span>
       <h2 class="h2 rv">Everything you open.<br><span class="dim">Rebuilt in the open.</span></h2>
@@ -61,7 +61,7 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
 
       <div class="home-grid">
         {%- for app in building %}
-        <a class="icon-link" href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
+        <a class="icon-link" data-tilt href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
           {% include app-icon.html app=app %}
           <span class="icon-label">{{ app.title }}</span>
         </a>
@@ -72,7 +72,7 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
         <span class="dock-label">In the dock: on Google Play today</span>
         <div class="dock" data-glass="regular">
           {%- for app in shipping %}
-          <a class="icon-link" href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
+          <a class="icon-link" data-tilt href="{{ app.url | relative_url }}" data-cat="{{ app.category }}" title="{{ app.title }}: {{ app.tagline }}">
             {% include app-icon.html app=app %}
             <span class="icon-label">{{ app.title }}</span>
           </a>
@@ -89,7 +89,7 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
   </div>
 </section>
 
-<section class="section" id="system">
+<section class="section" id="system" data-recede>
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow rv">The stack</span>
@@ -121,14 +121,14 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
   </div>
 </section>
 
-<section class="section" id="privacy">
+<section class="section" id="privacy" data-recede>
   <div class="wrap split">
     <div>
       <span class="eyebrow rv">Privacy</span>
       <h2 class="h2 rv" style="margin-top:20px">Off by default.<br><span class="dim">And it stays off.</span></h2>
       <p class="lede rv">Privacy is not a settings page you have to go and find. It is how Pvot is built, so the switches that matter come already flipped. Every line is public, so you never have to take our word for it.</p>
     </div>
-    <div class="settings rv" role="group" aria-label="Pvot defaults">
+    <div class="settings rv" data-tilt role="group" aria-label="Pvot defaults">
       <div class="settings-title">Pvot defaults</div>
       <div class="set-row">
         <span class="set-ic" style="--c:var(--pink)"><span class="ms">block</span></span>
@@ -159,8 +159,8 @@ seo_title: "Pvot · De-Googled, open-source Android and apps"
   </div>
 </section>
 
-<section class="stage glass-stage" data-stage data-live data-seed="4.2">
-  <div class="wrap">
+<section class="stage glass-stage" data-stage data-live data-seed="4.2" data-recede>
+  <div class="wrap" data-plane="0.8">
     <div class="section-head center">
       <span class="eyebrow">PvotLib</span>
       <h2 class="h2">The glass is real.</h2>

@@ -67,6 +67,13 @@
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
   --spring: cubic-bezier(0.3, 1.4, 0.5, 1);
   --wrap: 1200px;
+
+  /* Depth: a lit top edge and three elevations. Shadows are layered (contact, near, far) the way
+     light falls off a raised surface, not one flat blur. */
+  --rim: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.045);
+  --e1: 0 1px 1px rgba(0, 0, 0, 0.4), 0 6px 14px -6px rgba(0, 0, 0, 0.6);
+  --e2: 0 1px 1px rgba(0, 0, 0, 0.4), 0 12px 28px -10px rgba(0, 0, 0, 0.65), 0 36px 70px -30px rgba(0, 0, 0, 0.6);
+  --e3: 0 2px 2px rgba(0, 0, 0, 0.35), 0 22px 44px -14px rgba(0, 0, 0, 0.7), 0 70px 120px -40px rgba(0, 0, 0, 0.65);
   --gutter: 24px;
 }
 @media (max-width: 560px) { :root { --gutter: 18px; } }
@@ -350,7 +357,7 @@ html.refract .nav-glass {
 }
 .hero-foot .lede { max-width: 29em; }
 .hero-line { animation: rise 1.1s var(--ease) both; }
-.stage .hero-line { animation: none; }
+.stage .hero-line, .stage .hero-meta { animation: none; }
 .hero-line:nth-child(2) { animation-delay: 0.12s; }
 @keyframes rise {
   from { opacity: 0; transform: translateY(0.3em); }
@@ -681,7 +688,8 @@ a.stack-row:hover > .ms { color: var(--ink); transform: translateX(4px); }
 
 /* ---- Reveal ------------------------------------------------------------------------------ */
 
-.rv { opacity: 0; transform: translateY(28px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--d, 0s); }
+.rv { opacity: 0; transform: translateY(36px) scale(0.965); transform-origin: 50% 100%; transition: opacity 0.9s var(--ease), transform 1s var(--ease), filter 0.9s var(--ease); transition-delay: var(--d, 0s); }
+@media (hover: hover) and (pointer: fine) { .rv:not(.in) { filter: blur(6px); } }
 .rv.in { opacity: 1; transform: none; }
 html:not(.js) .rv { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
@@ -1132,3 +1140,58 @@ html:not(.js) .rv { opacity: 1; transform: none; }
 .seg-glass.dragging, .seg-glass.dragging button { cursor: grabbing; }
 
 .nav-links a { -webkit-user-drag: none; user-select: none; }
+
+/* ---- Depth ----------------------------------------------------------------------------------- */
+
+/* Sections sink back as they scroll away (scale and opacity are written by main.js). */
+[data-recede] { transform-origin: 50% 100%; }
+[data-plane] { will-change: translate; }
+
+/* Raised surfaces share the same light. */
+.settings { box-shadow: var(--rim), var(--e3); }
+.repo, .donate-card, .sponsor-slot { box-shadow: var(--rim), var(--e1); }
+.code { box-shadow: var(--rim), var(--e1); }
+.comp { box-shadow: inset 0 0 0 1px var(--line), var(--e2); }
+.btn-solid { box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.12), var(--e1); }
+.btn-line { box-shadow: inset 0 0 0 1px var(--line-2), var(--rim), var(--e1); }
+.pill { box-shadow: var(--rim); }
+.app-icon { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.04), var(--e2); }
+.app-icon.on { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), var(--e2), 0 14px 30px -12px color-mix(in srgb, var(--c) 45%, transparent); }
+.site-header .nav-glass { transition: box-shadow 0.4s ease, background 0.4s ease; }
+.site-header.scrolled .nav-glass {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 255, 255, 0.07), var(--e3);
+}
+
+/* Tilt: cards lean toward the pointer and catch a sheen where it points. Vars come from main.js. */
+[data-tilt] { position: relative; }
+[data-tilt]:not(.icon-link):not(.row) {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.7s var(--spring), box-shadow 0.4s ease, background 0.2s;
+}
+[data-tilt].tilting:not(.icon-link):not(.row) { transition: transform 0.12s ease-out, box-shadow 0.4s ease, background 0.2s; box-shadow: var(--rim), var(--e3); }
+[data-tilt]:not(.icon-link):not(.row)::after,
+:is(.icon-link, .row)[data-tilt] .app-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(420px circle at var(--sx, 50%) var(--sy, 0%), rgba(255, 255, 255, 0.11), transparent 45%);
+  opacity: var(--so, 0);
+  transition: opacity 0.4s ease;
+}
+:is(.icon-link, .row)[data-tilt] .app-icon::after { background: radial-gradient(90px circle at var(--sx, 50%) var(--sy, 0%), rgba(255, 255, 255, 0.28), transparent 60%); }
+:is(.icon-link, .row)[data-tilt] .app-icon {
+  transform: perspective(420px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px)) scale(var(--grow, 1));
+  transition: transform 0.6s var(--spring), box-shadow 0.4s ease;
+}
+:is(.icon-link, .row)[data-tilt].tilting .app-icon {
+  --lift: -4px;
+  --grow: 1.06;
+  transition: transform 0.14s ease-out, box-shadow 0.4s ease;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), var(--e3);
+}
+:is(.icon-link, .row)[data-tilt].tilting .app-icon.on { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), var(--e3), 0 18px 40px -12px color-mix(in srgb, var(--c) 55%, transparent); }
+@media (prefers-reduced-motion: reduce) {
+  [data-tilt], [data-tilt] .app-icon { transform: none !important; }
+}

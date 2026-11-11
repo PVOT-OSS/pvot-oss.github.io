@@ -6,8 +6,8 @@ layout: base
 {%- if app.repo -%}{%- assign repo = "https://github.com/PVOT-OSS/" | append: app.repo -%}{%- else -%}{%- assign repo = site.social.github -%}{%- endif -%}
 {%- assign released = true -%}{%- if app.status == 'soon' -%}{%- assign released = false -%}{%- endif -%}
 
-<section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="{{ category.blobs }}" data-seed="{{ app.order | times: 0.7 }}" style="--c:{{ category.color }}">
-  <div class="wrap">
+<section class="stage app-hero" data-stage data-live data-dim="0.62" data-blobs="{{ category.blobs }}" data-seed="{{ app.order | times: 0.7 }}" style="--c:{{ category.color }}" data-recede>
+  <div class="wrap" data-plane>
     <a class="crumb" href="{{ '/apps/' | relative_url }}"><span class="ms">chevron_left</span> All apps</a>
     <div class="app-hero-inner">
       {% include app-icon.html app=app %}
@@ -72,7 +72,7 @@ layout: base
     <h2>More in {{ category.title }}</h2>
     <div class="home-grid">
       {%- for r in related %}
-      <a class="icon-link" href="{{ r.url | relative_url }}">
+      <a class="icon-link" data-tilt href="{{ r.url | relative_url }}">
         {% include app-icon.html app=r %}
         <span class="icon-label">{{ r.title }}</span>
       </a>

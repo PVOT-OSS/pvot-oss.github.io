@@ -24,7 +24,7 @@ seo_title: "Contribute to Pvot · Open-source Android projects to work on"
       </div>
       <div class="repo-grid">
         {%- for r in g.repos %}
-        <a class="repo" href="{{ site.social.github }}/{{ r.name }}" target="_blank" rel="noopener">
+        <a class="repo" data-tilt href="{{ site.social.github }}/{{ r.name }}" target="_blank" rel="noopener">
           <span class="repo-top"><b>{{ r.name }}</b><span class="ms">arrow_outward</span></span>
           <span class="repo-about">{{ r.about }}</span>
           <span class="repo-lang" data-lang="{{ r.lang }}">{{ r.lang }}</span>
@@ -40,15 +40,15 @@ seo_title: "Contribute to Pvot · Open-source Android projects to work on"
         <p>Some of the most useful help never touches a compiler.</p>
       </div>
       <div class="repo-grid">
-        <a class="repo" href="{{ site.social.telegram }}" target="_blank" rel="noopener">
+        <a class="repo" data-tilt href="{{ site.social.telegram }}" target="_blank" rel="noopener">
           <span class="repo-top"><b>Test builds</b><span class="ms">arrow_outward</span></span>
           <span class="repo-about">Flash betas, catch regressions on your device, and share logs.</span>
         </a>
-        <a class="repo" href="{{ site.social.telegram }}" target="_blank" rel="noopener">
+        <a class="repo" data-tilt href="{{ site.social.telegram }}" target="_blank" rel="noopener">
           <span class="repo-top"><b>Translate</b><span class="ms">arrow_outward</span></span>
           <span class="repo-about">Bring an app to your language. Strings live in each app's repo.</span>
         </a>
-        <a class="repo" href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">
+        <a class="repo" data-tilt href="{{ site.social.pvotlib }}" target="_blank" rel="noopener">
           <span class="repo-top"><b>Design</b><span class="ms">arrow_outward</span></span>
           <span class="repo-about">Icons, motion and layouts. Start from the PvotLib catalog app.</span>
         </a>

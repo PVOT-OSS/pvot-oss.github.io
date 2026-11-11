@@ -112,6 +112,8 @@
     'uniform float uSilk;',
     'uniform float uPx;',
     'uniform float uClear;',
+    'uniform vec2 uPaintShift;',
+    'uniform vec2 uSilkShift;',
     '',
     // Silk: a height field of slow, domain-warped waves, lit by one soft light. Its shadows take
     // the stage's first color, its sheen the third, and a touch of the second drifts through.
@@ -147,7 +149,7 @@
     '  vec2 p = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);',
     '  vec3 col = uBase;',
     '  if (uLive > 0.5 && uSilk > 0.5) {',
-    '    col = silk(p);',
+    '    col = silk(p + uSilkShift);',
     '  } else if (uLive > 0.5) {',
     '    float R = min(uRes.x, uRes.y * 1.35);',
     '    for (int i = 0; i < 5; i++) {',
@@ -161,7 +163,7 @@
     '      col = mix(col, uC[i].rgb, al);',
     '    }',
     '  }',
-    '  vec4 pt = texture2D(uPaint, p / uRes);',
+    '  vec4 pt = texture2D(uPaint, (p - uPaintShift) / uRes);',
     '  if (uClear > 0.5) { gl_FragColor = pt; return; }',
     '  col = pt.rgb + col * (1.0 - pt.a);',
     '  float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);',
@@ -542,6 +544,12 @@
       });
     });
     this.paints = Array.prototype.slice.call(this.el.querySelectorAll('[data-paint]'));
+    // The plane (a parallax layer) that holds the painted things, if one does.
+    var planes = Array.prototype.slice.call(this.el.querySelectorAll('[data-plane]'));
+    var paints = this.paints;
+    this.paintPlane = planes.filter(function (pl) {
+      return paints.some(function (p) { return pl.contains(p); });
+    })[0] || null;
     // Rich blocks: note their real backgrounds now, before the live CSS hides the DOM copies.
     this.paints.forEach(function (p) {
       if (p.dataset.paint !== 'rich') return;
@@ -590,18 +598,45 @@
   };
 
   // ----- painting --------------------------------------------------------------------------------
+  //
+  // Everything is painted in the section's own coordinates: CSS pixels from its top left, before
+  // any transform on the section (it may be scaled while it recedes) and before its plane's
+  // parallax shift. So the painted layer never needs repainting when either moves; the shader
+  // shifts the layer by the plane's offset instead.
 
-  // Wraps paintItem: clips to a scrolling parent ([data-paint-clip]) so text scrolled out of a
+  // The frame for this pass: where the section sits on screen and how much it is scaled.
+  Stage.prototype.frame = function () {
+    var b = this.canvas.getBoundingClientRect();
+    return { left: b.left, top: b.top, sc: (b.width / this.cssW) || 1 };
+  };
+
+  // The plane shift an element is painted without: only for the plane that holds painted things.
+  Stage.prototype.shiftOf = function (el) {
+    var pl = this.paintPlane;
+    return pl && pl._shift && pl.contains(el) ? pl._shift : null;
+  };
+
+  // A screen rect in local paint coordinates.
+  Stage.prototype.local = function (r, F, sh) {
+    return {
+      x: (r.left - F.left) / F.sc - (sh ? sh.x : 0),
+      y: (r.top - F.top) / F.sc - (sh ? sh.y : 0),
+      w: r.width / F.sc,
+      h: r.height / F.sc
+    };
+  };
+
+  // Wraps paintOne: clips to a scrolling parent ([data-paint-clip]) so text scrolled out of a
   // row is not drawn outside it.
-  Stage.prototype.paintItem = function (el, base) {
+  Stage.prototype.paintItem = function (el, F) {
     var clip = el.closest('[data-paint-clip]');
-    if (!clip) return this.paintOne(el, base);
-    var ctx = this.ctx, c = clip.getBoundingClientRect();
+    if (!clip) return this.paintOne(el, F);
+    var ctx = this.ctx, c = this.local(clip.getBoundingClientRect(), F, this.shiftOf(clip));
     ctx.save();
     ctx.beginPath();
-    ctx.rect(c.left - base.left, c.top - base.top, c.width, c.height);
+    ctx.rect(c.x, c.y, c.w, c.h);
     ctx.clip();
-    var r = this.paintOne(el, base);
+    var r = this.paintOne(el, F);
     ctx.restore();
     return r;
   };
@@ -610,8 +645,8 @@
 
   // data-paint="rich": a block of anything (a paragraph, a button, a row of labels). Its own and its
   // children's backgrounds are drawn as rounded boxes, then every word where the browser laid it out.
-  Stage.prototype.paintRich = function (root, base, alpha) {
-    var ctx = this.ctx;
+  Stage.prototype.paintRich = function (root, F, alpha) {
+    var ctx = this.ctx, self = this, sh = this.shiftOf(root);
     var walk = function (node, a) {
       if (node.nodeType === 3) {
         var text = node.data;
@@ -631,8 +666,8 @@
           range.setEnd(node, m.index + m[0].length);
           var rects = range.getClientRects();
           if (!rects.length) continue;
-          var r = rects[0];
-          ctx.fillText(upper ? m[0].toUpperCase() : m[0], r.left - base.left, r.top - base.top + asc);
+          var r = self.local(rects[0], F, sh);
+          ctx.fillText(upper ? m[0].toUpperCase() : m[0], r.x, r.y + asc);
         }
         if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
         return;
@@ -646,21 +681,21 @@
       // The background is read once, before the DOM copy is hidden.
       if (node._pbg === undefined) node._pbg = st.backgroundColor;
       if (node._pbg && !TRANSPARENT.test(node._pbg)) {
-        var b = node.getBoundingClientRect();
+        var b = self.local(node.getBoundingClientRect(), F, sh);
         ctx.globalAlpha = na;
         ctx.fillStyle = node._pbg;
-        roundRectPath(ctx, b.left - base.left, b.top - base.top, b.width, b.height,
-          Math.min(parseFloat(st.borderTopLeftRadius) || 0, b.width / 2, b.height / 2));
+        roundRectPath(ctx, b.x, b.y, b.w, b.h,
+          Math.min(parseFloat(st.borderTopLeftRadius) || 0, b.w / 2, b.h / 2));
         ctx.fill();
       }
       for (var c = node.firstChild; c; c = c.nextSibling) walk(c, na);
     };
     walk(root, alpha);
-    var br = root.getBoundingClientRect();
-    return { x: br.left - base.left - 8, y: br.top - base.top - 8, w: br.width + 16, h: br.height + 16 };
+    var br = this.local(root.getBoundingClientRect(), F, sh);
+    return { x: br.x - 8, y: br.y - 8, w: br.w + 16, h: br.h + 16 };
   };
 
-  Stage.prototype.paintOne = function (el, base) {
+  Stage.prototype.paintOne = function (el, F) {
     var ctx = this.ctx;
     if (el.closest('[hidden]') || !el.getClientRects().length) return null;
     var cs = getComputedStyle(el);
@@ -671,24 +706,25 @@
     while (p && p !== this.el) { alpha *= parseFloat(getComputedStyle(p).opacity); p = p.parentElement; }
     if (alpha <= 0.001) return null;
     ctx.globalAlpha = alpha;
+    var sh = this.shiftOf(el);
 
-    if (kind === 'rich') return this.paintRich(el, base, alpha);
+    if (kind === 'rich') return this.paintRich(el, F, alpha);
 
     if (kind === 'box') {
-      var r = el.getBoundingClientRect();
+      var r = this.local(el.getBoundingClientRect(), F, sh);
       var fill = cs.getPropertyValue('--fill').trim() || cs.backgroundColor;
-      var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, r.width / 2, r.height / 2);
+      var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, r.w / 2, r.h / 2);
       ctx.fillStyle = fill;
-      roundRectPath(ctx, r.left - base.left, r.top - base.top, r.width, r.height, rad);
+      roundRectPath(ctx, r.x, r.y, r.w, r.h, rad);
       ctx.fill();
-      return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height };
+      return r;
     }
 
     var text = el.textContent.replace(/\s+/g, ' ').trim();
     if (!text) return null;
     var range = document.createRange();
     range.selectNodeContents(el);
-    var rr = range.getClientRects()[0] || el.getBoundingClientRect();
+    var rr = this.local(range.getClientRects()[0] || el.getBoundingClientRect(), F, sh);
     ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
     var spacing = parseFloat(cs.letterSpacing) || 0;
     if ('letterSpacing' in ctx) ctx.letterSpacing = spacing + 'px';
@@ -696,7 +732,7 @@
     ctx.textBaseline = 'alphabetic';
     var m = ctx.measureText(text);
     var asc = m.fontBoundingBoxAscent != null ? m.fontBoundingBoxAscent : parseFloat(cs.fontSize) * 0.92;
-    var x = rr.left - base.left, y = rr.top - base.top + asc;
+    var x = rr.x, y = rr.y + asc;
     if ('letterSpacing' in ctx || !spacing) {
       ctx.fillText(text, x, y);
     } else {
@@ -706,18 +742,17 @@
       }
     }
     if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
-    var br = el.getBoundingClientRect();
-    return { x: Math.min(br.left, rr.left) - base.left - 8, y: br.top - base.top - 8, w: Math.max(br.width, rr.width) + 16, h: br.height + 16 };
+    var br = this.local(el.getBoundingClientRect(), F, sh);
+    return { x: Math.min(br.x, rr.x) - 8, y: br.y - 8, w: Math.max(br.w, rr.w) + 16, h: br.h + 16 };
   };
 
   Stage.prototype.repaint = function () {
-    var ctx = this.ctx, s = this.w / this.cssW;
-    var base = this.canvas.getBoundingClientRect();
+    var ctx = this.ctx, s = this.w / this.cssW, F = this.frame();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, this.w, this.h);
     ctx.setTransform(s, 0, 0, s, 0, 0);
     for (var i = 0; i < this.paints.length; i++) {
-      this.paints[i]._paintRect = this.paintItem(this.paints[i], base);
+      this.paints[i]._paintRect = this.paintItem(this.paints[i], F);
     }
     ctx.globalAlpha = 1;
     var gl = this.gl;
@@ -728,7 +763,7 @@
 
   // Repaints only where something changed, and uploads only that part.
   Stage.prototype.repaintRegion = function (rects) {
-    var s = this.w / this.cssW, base = this.canvas.getBoundingClientRect();
+    var s = this.w / this.cssW, F = this.frame();
     var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
     rects.forEach(function (r) {
       if (!r) return;
@@ -750,25 +785,30 @@
     var cx0 = px / s, cy0 = py / s, cx1 = (px + pw) / s, cy1 = (py + ph) / s;
     for (var i = 0; i < this.paints.length; i++) {
       var el = this.paints[i];
-      var r = el.getBoundingClientRect();
-      var rx = r.left - base.left, ry = r.top - base.top;
-      if (rx > cx1 + 20 || ry > cy1 + 20 || rx + r.width < cx0 - 20 || ry + r.height < cy0 - 20) continue;
-      el._paintRect = this.paintItem(el, base);
+      var r = this.local(el.getBoundingClientRect(), F, this.shiftOf(el));
+      if (r.x > cx1 + 20 || r.y > cy1 + 20 || r.x + r.w < cx0 - 20 || r.y + r.h < cy0 - 20) continue;
+      el._paintRect = this.paintItem(el, F);
     }
     ctx.restore();
     ctx.globalAlpha = 1;
-    var data = ctx.getImageData(px, py, pw, ph);
+    // Upload just this part, copied canvas to canvas: reading the pixels back (getImageData)
+    // would stall on the GPU.
+    var sc = this.scratch || (this.scratch = document.createElement('canvas'));
+    if (sc.width < pw || sc.height < ph) { sc.width = Math.max(sc.width, pw); sc.height = Math.max(sc.height, ph); }
+    var sctx = this.scratchCtx || (this.scratchCtx = sc.getContext('2d'));
+    if (sc.width !== pw || sc.height !== ph) { sc.width = pw; sc.height = ph; }
+    sctx.clearRect(0, 0, pw, ph);
+    sctx.drawImage(this.paintCanvas, px, py, pw, ph, 0, 0, pw, ph);
     var gl = this.gl;
     gl.bindTexture(gl.TEXTURE_2D, this.paintTex);
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, px, py, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, px, py, gl.RGBA, gl.UNSIGNED_BYTE, sc);
   };
 
   Stage.prototype.invalidate = function (el) {
     if (!el) { this.paintDirty = true; return; }
-    var before = el._paintRect;
-    var r = el.getBoundingClientRect(), base = this.canvas.getBoundingClientRect();
-    this.paintRegions.push(before, { x: r.left - base.left - 8, y: r.top - base.top - 8, w: r.width + 16, h: r.height + 16 });
+    var r = this.local(el.getBoundingClientRect(), this.frame(), this.shiftOf(el));
+    this.paintRegions.push(el._paintRect, { x: r.x - 8, y: r.y - 8, w: r.w + 16, h: r.h + 16 });
   };
 
   // ----- drawing ---------------------------------------------------------------------------------
@@ -829,6 +869,11 @@
     gl.uniform1f(ps.u.uDim, this.dim);
     gl.uniform1f(ps.u.uSilk, this.silk ? 1 : 0);
     gl.uniform1f(ps.u.uClear, this.clear ? 1 : 0);
+    var ks = this.w / this.cssW;
+    var psh = this.paintPlane && this.paintPlane._shift;
+    gl.uniform2f(ps.u.uPaintShift, psh ? psh.x * ks : 0, psh ? psh.y * ks : 0);
+    var ssh = this.el._silkShift;
+    gl.uniform2f(ps.u.uSilkShift, ssh ? ssh.x * ks : 0, ssh ? ssh.y * ks : 0);
     gl.uniform1f(ps.u.uPx, this.dpr);
     gl.uniform1f(ps.u.uTime, this.seed * 7 + (reduceMotion ? 0 : now / 1000 * 0.11));
     gl.uniform3f(ps.u.uBase, this.base[0], this.base[1], this.base[2]);
@@ -903,7 +948,7 @@
     var out = [];
     if (!this.glasses.length) return out;
     var base = this.canvas.getBoundingClientRect();
-    var s = this.w / this.cssW;
+    var s = this.w / (base.width || this.cssW);
     var usePointer = pointer.active && now - pointer.at < 6000;
     for (var i = 0; i < this.glasses.length; i++) {
       var g = this.glasses[i], el = g.el;
@@ -1114,7 +1159,7 @@
     }
 
     var poke = function () { busyUntil = performance.now() + 1500; };
-    ['pointerdown', 'pointermove', 'keydown', 'touchmove'].forEach(function (t) {
+    ['pointerdown', 'pointermove', 'keydown', 'touchmove', 'scroll', 'wheel'].forEach(function (t) {
       window.addEventListener(t, poke, { passive: true });
     });
 

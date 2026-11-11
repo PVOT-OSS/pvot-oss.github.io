@@ -9,8 +9,8 @@ seo_title: "Pvot apps · Open-source Android apps with 0 trackers"
 {%- assign released = apps | where_exp: "a", "a.status != 'soon'" -%}
 {%- assign appcount = apps | where_exp: "a", "a.category != 'design'" | size -%}
 
-<section class="stage page-stage" id="catalog-top" data-stage data-live data-seed="1.4" data-dim="0.8">
-  <div class="wrap">
+<section class="stage page-stage" id="catalog-top" data-stage data-live data-seed="1.4" data-dim="0.8" data-recede>
+  <div class="wrap" data-plane>
     <span class="eyebrow">{{ appcount }} apps, {{ released.size }} shipping today</span>
     <h1 class="display" style="margin-top:18px"><span data-paint>Apps.</span></h1>
     <p class="lede">A full suite of first-party apps to replace the defaults. Every one is open source and works offline first. Shipping apps are on Google Play, and Exodus Privacy finds zero trackers in each. The rest are being built right now, in public.</p>
@@ -35,7 +35,7 @@ seo_title: "Pvot apps · Open-source Android apps with 0 trackers"
     </div>
     <div class="rows">
       {%- for app in in_cat %}
-      <a class="row" href="{{ app.url | relative_url }}">
+      <a class="row" data-tilt href="{{ app.url | relative_url }}">
         {% include app-icon.html app=app %}
         <span><b>{{ app.title }}</b><span class="t">{{ app.tagline }}</span></span>
         {%- case app.status -%}

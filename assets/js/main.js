@@ -67,6 +67,117 @@
     if ('ResizeObserver' in window) new ResizeObserver(build).observe(nav);
   })();
 
+  // ---- Depth ------------------------------------------------------------------------------
+  // The site is built in layers, like the OS: the silk at the back, each section's content on a
+  // plane in front of it, glass and the bar floating above. Planes slide against each other with
+  // the pointer (or the phone's tilt) and with scroll; a section that scrolls away sinks back
+  // instead of just leaving. Everything below writes only `translate`, `scale` and `opacity`.
+  (function depth() {
+    var planes = $$('[data-plane]');
+    var receders = $$('[data-recede]');
+    if (reduceMotion || (!planes.length && !receders.length)) return;
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var gx = 0, gy = 0, tx = 0, ty = 0, vh = window.innerHeight;
+    var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
+    if (fine) {
+      window.addEventListener('pointermove', function (e) {
+        gx = e.clientX / window.innerWidth * 2 - 1;
+        gy = e.clientY / window.innerHeight * 2 - 1;
+      }, { passive: true });
+    } else if ('DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+      window.addEventListener('deviceorientation', function (e) {
+        if (e.gamma == null) return;
+        gx = clamp(e.gamma / 25);
+        gy = clamp((e.beta - 45) / 25);
+      }, { passive: true });
+    }
+    // Layout positions, untouched by our own transforms.
+    var docTop = function (el) { var t = 0; while (el) { t += el.offsetTop; el = el.offsetParent; } return t; };
+    var measure = function () {
+      vh = window.innerHeight;
+      planes.forEach(function (pl) {
+        var host = pl.closest('[data-stage]') || pl.parentElement;
+        pl._host = host; pl._top = docTop(host); pl._h = host.offsetHeight;
+      });
+      receders.forEach(function (el) { el._top = docTop(el); el._h = el.offsetHeight; });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+    if (document.fonts) document.fonts.ready.then(measure);
+
+    (function tick() {
+      tx += (gx - tx) * 0.06;
+      ty += (gy - ty) * 0.06;
+      var y0 = window.scrollY;
+      planes.forEach(function (pl) {
+        var top = pl._top - y0;
+        if (top > vh + 80 || top + pl._h < -80) return;
+        var prog = Math.max(0, Math.min(1, -top / pl._h));
+        var k = parseFloat(pl.dataset.plane) || 1;
+        // The content plane drifts against the pointer and lags the scroll a little; the silk
+        // behind it moves the other way, further.
+        var x = Math.round(-tx * 10 * k * 10) / 10;
+        var y = Math.round((-ty * 7 * k + prog * pl._h * 0.1) * 10) / 10;
+        if (!pl._shift || pl._shift.x !== x || pl._shift.y !== y) {
+          pl._shift = { x: x, y: y };
+          pl.style.translate = x + 'px ' + y + 'px';
+        }
+        pl._host._silkShift = { x: tx * 28, y: ty * 18 - prog * pl._h * 0.1 };
+      });
+      receders.forEach(function (el) {
+        var top = el._top - y0;
+        var p = top < 0 ? Math.min(1, -top / Math.max(el._h * 0.9, vh * 0.7)) : 0;
+        if (top > vh || Math.abs(p - (el._rp || 0)) < 0.002) return;
+        el._rp = p;
+        el.style.scale = String(1 - 0.06 * p);
+        el.style.opacity = String(1 - 0.5 * p);
+        // A glass section rounds off like a card being set down.
+        if (el.hasAttribute('data-stage')) el.style.borderRadius = (p * 36).toFixed(1) + 'px';
+      });
+      requestAnimationFrame(tick);
+    })();
+  })();
+
+  // Touchable things are physical: icons and cards tilt toward the pointer and catch a sheen.
+  (function tilt() {
+    if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var cur = null;
+    var reset = function (el) {
+      el.classList.remove('tilting');
+      ['--rx', '--ry', '--so'].forEach(function (v) { el.style.removeProperty(v); });
+    };
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest ? e.target.closest('[data-tilt]') : null;
+      if (el !== cur) { if (cur) reset(cur); cur = el; if (el) el.classList.add('tilting'); }
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      var max = el.matches('.icon-link, .row') ? 16 : 5;
+      el.style.setProperty('--ry', ((x - 0.5) * max).toFixed(2) + 'deg');
+      el.style.setProperty('--rx', (-(y - 0.5) * max).toFixed(2) + 'deg');
+      el.style.setProperty('--sx', (x * 100).toFixed(1) + '%');
+      el.style.setProperty('--sy', (y * 100).toFixed(1) + '%');
+      el.style.setProperty('--so', '1');
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', function () { if (cur) { reset(cur); cur = null; } });
+  })();
+
+  // The bar lifts further off the page once there is page under it.
+  if (header) {
+    var lifted = false;
+    window.addEventListener('scroll', function () {
+      var on = window.scrollY > 8;
+      if (on !== lifted) { lifted = on; header.classList.toggle('scrolled', on); }
+    }, { passive: true });
+  }
+
+  // Everything outside the glass sections arrives from depth too, not only what is marked.
+  $$('.doc-body > *, .repo-group, .cat, .feature-list li, .note, .app-summary, .related, .install-step, .sponsor-grid, .donate-card, .split > div')
+    .forEach(function (el) {
+      if (!el.classList.contains('rv') && !el.closest('[data-stage]') && !el.closest('.rv')) el.classList.add('rv');
+    });
+
   // ---- Reveal -----------------------------------------------------------------------------
   var rv = $$('.rv');
   if ('IntersectionObserver' in window && !reduceMotion) {
