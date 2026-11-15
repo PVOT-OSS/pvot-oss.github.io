@@ -12,7 +12,7 @@ sitemap: false
 
 Key facts:
 
-- Every shipping app is free on Google Play and scanned by Exodus Privacy, which reports 0 trackers in each.
+- Every shipping app is free on Google Play. Every Exodus Privacy report on a Pvot app so far shows 0 trackers.
 - Apps are offline first and keep data on the device unless the user sends it somewhere.
 - PvotLib renders real liquid glass (a refracting lens shader) on Android 13+, with frosted and solid fallbacks.
 - Source code lives at {{ site.social.github }}. Bugs go to {{ site.social.issues }}.

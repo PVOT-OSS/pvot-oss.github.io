@@ -17,4 +17,6 @@ features:
 - Interactive demos
 - Always up to date
 repo: PvotLib
+exodus: true
+apk: true
 ---

@@ -7,7 +7,8 @@ category: tools
 icon: memory
 app_icon: /assets/icons/toolkit.svg
 accent: "#A3E635"
-status: soon
+package: org.prauga.toolkit
+status: stable
 summary: Device and kernel details, live CPU, memory and battery metrics without root, and StormBreaker kernel releases and news, from the team that builds the kernels.
 features:
 - Device and kernel info

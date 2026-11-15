@@ -7,7 +7,8 @@ category: life
 icon: menu_book
 app_icon: /assets/icons/journal.svg
 accent: "#C4B5FD"
-status: soon
+package: org.prauga.journal
+status: stable
 summary: A private journal that stays on your device. Write freely, with no cloud
   reading over your shoulder.
 features:

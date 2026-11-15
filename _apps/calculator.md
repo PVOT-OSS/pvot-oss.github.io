@@ -16,4 +16,6 @@ features:
 - Fractions and exact answers
 - No permissions
 repo: Calculator
+exodus: true
+apk: true
 ---

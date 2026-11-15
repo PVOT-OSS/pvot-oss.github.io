@@ -32,7 +32,7 @@ layout: base
           <a class="btn btn-solid" href="{{ repo }}/releases" target="_blank" rel="noopener"><span class="ms">download</span> Download</a>
           {%- endif %}
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ repo }}" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
-          {%- if app.package %}
+          {%- if app.package and app.apk %}
           <a class="btn btn-line" href="{{ repo }}/releases" target="_blank" rel="noopener"><span class="ms">download</span> APK</a>
           {%- endif %}
           {%- if app.fdroid %}<a class="btn btn-line" href="{{ app.fdroid }}" target="_blank" rel="noopener">F-Droid</a>{%- endif %}
@@ -45,7 +45,7 @@ layout: base
           {%- endif %}
           {%- endif %}
         </div>
-        {%- if app.package %}
+        {%- if app.exodus %}
         <a class="exodus" href="https://reports.exodus-privacy.eu.org/en/reports/{{ app.package }}/latest/" target="_blank" rel="noopener">
           <span class="ms fill">verified_user</span> 0 trackers, verified by Exodus Privacy <span class="ms">arrow_outward</span>
         </a>
@@ -66,7 +66,7 @@ layout: base
       {%- for f in app.features %}
       <li><span class="ms">check_circle</span> {{ f }}</li>
       {%- endfor %}
-      <li><span class="ms">check_circle</span> No ads, no account{% if app.package %}, 0 trackers on Exodus{% else %}, no trackers{% endif %}</li>
+      <li><span class="ms">check_circle</span> No ads, no account{% if app.exodus %}, 0 trackers on Exodus{% else %}, no trackers{% endif %}</li>
     </ul>
   </div>
 

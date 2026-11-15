@@ -7,7 +7,8 @@ category: everyday
 icon: edit_note
 app_icon: /assets/icons/notes.svg
 accent: "#FFC24B"
-status: soon
+package: org.prauga.notes
+status: stable
 summary: Quick notes in Markdown, organised with collections, tags and colours. Fully offline, no account, just somewhere to think.
 features:
 - Markdown notes

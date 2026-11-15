@@ -8,7 +8,8 @@ category: everyday
 icon: wb_sunny
 app_icon: /assets/icons/weather.svg
 accent: "#38BDF8"
-status: soon
+package: org.prauga.weather
+status: stable
 summary: "Forecasts from Open-Meteo without an account: hourly and 16-day forecasts, air quality, how today compares with the usual, and a side-by-side comparison of sources."
 features:
 - Hourly and 16-day forecasts
@@ -16,4 +17,5 @@ features:
 - Compare forecast sources
 - No account
 repo: PvotWeather
+exodus: true
 ---

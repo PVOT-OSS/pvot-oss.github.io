@@ -19,4 +19,6 @@ features:
 - Automatic OTP detection
 - No tracking
 repo: Messages
+exodus: true
+apk: true
 ---

@@ -7,7 +7,8 @@ category: everyday
 icon: calendar_month
 app_icon: /assets/icons/calendar.svg
 accent: "#FF7A6B"
-status: soon
+package: org.prauga.calendar
+status: stable
 summary: "Day, week, month and year views for events that stay on your phone: in an offline calendar, or synced with Nextcloud, Google or any CalDAV server through DAVx⁵."
 features:
 - Day, week, month and year views

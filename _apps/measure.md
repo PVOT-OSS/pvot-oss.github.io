@@ -17,4 +17,5 @@ features:
 - On-device processing
 - Metric or imperial
 repo: PvotMeasure
+exodus: true
 ---

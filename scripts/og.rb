@@ -112,7 +112,8 @@ Dir[File.join(ROOT, '_apps/*.md')].sort.each do |path|
   blobs = cat['blobs'].split(',')
   live = app['status'] != 'soon'
   status = live ? '<span class="pill good">Available</span>' : '<span class="pill dev">In development</span>'
-  extra = app['package'] ? '<span class="pill">Google Play</span><span class="pill">0 trackers</span>' : '<span class="pill">Open source</span>'
+  extra = app['package'] ? '<span class="pill">Google Play</span>' : '<span class="pill">Open source</span>'
+  extra += '<span class="pill">0 trackers</span>' if app['exodus']
   name = slug == 'whats-in-pvot' ? app['title'] : "Pvot #{app['title']}"
   size = name.length > 16 ? 84 : 112
   icon = if app['app_icon']
