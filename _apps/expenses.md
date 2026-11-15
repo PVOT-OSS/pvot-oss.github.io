@@ -1,6 +1,6 @@
 ---
 order: 18
-title: Expense Manager
+title: Ledger
 tagline: Money, minus the snooping.
 kind: expense tracker
 schema_category: FinanceApplication
@@ -8,11 +8,12 @@ category: life
 icon: account_balance_wallet
 accent: "#10B981"
 status: soon
-summary: Track spending and budgets without a bank login or a company reading your
-  statements.
+summary: "Track spending with as little typing as possible: type \"120 coffee\", or let Ledger read payment notifications and bank SMS. Your data is encrypted on the phone, and the app has no internet access."
 features:
-- Budgets and categories
-- Offline ledger
-- Export anytime
-- No account
+- Quick add in plain words
+- Reads payment notifications and bank SMS
+- Budgets, bills and insights
+- Encrypted, with no internet access
+- Backups and CSV import
+repo: PvotExpense
 ---

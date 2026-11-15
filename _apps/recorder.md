@@ -7,11 +7,11 @@ category: media
 icon: mic
 accent: "#FF6B9D"
 status: soon
-summary: Record audio in a tap. Everything is stored locally, and the app holds no
-  network permission it does not need.
+summary: Record audio in a tap and keep it on your phone. Optional on-device transcription, with speech models you download once, makes every word searchable.
 features:
 - One-tap recording
-- No network access
-- Clean waveform view
-- Open source
+- On-device transcription
+- Search, labels and favourites
+- Optional location tags
+repo: Recorder
 ---

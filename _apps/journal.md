@@ -10,8 +10,9 @@ status: soon
 summary: A private journal that stays on your device. Write freely, with no cloud
   reading over your shoulder.
 features:
-- Daily entries
-- Photos and mood
+- Daily entries with photos
+- Day, week and month views
+- Tags
 - On-device only
-- Export anytime
+repo: PvotNotes
 ---

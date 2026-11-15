@@ -8,12 +8,11 @@ icon: calculate
 accent: "#A78BFA"
 package: org.prauga.calculator
 status: stable
-summary: A simple, fast calculator with a clean Material interface. No permissions,
-  no clutter, just the maths.
+summary: A fast scientific calculator rebuilt from LineageOS. History, fractions and exact answers, and it asks for no permissions at all.
 features:
-- Clean Material UI
+- Scientific functions
 - Calculation history
+- Fractions and exact answers
 - No permissions
-- Open source
 repo: Calculator
 ---

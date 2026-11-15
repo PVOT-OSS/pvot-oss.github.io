@@ -12,7 +12,8 @@ summary: Measure the world with your camera. All the processing happens on devic
   so nothing you point at leaves your phone.
 features:
 - AR measuring
+- Spirit level
 - On-device processing
-- No cloud
+- Metric or imperial
 repo: PvotMeasure
 ---

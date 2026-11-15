@@ -7,11 +7,11 @@ category: communication
 icon: call
 accent: "#34D399"
 status: soon
-summary: Place and manage calls without the bloat. A quick, focused dialer that does
-  the one job and gets out of the way.
+summary: "A quick, focused dialer rebuilt from LineageOS: T9 search, call history and statistics, screening for unknown callers, and caller lookup."
 features:
 - Fast T9 dialer
-- Call history
-- Contact integration
-- No ads or trackers
+- Call history and statistics
+- Unknown-caller screening
+- Helplines
+repo: Phone
 ---

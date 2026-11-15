@@ -1,17 +1,18 @@
 ---
 order: 27
-title: News Feed
-tagline: Your feeds, no algorithm.
-kind: RSS reader
+title: Feed
+tagline: The news, no algorithm.
+kind: news reader
 category: tools
 icon: rss_feed
 accent: "#FB923C"
 status: soon
-summary: Follow sites and blogs with a clean RSS reader. You pick the sources, not
-  a recommendation engine.
+summary: Pick your regions and topics, and Feed fetches the news straight from each outlet. When several outlets cover the same story, it groups them together. No account, no tracking.
 features:
-- RSS and Atom
-- No algorithm
-- Offline reading
-- Open source
+- Outlets by region and topic
+- Stories grouped across outlets
+- Clean reader view
+- OPML import and export
+- Muted words
+repo: PvotFeed
 ---

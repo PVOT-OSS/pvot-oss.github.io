@@ -7,11 +7,10 @@ category: everyday
 icon: schedule
 accent: "#8B7CFF"
 status: soon
-summary: Alarms, timers, a stopwatch, and a world clock in one tidy place. Everything
-  you expect, nothing you do not.
+summary: Alarms, timers, a stopwatch, a world clock and a bedtime schedule in one tidy place. Everything you expect, nothing you do not.
 features:
-- Multiple alarms
+- Alarms with a sunrise wake-up
 - Timers and stopwatch
 - World clock
-- Gentle wake-up
+- Bedtime schedule
 ---

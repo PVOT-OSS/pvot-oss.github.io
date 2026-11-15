@@ -7,10 +7,15 @@
     - { name: PvotCompass, lang: Kotlin, about: "A clean, calm compass." }
     - { name: PvotEqualizer, lang: Kotlin, about: "6 and 10 band EQ with pre-amp and preset import." }
     - { name: PvotWeather, lang: Kotlin, about: "Forecasts without an account." }
-    - { name: PvotNotes, lang: Kotlin, about: "Notes that stay on your phone." }
+    - { name: PvotNotes, lang: Kotlin, about: "Notes, Journal and Reminders, all on your phone." }
     - { name: PvotMaps, lang: Kotlin, about: "Maps that do not follow you around." }
-    - { name: Recorder, lang: Kotlin, about: "Voice memos, recorded and kept on device." }
-    - { name: ToolKit, lang: Kotlin, about: "Small system tools for Pvot." }
+    - { name: Photos, lang: Kotlin, about: "Your photos and videos, browsed on device." }
+    - { name: PvotExpense, lang: Kotlin, about: "Ledger: spending tracked offline and encrypted." }
+    - { name: PvotFeed, lang: Kotlin, about: "News from the outlets you pick, grouped by story." }
+    - { name: PvotFinder, lang: Kotlin, about: "Find your own phones over Bluetooth." }
+    - { name: Recorder, lang: Kotlin, about: "Voice memos with on-device transcription." }
+    - { name: PvotToolKit, lang: Kotlin, about: "Device, kernel and live metrics for Pvot." }
+    - { name: CameraProbe, lang: Kotlin, about: "Probes what each camera on a device supports." }
 - group: Apps from AOSP, in Java
   blurb: Platform apps we fork and rebuild. Good if you like reading big codebases.
   repos:
@@ -26,6 +31,7 @@
   repos:
     - { name: platform_vendor_partner_pvot, lang: Shell, about: "Vendor config for Pvot builds." }
     - { name: workflows, lang: YAML, about: "Shared CI: DCO, REUSE and build checks." }
+    - { name: pvot-app-template, lang: Kotlin, about: "Start a new Pvot app on PvotLib." }
     - { name: pvot-oss.github.io, lang: HTML, about: "This website. Jekyll and a WebGL glass shader." }
 - group: Testing and triage
   blurb: No code needed. Real devices and sharp reports move things fastest.

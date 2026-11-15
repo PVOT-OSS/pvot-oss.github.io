@@ -7,11 +7,10 @@ category: media
 icon: photo_camera
 accent: "#6B66FF"
 status: soon
-summary: A fast, capable camera with real manual controls and nothing phoning home.
-  Your shots stay on your device until you decide otherwise.
+summary: A fast camera with photo, video and scan modes, Night mode, and quick controls for the timer, exposure and effects. Your shots stay on your device until you decide otherwise.
 features:
-- Manual pro controls
-- QR and barcode scanning
+- Photo, video and QR scanning
+- Night mode
+- Timer, exposure and effects
 - No cloud upload
-- Open source
 ---

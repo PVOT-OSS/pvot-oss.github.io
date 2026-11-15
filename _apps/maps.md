@@ -8,11 +8,11 @@ category: everyday
 icon: map
 accent: "#4ADE80"
 status: soon
-summary: Navigation and maps without the location profiling. Get where you are going,
-  quietly.
+summary: Maps and directions on open map data, without the location profiling. Get where you are going, quietly.
 features:
 - Search and directions
-- Offline-friendly
-- No location profiling
+- Explore and driving views
+- 3D map
 - Open map data
+repo: PvotMaps
 ---

@@ -10,7 +10,8 @@ status: soon
 summary: A clean, accurate compass with a simple face. Points you the right way and
   asks for nothing in return.
 features:
-- True and magnetic north
-- Minimal interface
+- Clean, minimal dial
+- Heading in degrees and direction
 - Works fully offline
+repo: PvotCompass
 ---

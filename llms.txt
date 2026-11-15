@@ -8,7 +8,7 @@ sitemap: false
 {%- assign building = apps | where: "status", "soon" -%}
 # Pvot
 
-> Pvot is open-source, de-Googled Android: an AOSP and LineageOS based OS plus a full suite of first-party apps, all built on one Jetpack Compose design system, PvotLib. No Google services, no trackers, no accounts. Built in the open by Team StormBreaker and contributors, licensed Apache-2.0 for most of the project.
+> Pvot is open-source, de-Googled Android: an AOSP and LineageOS based OS plus a full suite of first-party apps, sharing one design system, PvotLib (Jetpack Compose components plus matching themes for apps still built on Android Views). No Google services, no trackers, no accounts. Built in the open by Team StormBreaker and contributors, licensed under Apache-2.0, GPL-3.0 or AGPL-3.0 depending on the component.
 
 Key facts:
 

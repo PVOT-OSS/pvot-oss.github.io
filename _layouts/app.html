@@ -38,7 +38,11 @@ layout: base
           {%- if app.fdroid %}<a class="btn btn-line" href="{{ app.fdroid }}" target="_blank" rel="noopener">F-Droid</a>{%- endif %}
           {%- else %}
           <a class="btn btn-glass" data-glass="clear" data-glass-press href="{{ site.social.telegram }}" target="_blank" rel="noopener"><span class="ms">notifications</span> Follow along</a>
+          {%- if app.repo %}
+          <a class="btn btn-line" href="{{ repo }}" target="_blank" rel="noopener"><span class="ms">code</span> Source</a>
+          {%- else %}
           <a class="btn btn-line" href="{{ '/contribute/' | relative_url }}">Help build it</a>
+          {%- endif %}
           {%- endif %}
         </div>
         {%- if app.package %}
@@ -55,7 +59,7 @@ layout: base
     <div>
       <p class="app-summary rv">{{ app.summary }}</p>
       {%- unless released %}
-      <div class="note rv"><span class="ms">construction</span><span>{{ app.title }} is in active development. It is not ready to install yet, but the work happens in the open on GitHub.</span></div>
+      <div class="note rv"><span class="ms">construction</span><span>{{ app.title }} is in active development. It is not ready to install yet{% if app.repo %}, but the work happens in the open on GitHub{% else %}, and its source will be published when it is ready{% endif %}.</span></div>
       {%- endunless %}
     </div>
     <ul class="feature-list rv">

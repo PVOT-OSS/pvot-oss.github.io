@@ -10,8 +10,9 @@ status: soon
 summary: Simple reminders and to-dos that live on your device and nag only you. No
   account, no sync you did not ask for.
 features:
-- One-off and recurring
-- Due dates
-- Notifications
+- Due dates and times
+- Repeats and early alerts
+- Priorities and subtasks
 - No account
+repo: PvotNotes
 ---

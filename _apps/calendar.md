@@ -7,11 +7,11 @@ category: everyday
 icon: calendar_month
 accent: "#FF7A6B"
 status: soon
-summary: Plan events and reminders that live on your device. Recurring schedules and
-  widgets, with no profiling attached.
+summary: "Day, week, month and year views for events that stay on your phone: in an offline calendar, or synced with Nextcloud, Google or any CalDAV server through DAVx⁵."
 features:
-- Events and reminders
-- Recurring schedules
+- Day, week, month and year views
+- Offline calendars
+- CalDAV sync through DAVx⁵
 - Home-screen widgets
-- Local-first
+repo: Calendar
 ---
