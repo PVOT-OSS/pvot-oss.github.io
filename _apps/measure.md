@@ -5,6 +5,7 @@ tagline: An AR ruler, on device.
 kind: AR measuring app
 category: tools
 icon: straighten
+app_icon: /assets/icons/measure.svg
 accent: "#F472B6"
 package: org.prauga.measure
 status: beta

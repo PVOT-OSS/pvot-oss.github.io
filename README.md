@@ -80,7 +80,9 @@ features:
 ```
 
 Shipping apps (stable or beta) light up in full color and sit in the home page's dock; the rest
-are dark, themed icons. If you use a new icon, run `./scripts/fonts.sh` so the glyph is in the font subset, and
+are dark, themed icons. When an app has a real launcher icon, render it with
+`python3 scripts/app-icon.py <app>/src/main/res assets/icons/<slug>.svg` and set
+`app_icon: /assets/icons/<slug>.svg`; pages and link previews then use it instead of the glyph. If you use a new icon, run `./scripts/fonts.sh` so the glyph is in the font subset, and
 `ruby scripts/og.rb` for the app's link preview.
 
 ### SEO, previews and fonts

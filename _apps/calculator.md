@@ -5,6 +5,7 @@ tagline: Numbers, nothing else.
 kind: calculator
 category: tools
 icon: calculate
+app_icon: /assets/icons/calculator.svg
 accent: "#A78BFA"
 package: org.prauga.calculator
 status: stable

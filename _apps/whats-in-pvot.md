@@ -6,6 +6,7 @@ kind: design system catalog
 seo_title: "What's in Pvot · PvotLib design system catalog for Android"
 category: design
 icon: grid_view
+app_icon: /assets/icons/whats-in-pvot.svg
 accent: "#C084FC"
 package: com.prauga.pvot
 status: beta

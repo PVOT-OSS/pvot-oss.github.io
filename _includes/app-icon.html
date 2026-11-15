@@ -1,3 +1,7 @@
 {%- assign ic_cat = site.data.categories | where: "id", include.app.category | first -%}
 {%- assign ic_on = false -%}{%- if include.app.status != 'soon' -%}{%- assign ic_on = true -%}{%- endif -%}
+{%- if include.app.app_icon -%}
+<span class="app-icon has-img{% if ic_on %} on{% endif %}" style="--c:{{ ic_cat.color }}" aria-hidden="true"><img src="{{ include.app.app_icon | relative_url }}" alt="" width="64" height="64" decoding="async"></span>
+{%- else -%}
 <span class="app-icon{% if ic_on %} on{% endif %}" style="--c:{{ ic_cat.color }}" aria-hidden="true"><span class="ms">{{ include.app.icon }}</span></span>
+{%- endif -%}

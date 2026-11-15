@@ -5,6 +5,7 @@ tagline: Tune your sound.
 kind: audio equalizer
 category: media
 icon: equalizer
+app_icon: /assets/icons/equaliser.svg
 accent: "#2DD4BF"
 status: soon
 summary: "Shape your sound by dragging a curve: six bands, or ten in advanced mode, with a pre-amp and presets you can save, import and export. It works with apps that share their audio session."

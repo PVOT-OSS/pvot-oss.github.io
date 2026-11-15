@@ -6,6 +6,7 @@ kind: maps and navigation app
 schema_category: TravelApplication
 category: everyday
 icon: map
+app_icon: /assets/icons/maps.svg
 accent: "#4ADE80"
 status: soon
 summary: Maps and directions on open map data, without the location profiling. Get where you are going, quietly.

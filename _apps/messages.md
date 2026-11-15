@@ -5,6 +5,7 @@ tagline: SMS without the spyware.
 kind: SMS app
 category: communication
 icon: sms
+app_icon: /assets/icons/messages.svg
 accent: "#4CC2FF"
 package: org.prauga.messages
 status: stable

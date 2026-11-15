@@ -5,6 +5,7 @@ tagline: Your days, for your eyes.
 kind: journal app
 category: life
 icon: menu_book
+app_icon: /assets/icons/journal.svg
 accent: "#C4B5FD"
 status: soon
 summary: A private journal that stays on your device. Write freely, with no cloud

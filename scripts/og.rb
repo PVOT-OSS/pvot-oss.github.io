@@ -60,6 +60,8 @@ def page(body, tint: '#3B2DB8', accent: '#A8104F', w: 1200, ht: 630)
       .icon i { font-family: Icons; font-style: normal; font-size: 96px; line-height: 1; color: var(--c);
         font-variation-settings: 'FILL' 0, 'wght' 400, 'opsz' 48; }
       .icon.on i { color: #0b0b0e; font-variation-settings: 'FILL' 1, 'wght' 500, 'opsz' 48; }
+      .icon.img { background: none; overflow: hidden; }
+      .icon.img img { width: 100%; height: 100%; display: block; }
       h1 { font-size: 112px; font-weight: 750; letter-spacing: -0.055em; line-height: 0.95; }
       h1.big { font-size: 124px; }
       p { font-size: 38px; color: rgba(245,245,247,.68); margin-top: 18px; letter-spacing: -0.025em; line-height: 1.2; }
@@ -113,10 +115,15 @@ Dir[File.join(ROOT, '_apps/*.md')].sort.each do |path|
   extra = app['package'] ? '<span class="pill">Google Play</span><span class="pill">0 trackers</span>' : '<span class="pill">Open source</span>'
   name = slug == 'whats-in-pvot' ? app['title'] : "Pvot #{app['title']}"
   size = name.length > 16 ? 84 : 112
+  icon = if app['app_icon']
+    %(<div class="icon img"><img src="file://#{ROOT}#{app['app_icon']}"></div>)
+  else
+    %(<div class="icon#{live ? ' on' : ''}" style="--c:#{cat['color']}"><i>#{h(app['icon'])}</i></div>)
+  end
   shoot(slug, page(<<~B, tint: blobs[0][0, 7], accent: blobs[1][0, 7]))
     #{brand}
     <div class="row">
-      <div class="icon#{live ? ' on' : ''}" style="--c:#{cat['color']}"><i>#{h(app['icon'])}</i></div>
+      #{icon}
       <div><h1 style="font-size:#{size}px">#{h(name)}</h1><p>#{h(app['tagline'])}</p></div>
     </div>
     #{foot.call("#{status}#{extra}<span class=\"pill\">Android</span>")}

@@ -5,6 +5,7 @@ tagline: The news, no algorithm.
 kind: news reader
 category: tools
 icon: rss_feed
+app_icon: /assets/icons/news-feed.svg
 accent: "#FB923C"
 status: soon
 summary: Pick your regions and topics, and Feed fetches the news straight from each outlet. When several outlets cover the same story, it groups them together. No account, no tracking.

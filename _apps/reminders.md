@@ -5,6 +5,7 @@ tagline: Never forget, quietly.
 kind: reminders app
 category: everyday
 icon: task_alt
+app_icon: /assets/icons/reminders.svg
 accent: "#FDBA74"
 status: soon
 summary: Simple reminders and to-dos that live on your device and nag only you. No
