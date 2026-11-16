@@ -1,0 +1,49 @@
+---
+layout: base
+permalink: /contact/
+title: Contact
+description: "How to contact Prauga, the developer and publisher of the Pvot apps, including Pvot Feed."
+seo_title: "Contact us · Pvot"
+---
+<section class="doc-head">
+  <div class="wrap">
+    <span class="eyebrow hero-meta">Contact</span>
+    <h1 class="display" style="margin-top:18px"><span class="hero-line">Contact</span><span class="hero-line">us.</span></h1>
+    <p class="lede hero-meta">Pvot apps are developed and published by Prauga. Here is how to reach us.</p>
+  </div>
+</section>
+
+<section class="doc">
+  <div class="wrap"><div class="doc-body">
+    <h2>Email</h2>
+    <p>
+      Write to <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a> about any Pvot app:
+      questions, feedback, privacy or content concerns. We read every message.
+    </p>
+
+    <h2>Developer</h2>
+    <ul>
+      <li><strong>Developer and publisher:</strong> Prauga</li>
+      <li><strong>Email:</strong> <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a></li>
+      <li><strong>Website:</strong> <a href="{{ '/' | relative_url }}">{{ site.url | remove: "https://" }}</a></li>
+    </ul>
+
+    <h2>Pvot Feed</h2>
+    <p>
+      <a href="{{ '/apps/news-feed/' | relative_url }}">Pvot Feed</a> is a news aggregator. It does not write
+      or edit news: every article comes from, and links back to, the outlet that published it. For questions
+      about the app, the outlets it offers, or an article you read in it, email
+      <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>. Requests about an article's
+      content itself are best sent to the outlet named on it as well.
+    </p>
+
+    <h2>Bugs and feature requests</h2>
+    <p>
+      Open an issue in the app's repository on <a href="{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a>,
+      or on our <a href="{{ site.social.issues }}" target="_blank" rel="noopener">public issue tracker</a>.
+    </p>
+
+    <p class="doc-note">Last updated: November 2026.</p>
+  </div>
+  </div>
+</section>

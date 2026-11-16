@@ -33,6 +33,9 @@ social:
   paypal: "https://paypal.me/saalimquadri"
   email: "team.stormbreakerproject@gmail.com"
 
+# Developer contact (Prauga, the Play publisher), shown on /contact/
+contact_email: "developer@prauga.com"
+
 # Primary nav
 nav:
   - { label: "Apps", href: "/apps/" }
