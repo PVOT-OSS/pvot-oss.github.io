@@ -1147,9 +1147,14 @@
   function boot() {
     var els = document.querySelectorAll('[data-stage]');
     if (!els.length) return;
+    // Without the shader the glass stays CSS frost, but it can still be picked up and moved.
+    var frostOnly = function () {
+      Array.prototype.forEach.call(els, function (el) { bindDrag({ el: el }); });
+    };
     var probe = document.createElement('canvas');
     if (!(probe.getContext('webgl'))) {
       document.documentElement.classList.add('no-glass');
+      frostOnly();
       return;
     }
     // WebGL that would run on the CPU (graphics acceleration off, or no usable GPU driver) draws
@@ -1157,6 +1162,7 @@
     if (!(document.createElement('canvas').getContext('webgl', { failIfMajorPerformanceCaveat: true }))) {
       api.software = true;
       document.documentElement.classList.add('no-glass', 'no-gpu');
+      frostOnly();
       return;
     }
     var start = function (el) {
