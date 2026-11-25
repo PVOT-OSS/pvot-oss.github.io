@@ -5,6 +5,11 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var glass = function () { return window.PvotGlass; };
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Set by glass.js (which runs first) when there is no hardware graphics: every layer would be
+  // composited on the CPU, so skip the effects that repaint large areas each frame.
+  var noGpu = document.documentElement.classList.contains('no-gpu');
+  // No WebGL glass at all (no WebGL, or no GPU): the page stays on CSS frost.
+  var noGlass = document.documentElement.classList.contains('no-glass');
 
   // ---- Header -----------------------------------------------------------------------------
   var header = $('#site-header'), toggle = $('#nav-toggle');
@@ -30,7 +35,7 @@
     var brands = navigator.userAgentData && navigator.userAgentData.brands;
     var chromium = brands && brands.some(function (b) { return /Chromium/.test(b.brand); });
     var nav = $('.nav-glass'), map = $('#nav-refract-map'), disp = $('#nav-refract-disp');
-    if (!chromium || !nav || !map || !disp) return;
+    if (!chromium || noGpu || !nav || !map || !disp) return;
 
     function sdf(px, py, bx, by, r) {
       var qx = Math.abs(px) - bx + r, qy = Math.abs(py) - by + r;
@@ -81,7 +86,7 @@
   (function depth() {
     var planes = $$('[data-plane]');
     var receders = $$('[data-recede]');
-    if (reduceMotion || (!planes.length && !receders.length)) return;
+    if (reduceMotion || noGpu || (!planes.length && !receders.length)) return;
     var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     var gx = 0, gy = 0, tx = 0, ty = 0, vh = window.innerHeight;
     var clamp = function (v) { return Math.max(-1, Math.min(1, v)); };
@@ -566,7 +571,9 @@
   // ---- Intro: once a session, a big lens sweeps across the hero and settles into the small one --
   (function intro() {
     var lens = $('.hero .lens');
-    if (!lens || reduceMotion || !lens.animate) return;
+    // The intro waits for the shader's first frame; without the shader it would only park the
+    // lens off screen until it gave up, so leave the lens where it sits.
+    if (!lens || reduceMotion || noGlass || !lens.animate) return;
     try {
       if (sessionStorage.getItem('pvot-intro')) return;
       sessionStorage.setItem('pvot-intro', '1');
@@ -617,6 +624,37 @@
       if (performance.now() - t0 > 6000) { finish(); return; }
       requestAnimationFrame(wait);
     })();
+  })();
+
+  // ---- Lens light without the shader --------------------------------------------------------
+  // The shader lights the side of the glass facing the pointer. On CSS glass, point the sheen
+  // and the bright part of the rim the same way; near or on the glass, the light settles at the
+  // top left. Only three custom properties change, once a frame at most.
+  (function lensLight() {
+    var lenses = $$('.lens');
+    if (!noGlass || !lenses.length) return;
+    var px = 0, py = 0, queued = false;
+    var update = function () {
+      queued = false;
+      lenses.forEach(function (l) {
+        var r = l.getBoundingClientRect();
+        if (!r.width || r.bottom < 0 || r.top > window.innerHeight) return;
+        var dx = px - (r.left + r.width / 2), dy = py - (r.top + r.height / 2);
+        var d = Math.hypot(dx, dy) || 1;
+        var reach = Math.min(1, Math.max(0, (d - r.height * 0.4) / r.width));
+        // Blend the pointer's direction with the resting top-left light, so nothing jumps.
+        var vx = dx / d * reach - 0.707 * (1 - reach), vy = dy / d * reach - 0.707 * (1 - reach);
+        var lx = 50 + vx * 34, ly = 50 + vy * 44;
+        var la = Math.atan2(vy, vx) * 180 / Math.PI + 90;
+        l.style.setProperty('--lx', lx.toFixed(1) + '%');
+        l.style.setProperty('--ly', ly.toFixed(1) + '%');
+        l.style.setProperty('--la', la.toFixed(0) + 'deg');
+      });
+    };
+    window.addEventListener('pointermove', function (e) {
+      px = e.clientX; py = e.clientY;
+      if (!queued) { queued = true; requestAnimationFrame(update); }
+    }, { passive: true });
   })();
 
   // ---- Lens: hide the hint once it has been picked up -------------------------------------
