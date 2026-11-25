@@ -1152,6 +1152,13 @@
       document.documentElement.classList.add('no-glass');
       return;
     }
+    // WebGL that would run on the CPU (graphics acceleration off, or no usable GPU driver) draws
+    // the shader at a few frames a second. Keep the CSS frost there instead.
+    if (!(document.createElement('canvas').getContext('webgl', { failIfMajorPerformanceCaveat: true }))) {
+      api.software = true;
+      document.documentElement.classList.add('no-glass', 'no-gpu');
+      return;
+    }
     var start = function (el) {
       try {
         var st = new Stage(el);
