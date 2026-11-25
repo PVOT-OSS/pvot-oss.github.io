@@ -626,6 +626,37 @@
     })();
   })();
 
+  // ---- Lens light without the shader --------------------------------------------------------
+  // The shader lights the side of the glass facing the pointer. On CSS glass, point the sheen
+  // and the bright part of the rim the same way; near or on the glass, the light settles at the
+  // top left. Only three custom properties change, once a frame at most.
+  (function lensLight() {
+    var lenses = $$('.lens');
+    if (!noGlass || !lenses.length) return;
+    var px = 0, py = 0, queued = false;
+    var update = function () {
+      queued = false;
+      lenses.forEach(function (l) {
+        var r = l.getBoundingClientRect();
+        if (!r.width || r.bottom < 0 || r.top > window.innerHeight) return;
+        var dx = px - (r.left + r.width / 2), dy = py - (r.top + r.height / 2);
+        var d = Math.hypot(dx, dy) || 1;
+        var reach = Math.min(1, Math.max(0, (d - r.height * 0.4) / r.width));
+        // Blend the pointer's direction with the resting top-left light, so nothing jumps.
+        var vx = dx / d * reach - 0.707 * (1 - reach), vy = dy / d * reach - 0.707 * (1 - reach);
+        var lx = 50 + vx * 34, ly = 50 + vy * 44;
+        var la = Math.atan2(vy, vx) * 180 / Math.PI + 90;
+        l.style.setProperty('--lx', lx.toFixed(1) + '%');
+        l.style.setProperty('--ly', ly.toFixed(1) + '%');
+        l.style.setProperty('--la', la.toFixed(0) + 'deg');
+      });
+    };
+    window.addEventListener('pointermove', function (e) {
+      px = e.clientX; py = e.clientY;
+      if (!queued) { queued = true; requestAnimationFrame(update); }
+    }, { passive: true });
+  })();
+
   // ---- Lens: hide the hint once it has been picked up -------------------------------------
   $$('.lens').forEach(function (lens) {
     var stage = lens.closest('.stage');

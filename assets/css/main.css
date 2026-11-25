@@ -278,6 +278,47 @@ a.sr-only:focus {
     inset 0 -14px 26px -10px rgba(255, 255, 255, 0.12),
     0 18px 40px rgba(0, 0, 0, 0.35);
 }
+/* Light on the CSS lens, only when the shader is not running. main.js points it at the pointer
+   (--lx, --ly, --la); without a pointer it falls from the top left. */
+html.no-glass .lens[data-glass] {
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 5px 0 8px -4px rgba(255, 70, 130, 0.45),
+    inset -5px 0 8px -4px rgba(80, 150, 255, 0.5),
+    inset 0 -14px 26px -10px rgba(255, 255, 255, 0.12),
+    0 0 36px -8px rgba(133, 119, 255, 0.45),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+html.no-glass .lens::before,
+html.no-glass .lens::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+/* The rim splits light into a spectrum, as the shader's chromatic split and mirror do at the
+   edge. A thin ring, brightest where the light comes from. */
+html.no-glass .lens::before {
+  padding: 3.5px;
+  background: conic-gradient(from var(--la, 315deg),
+    rgba(255, 255, 255, 0.95), rgba(255, 110, 170, 0.9) 7%, rgba(255, 190, 90, 0.75) 14%,
+    rgba(110, 240, 200, 0.55) 22%, rgba(90, 160, 255, 0.35) 32%, rgba(140, 120, 255, 0.14) 45%,
+    rgba(140, 120, 255, 0.1) 55%, rgba(200, 110, 255, 0.4) 66%, rgba(90, 150, 255, 0.7) 78%,
+    rgba(120, 230, 255, 0.75) 89%, rgba(255, 255, 255, 0.95));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+/* Scattered light: a soft bright patch on the side facing the light, and its faint, cooler
+   bounce on the far side. */
+html.no-glass .lens::after {
+  background:
+    radial-gradient(34% 48% at var(--lx, 24%) var(--ly, 16%), rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(46% 40% at calc(100% - var(--lx, 24%)) calc(100% - var(--ly, 16%)), rgba(140, 170, 255, 0.16), rgba(140, 170, 255, 0) 70%);
+}
 [data-stage].is-live [data-glass] {
   background: transparent;
   -webkit-backdrop-filter: none;
